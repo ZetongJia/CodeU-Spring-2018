@@ -38,6 +38,11 @@
 
       <h1>About the CodeU Chat App</h1>
       <p>
+        Hello everyone, we are ZETA! Our group members consist of Alice, Aubin,
+        Tania and Tina. Throughout the summer, we'll be updating this chat app
+        with some awesome improvements. Stay tuned!
+      </p>
+      <p>
         This is an example chat application designed to be a starting point
         for your CodeU project team work. Here's some stuff to think about:
       </p>
