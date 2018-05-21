@@ -21,12 +21,7 @@
 </head>
 <body>
 
-  <nav>
-    <a id="navTitle" href="/">CodeU Chat App</a>
-    <a href="/conversations">Conversations</a>
-    <a href="/about.jsp">About</a>
-    <a href="/admin">Admin</a>
-  </nav>
+  <jsp:include page="/WEB-INF/includes/header.jsp"/>
 
   <div id="container">
     <h1>Administration</h1>
