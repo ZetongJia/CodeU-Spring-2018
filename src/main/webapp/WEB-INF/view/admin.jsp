@@ -16,7 +16,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>CodeU Chat App</title>
+  <title>Admin Page</title>
   <link rel="stylesheet" href="/css/main.css">
 </head>
 <body>
@@ -24,31 +24,39 @@
   <nav>
     <a id="navTitle" href="/">CodeU Chat App</a>
     <a href="/conversations">Conversations</a>
-    <% if(request.getSession().getAttribute("user") != null){ %>
-      <a>Hello <%= request.getSession().getAttribute("user") %>!</a>
-    <% } else{ %>
-      <a href="/login">Login</a>
-    <% } %>
     <a href="/about.jsp">About</a>
-    <!--admin link will be restricted for admin in mvp-->
     <a href="/admin">Admin</a>
   </nav>
 
   <div id="container">
-    <div
-      style="width:75%; margin-left:auto; margin-right:auto; margin-top: 50px;">
-
-      <h1>CodeU Chat App</h1>
-      <h2>Welcome!</h2>
-
+    <h1>Administration</h1>
+    <hr>
+    <h2>Site Statistics</h2>
+    <p>Here are some site stats:
       <ul>
-        <li><a href="/login">Login</a> to get started.</li>
-        <li>Go to the <a href="/conversations">conversations</a> page to
-            create or join a conversation.</li>
-        <li>View the <a href="/about.jsp">about</a> page to learn more about the
-            project.</li>
+        <li>Users:</li>
+        <li>Conversations:</li>
+        <li>Messages:</li>
+        <li>Most Active User:</li>
+        <li>Wordiest User:</li>
       </ul>
+    </p>
+    <hr>
+    <h2>Import Data</h2>
+      <form action=/ method=POST>
+        <p>
+          From source:
+          <select name="cars">
+            <option value="opt1">Opt1</option>
+            <option value="opt2">Opt2</option>
+            <option value="opt3">Opt3</option>
+          </select>
+        </p>
+        <input type="submit" value="Submit">
+      </form>
     </div>
+
   </div>
+
 </body>
 </html>
