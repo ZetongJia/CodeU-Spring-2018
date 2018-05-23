@@ -13,6 +13,11 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 --%>
+
+<%@ page import="java.util.List" %>
+<%@ page import="codeu.model.data.Conversation" %>
+<%@ page import="codeu.model.store.basic.*" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,14 +29,21 @@
   <jsp:include page="/WEB-INF/includes/header.jsp"/>
 
   <div id="container">
+
+    <%
+    UserStore userStore = UserStore.getInstance();
+    ConversationStore conversationStore = ConversationStore.getInstance();
+    MessageStore messageStore = MessageStore.getInstance();
+    %>
+
     <h1>Administration</h1>
     <hr>
     <h2>Site Statistics</h2>
     <p>Here are some site stats:
       <ul>
-        <li>Users:</li>
-        <li>Conversations:</li>
-        <li>Messages:</li>
+        <li>Users: <%= userStore.getNumOfUsers()%> </li>
+        <li>Conversations: <%= conversationStore.getNumOfConversations()%> </li>
+        <li>Messages: <%= messageStore.getNumOfMessages()%> </li>
         <li>Most Active User:</li>
         <li>Wordiest User:</li>
       </ul>
