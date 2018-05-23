@@ -16,7 +16,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Login</title>
+  <title>Admin Page</title>
   <link rel="stylesheet" href="/css/main.css">
 </head>
 <body>
@@ -24,25 +24,34 @@
   <jsp:include page="/WEB-INF/includes/header.jsp"/>
 
   <div id="container">
-    <h1>Login</h1>
+    <h1>Administration</h1>
+    <hr>
+    <h2>Site Statistics</h2>
+    <p>Here are some site stats:
+      <ul>
+        <li>Users:</li>
+        <li>Conversations:</li>
+        <li>Messages:</li>
+        <li>Most Active User:</li>
+        <li>Wordiest User:</li>
+      </ul>
+    </p>
+    <hr>
+    <h2>Import Data</h2>
+      <form action=/ method=POST>
+        <p>
+          From source:
+          <select name="cars">
+            <option value="opt1">Opt1</option>
+            <option value="opt2">Opt2</option>
+            <option value="opt3">Opt3</option>
+          </select>
+        </p>
+        <input type="submit" value="Submit">
+      </form>
+    </div>
 
-    <% if(request.getAttribute("error") != null){ %>
-        <h2 style="color:red"><%= request.getAttribute("error") %></h2>
-    <% } %>
-
-    <form action="/login" method="POST">
-      <label for="username">Username: </label>
-      <br/>
-      <input type="text" name="username" id="username">
-      <br/>
-      <label for="password">Password: </label>
-      <br/>
-      <input type="password" name="password" id="password">
-      <br/><br/>
-      <button type="submit">Login</button>
-    </form>
-
-    <p>New users can register <a href="/register">here</a>.</p>
   </div>
+
 </body>
 </html>
