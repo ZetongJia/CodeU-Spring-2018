@@ -9,4 +9,5 @@
   <a href="/about.jsp">About</a>
   <!--admin link will be restricted for admin in mvp-->
   <a href="/admin">Admin</a>
+  <a href="/profile">My Profile</a>
 </nav>
