@@ -44,9 +44,9 @@
 
     <h2>Sent Messages</h2>
     <div class="messages">
-              <% for i in conversationStore %>
-                <p class="messages"> <!--{{ i.messages}} --> <br> <%i.getUser%>'s Blog <br> Title: <%i.cleanedMessageContent%> <br> <%i.conversationtext%></p>
-              <%endfor%>
+              <% for (Message i : messages) {%>
+                <p class="messages"> <br> <%System.out.println(messages.get(i))%></p>
+              <% } %>
     </div>
 
   </div>
