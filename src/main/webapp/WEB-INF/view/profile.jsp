@@ -32,19 +32,22 @@
 
     <h2>About Me</h2>
 
+    <h3>Edit Your About Me</h3>
+
     <form action="/submit" method="POST">
       <label for="aboutme">Edit your About Me </label>
       <br/>
-      <textarea rows="50" cols="100" name="aboutme" id="aboutme"></textarea>
-      <br/>
-      <input type="text" name="aboutme" id="aboutme">
-      <br/>
-      <label for="conversations">Sent Messages </label>
-      <br/>
-      <input type="password" name="password" id="password">
+      <textarea rows="10" cols="100" name="aboutme" id="aboutme"></textarea>
       <br/><br/>
       <button type="submit">Submit</button>
     </form>
+
+    <h2>Sent Messages</h2>
+    <div class="messages">
+              {% for i in conversationStore %}
+                <p class="messages"> <!--{{ i.messages}} --> <br> {{i.getUser}}'s Blog <br> Title: {{i.cleanedMessageContent}} <br> {{i.conversationtext}}</p>
+              {%endfor%}
+    </div>
 
   </div>
 </body>
