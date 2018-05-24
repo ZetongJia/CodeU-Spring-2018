@@ -35,7 +35,7 @@
     <h3>Edit Your About Me</h3>
 
     <form action="/submit" method="POST">
-      <label for="aboutme">Edit your About Me </label>
+      <label for="aboutme"></label>
       <br/>
       <textarea rows="10" cols="100" name="aboutme" id="aboutme"></textarea>
       <br/><br/>
@@ -44,9 +44,9 @@
 
     <h2>Sent Messages</h2>
     <div class="messages">
-              {% for i in conversationStore %}
-                <p class="messages"> <!--{{ i.messages}} --> <br> {{i.getUser}}'s Blog <br> Title: {{i.cleanedMessageContent}} <br> {{i.conversationtext}}</p>
-              {%endfor%}
+              <% for i in conversationStore %>
+                <p class="messages"> <!--{{ i.messages}} --> <br> <%i.getUser%>'s Blog <br> Title: <%i.cleanedMessageContent%> <br> <%i.conversationtext%></p>
+              <%endfor%>
     </div>
 
   </div>
