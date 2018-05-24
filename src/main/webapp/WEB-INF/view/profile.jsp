@@ -45,7 +45,7 @@
     <h2>Sent Messages</h2>
     <div class="messages">
               <% for (Message i : messages) {%>
-                <p class="messages"> <br> <%System.out.println(messages.get(i));%></p>
+                <p class="messages"> <br> <%System.out.println(messagesInConversation.get(i));%></p>
               <% } %>
     </div>
 
