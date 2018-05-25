@@ -64,7 +64,7 @@ public class ProfileServlet extends HttpServlet {
       String requestUrl = request.getRequestURI();
       String userProfile = requestUrl.substring("/user/".length());
 
-      //request.getSession().setAttribute("user")
+      request.getSession().setAttribute("user", userProfile);
     request.getRequestDispatcher("/WEB-INF/view/profile.jsp").forward(request, response);
   }
 
