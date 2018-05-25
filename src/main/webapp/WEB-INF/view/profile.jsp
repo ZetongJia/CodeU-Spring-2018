@@ -16,7 +16,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Login</title>
+  <title>My Profile</title>
   <link rel="stylesheet" href="/css/main.css">
 </head>
 <body>
