@@ -95,22 +95,5 @@ public class ProfileServlet extends HttpServlet {
           String userProfile = requestUrl.substring("/user/".length());
 
     response.sendRedirect("/user/"+userProfile);
-    //
-    // if (!userStore.isUserRegistered(username)) {
-    //   request.setAttribute("error", "That username was not found.");
-    //   request.getRequestDispatcher("/WEB-INF/view/profile.jsp").forward(request, response);
-    //   return;
-    // }
-    //
-    // User user = userStore.getUser(username);
-    //
-    // if (!BCrypt.checkpw(password, user.getPasswordHash())) {
-    //   request.setAttribute("error", "Please enter a correct password.");
-    //   request.getRequestDispatcher("/WEB-INF/view/profile.jsp").forward(request, response);
-    //   return;
-    // }
-    //
-    // request.getSession().setAttribute("user", username);
-    // response.sendRedirect("/conversations");
   }
 }
