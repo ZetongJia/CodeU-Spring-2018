@@ -152,6 +152,8 @@ public class ChatServlet extends HttpServlet {
             Instant.now());
 
     messageStore.addMessage(message);
+    user.getIncNumWords(message.calcNumWords());
+    userStore.updateUser(user);
 
     // redirect to a GET request
     response.sendRedirect("/chat/" + conversationTitle);

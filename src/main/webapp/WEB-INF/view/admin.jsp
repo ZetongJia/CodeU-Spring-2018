@@ -14,8 +14,6 @@
   limitations under the License.
 --%>
 
-<%@ page import="java.util.List" %>
-<%@ page import="codeu.model.data.Conversation" %>
 <%@ page import="codeu.model.store.basic.*" %>
 
 <!DOCTYPE html>
@@ -41,11 +39,12 @@
     <h2>Site Statistics</h2>
     <p>Here are some site stats:
       <ul>
-        <li>Users: <%= userStore.getNumOfUsers()%> </li>
-        <li>Conversations: <%= conversationStore.getNumOfConversations()%> </li>
-        <li>Messages: <%= messageStore.getNumOfMessages()%> </li>
-        <li>Most Active User:</li>
-        <li>Wordiest User:</li>
+        <li>Users: <%= userStore.getNumOfUsers() %> </li>
+        <li>Conversations: <%= conversationStore.getNumOfConversations() %> </li>
+        <li>Messages: <%= messageStore.getNumOfMessages() %> </li>
+        <li>Most Active User: <%= userStore.getMostActiveUser() %> </li>
+        <li>Newest User: <%= userStore.getNewestUser() %> </li>
+        <li>Wordiest User: <%= userStore.getWordiestUser() %> </li>
       </ul>
     </p>
     <hr>

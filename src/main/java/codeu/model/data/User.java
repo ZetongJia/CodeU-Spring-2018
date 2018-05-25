@@ -23,6 +23,8 @@ public class User {
   private final String name;
   private final String passwordHash;
   private final Instant creation;
+  private long numMessages;
+  private long numWords;
 
   /**
    * Constructs a new User.
@@ -32,11 +34,13 @@ public class User {
    * @param passwordHash the password hash of this User
    * @param creation the creation time of this User
    */
-  public User(UUID id, String name, String passwordHash, Instant creation) {
+  public User(UUID id, String name, String passwordHash, Instant creation ) {
     this.id = id;
     this.name = name;
     this.passwordHash = passwordHash;
     this.creation = creation;
+    this.numMessages = -1;
+    this.numWords = 0;
   }
 
   /** Returns the ID of this User. */
@@ -58,4 +62,27 @@ public class User {
   public Instant getCreationTime() {
     return creation;
   }
+
+  /** Returns the number of messages sent by this User. */
+  public long getNumMessages() {
+    return numMessages;
+  }
+
+  /** Returns the number of messages sent by this User. */
+  public long getIncNumMessages() {
+    this.numMessages = numMessages + 1; 
+    return numMessages;
+  }
+
+  /** Returns the number of words typed by this User. */
+  public long getNumWords() {
+    return numWords;
+  }
+
+  /** Returns the number of words sent by this User. */
+  public long getIncNumWords(long words) {
+    this.numWords = numWords + words; 
+    return numWords;
+  }  
+
 }

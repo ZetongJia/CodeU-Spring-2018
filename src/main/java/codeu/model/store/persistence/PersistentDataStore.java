@@ -17,6 +17,7 @@ package codeu.model.store.persistence;
 import codeu.model.data.Conversation;
 import codeu.model.data.Message;
 import codeu.model.data.User;
+import codeu.model.store.basic.*;
 import codeu.model.store.persistence.PersistentDataStoreException;
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
@@ -67,6 +68,8 @@ public class PersistentDataStore {
         String userName = (String) entity.getProperty("username");
         String passwordHash = (String) entity.getProperty("password_hash");
         Instant creationTime = Instant.parse((String) entity.getProperty("creation_time"));
+        Long numMessages = Long.parseLong( (String) entity.getProperty("numMessages"));
+        Long numWords = Long.parseLong( (String) entity.getProperty("numWords"));
         User user = new User(uuid, userName, passwordHash, creationTime);
         users.add(user);
       } catch (Exception e) {
@@ -156,6 +159,8 @@ public class PersistentDataStore {
     userEntity.setProperty("username", user.getName());
     userEntity.setProperty("password_hash", user.getPasswordHash());
     userEntity.setProperty("creation_time", user.getCreationTime().toString());
+    userEntity.setProperty("numMessages", String.valueOf(user.getIncNumMessages()));
+    userEntity.setProperty("numWords", String.valueOf(user.getNumWords()));
     datastore.put(userEntity);
   }
 

@@ -131,5 +131,57 @@ public class UserStore {
   public int getNumOfUsers() {
     return this.users.size();
   }
+
+  /** Gets newest user registered in UserStore. */
+  public String getNewestUser() {
+    if (users.size() == 0){
+      return "N/A";
+    } 
+    return (this.users.get(users.size() - 1)).getName();
+  }
+
+  /** 
+  * Gets most active user in UserStore.
+  * The most active user is the user with the most messages sent. 
+  */
+  public String getMostActiveUser() {
+    if (users.size() == 0){
+      return "N/A";
+    }
+
+    long largest = 0;
+    String mostActive = "N/A";
+    for (User user : users) {
+      if (user.getNumMessages() >= largest){
+        mostActive = user.getName();
+        largest = user.getNumMessages();
+      }
+    }
+    return mostActive;
+  }
+
+  /** 
+  * Gets wordiest user in UserStore.
+  * The wordiest user is the user with the highest average number of words sent per message. 
+  */
+  public String getWordiestUser() {
+    if (users.size() == 0){
+      return "N/A";
+    } 
+
+    long largest = 0;
+    long curr = 0;
+    String mostWordiest = "N/A";
+    for (User user : users) {
+      curr = user.getNumWords()/user.getNumMessages();
+      System.out.println(curr);
+      if (curr >= largest){
+        mostWordiest = user.getName();
+        largest = curr;
+      }
+    }
+    return mostWordiest;
+  }  
+
 }
 
