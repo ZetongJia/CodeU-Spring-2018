@@ -63,9 +63,7 @@ public class ProfileServlet extends HttpServlet {
       throws IOException, ServletException {
       String requestUrl = request.getRequestURI();
       String userProfile = requestUrl.substring("/user/".length());
-      User user = userStore.getUser(username);
 
-      request.getSession().setAttribute("user", username);
     request.getRequestDispatcher("/WEB-INF/view/profile.jsp").forward(request, response);
   }
 
@@ -81,6 +79,9 @@ public class ProfileServlet extends HttpServlet {
           String aboutme = request.getParameter("aboutme");
           String username = (String) request.getSession().getAttribute("user");
 
+          String requestUrl = request.getRequestURI();
+          String userProfile = requestUrl.substring("/user/".length());
+
           if(username == null){
             response.sendRedirect("/login");
             return;
@@ -95,7 +96,7 @@ public class ProfileServlet extends HttpServlet {
           String requestUrl = request.getRequestURI();
           String userProfile = requestUrl.substring("/user/".length());
 
-    response.sendRedirect("/user/"+username);
+    response.sendRedirect("/user/"+userProfile);
     //
     // if (!userStore.isUserRegistered(username)) {
     //   request.setAttribute("error", "That username was not found.");
