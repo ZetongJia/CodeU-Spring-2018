@@ -56,11 +56,13 @@ public class ProfileServlet extends HttpServlet {
 
   /**
    * This function fires when a user requests the /profile URL. It simply forwards the request to
-   * profile.jsp.
+   * profile.jsp. Also adds username to the URL.
    */
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response)
       throws IOException, ServletException {
+      String requestUrl = request.getRequestURI();
+      String userProfile = requestUrl.substring("/user/".length());
     request.getRequestDispatcher("/WEB-INF/view/profile.jsp").forward(request, response);
   }
 
@@ -72,7 +74,22 @@ public class ProfileServlet extends HttpServlet {
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response)
       throws IOException, ServletException {
-    String aboutme = request.getParameter("aboutme");
+
+          String aboutme = request.getParameter("aboutme");
+          String username = request.getSession().getAttribute("user");
+
+          if(username == null){
+            response.sendRedirect("/login");
+          }
+
+          User user = userStore.getUser(username);
+          if(user == null){
+            response.sendRedirect("/login");
+          }
+          String requestUrl = request.getRequestURI();
+          String userProfile = requestUrl.substring("/user/".length());
+
+    response.sendRedirect("/user/"+username);
     //
     // if (!userStore.isUserRegistered(username)) {
     //   request.setAttribute("error", "That username was not found.");
