@@ -79,8 +79,6 @@ public class ProfileServlet extends HttpServlet {
           String aboutme = request.getParameter("aboutme");
           String username = (String) request.getSession().getAttribute("user");
 
-          String requestUrl = request.getRequestURI();
-          String userProfile = requestUrl.substring("/user/".length());
 
           if(username == null){
             response.sendRedirect("/login");
