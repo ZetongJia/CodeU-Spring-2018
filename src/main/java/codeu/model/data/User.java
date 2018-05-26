@@ -25,6 +25,7 @@ public class User {
   private final Instant creation;
   private long numMessages;
   private long numWords;
+  private boolean isAdmin;
 
   /**
    * Constructs a new User.
@@ -33,14 +34,16 @@ public class User {
    * @param name the username of this User
    * @param passwordHash the password hash of this User
    * @param creation the creation time of this User
+   * @param isAdmin the admin status of this User
    */
-  public User(UUID id, String name, String passwordHash, Instant creation ) {
+  public User(UUID id, String name, String passwordHash, Instant creation, boolean isAdmin) {
     this.id = id;
     this.name = name;
     this.passwordHash = passwordHash;
     this.creation = creation;
     this.numMessages = 0;
     this.numWords = 0;
+    this.isAdmin = isAdmin;
   }
 
   /** Returns the ID of this User. */
@@ -83,6 +86,11 @@ public class User {
   public long getIncNumWords(long words) {
     this.numWords = numWords + words; 
     return numWords;
+  }  
+
+  /** Returns true if user is admin. */
+  public boolean getIsAdmin() {
+    return isAdmin;
   }  
 
 }

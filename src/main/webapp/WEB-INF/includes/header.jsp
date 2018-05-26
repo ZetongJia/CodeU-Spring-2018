@@ -4,7 +4,7 @@
   <% if (request.getSession().getAttribute("user") != null) { %>
        <a>Hello <%= request.getSession().getAttribute("user") %>!</a>
 
-  <%  if (request.getSession().getAttribute("user").equals("admin")) { %>
+  <%  if ( (boolean) request.getSession().getAttribute("isAdmin")) { %>
         <a href="/admin">Admin</a>
   <%  } 
      }else{ %>
@@ -12,5 +12,3 @@
   <% } %>
   <a href="/about.jsp">About</a>
 </nav>
-
-
