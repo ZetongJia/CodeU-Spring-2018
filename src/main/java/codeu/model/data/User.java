@@ -39,7 +39,7 @@ public class User {
     this.name = name;
     this.passwordHash = passwordHash;
     this.creation = creation;
-    this.numMessages = -1;
+    this.numMessages = 0;
     this.numWords = 0;
   }
 

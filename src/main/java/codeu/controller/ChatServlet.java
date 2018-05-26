@@ -152,6 +152,7 @@ public class ChatServlet extends HttpServlet {
             Instant.now());
 
     messageStore.addMessage(message);
+    user.getIncNumMessages();
     user.getIncNumWords(message.calcNumWords());
     userStore.updateUser(user);
 

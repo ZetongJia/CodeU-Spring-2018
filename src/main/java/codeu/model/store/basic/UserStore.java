@@ -152,7 +152,9 @@ public class UserStore {
     long largest = 0;
     String mostActive = "N/A";
     for (User user : users) {
-      if (user.getNumMessages() >= largest){
+      if (user.getNumMessages() == 0){
+        continue;
+      }else if (user.getNumMessages() >= largest){
         mostActive = user.getName();
         largest = user.getNumMessages();
       }
@@ -173,6 +175,9 @@ public class UserStore {
     long curr = 0;
     String mostWordiest = "N/A";
     for (User user : users) {
+      if (user.getNumMessages() == 0){
+        continue;
+      }
       curr = user.getNumWords()/user.getNumMessages();
       System.out.println(curr);
       if (curr >= largest){
