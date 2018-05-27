@@ -37,8 +37,7 @@
 
     <form action="/user/<%=request.getSession().getAttribute("user")%>" method="POST">
       <br/>
-      <input type="text" name="aboutme"/>
-      <%-- <textarea rows="10" cols="100" name="aboutme"></textarea> --%>
+      <textarea rows="10" cols="100" name="aboutme"></textarea>
       <br/><br/>
       <input type="submit" value="Submit"/>
     </form>
