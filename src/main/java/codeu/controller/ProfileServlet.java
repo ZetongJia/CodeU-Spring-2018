@@ -75,6 +75,7 @@ public class ProfileServlet extends HttpServlet {
       throws IOException, ServletException {
 
           String aboutme = request.getParameter("aboutme");
+          request.getSession().setAttribute("aboutme", aboutme);
           String username = (String) request.getSession().getAttribute("user");
 
 
@@ -89,7 +90,7 @@ public class ProfileServlet extends HttpServlet {
             response.sendRedirect("/login");
             return;
           }
-          
+
     response.sendRedirect("/user/"+request.getSession().getAttribute("user"));
   }
 }

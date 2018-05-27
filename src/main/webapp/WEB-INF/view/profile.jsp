@@ -31,7 +31,7 @@
     <% } %>
 
     <h2>About Me</h2>
-    <p><%= request.getParameter("aboutme") %></p>
+    <p><%= request.getSession().getAttribute("aboutme")%></p>
 
     <h3>Edit Your About Me</h3>
 
