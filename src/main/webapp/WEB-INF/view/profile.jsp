@@ -25,6 +25,8 @@
 
   <div id="container">
     <h1><%=request.getSession().getAttribute("user")%>'s Profile Page</h1>
+    <hr/>
+
 
     <% if(request.getAttribute("error") != null){ %>
         <h2 style="color:red"><%= request.getAttribute("error") %></h2>
@@ -41,6 +43,7 @@
       <br/><br/>
       <input type="submit" value="Submit"/>
     </form>
+    <hr/>
 
     <h2>Sent Messages</h2>
     <div class="messages">
@@ -48,6 +51,8 @@
                 <p class="messages"> <br> <%System.out.println(messagesInConversation.get(i));%></p>
               <% } %> --%>
     </div>
+    <hr/>
+
 
   </div>
 </body>

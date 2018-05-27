@@ -124,6 +124,7 @@ public class PersistentDataStore {
   public List<Message> loadMessages() throws PersistentDataStoreException {
 
     List<Message> messages = new ArrayList<>();
+    List<Message> messagesByUser = new ArrayList<>();
 
     // Retrieve all messages from the datastore.
     Query query = new Query("chat-messages").addSort("creation_time", SortDirection.ASCENDING);
@@ -180,4 +181,3 @@ public class PersistentDataStore {
     datastore.put(conversationEntity);
   }
 }
-

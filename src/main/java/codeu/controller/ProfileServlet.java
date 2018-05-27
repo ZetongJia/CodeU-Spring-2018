@@ -62,6 +62,9 @@ public class ProfileServlet extends HttpServlet {
   public void doGet(HttpServletRequest request, HttpServletResponse response)
       throws IOException, ServletException {
 
+      String requestUrl = request.getRequestURI();
+      String userId = requestUrl.substring("/user/".length());
+
     request.getRequestDispatcher("/WEB-INF/view/profile.jsp").forward(request, response);
   }
 
@@ -78,7 +81,6 @@ public class ProfileServlet extends HttpServlet {
           request.getSession().setAttribute("aboutme", aboutme);
           String username = (String) request.getSession().getAttribute("user");
 
-
           if(username == null){
             response.sendRedirect("/login");
             return;
@@ -91,6 +93,10 @@ public class ProfileServlet extends HttpServlet {
             return;
           }
 
+          List<Message> messagesByUser = messageStore.getUserMessages(userId);
+          for(Message messagesfromuser: messagesByUser){
+            System.out.println(messagesByUser[messagesfromuser]);
+          }
     response.sendRedirect("/user/"+request.getSession().getAttribute("user"));
   }
 }
