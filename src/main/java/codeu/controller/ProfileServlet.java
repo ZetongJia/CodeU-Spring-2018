@@ -94,6 +94,6 @@ public class ProfileServlet extends HttpServlet {
           String requestUrl = request.getRequestURI();
           String userProfile = requestUrl.substring("/user/".length());
 
-    response.sendRedirect("/user/"+userProfile);
+    response.sendRedirect("/user/"+username);
   }
 }
