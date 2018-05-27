@@ -47,9 +47,9 @@
 
     <h2>Sent Messages</h2>
     <div class="messages">
-              <%-- <% for (MessageStore i : messagesInConversation) {%>
-                <p class="messages"> <br> <%System.out.println(messagesInConversation.get(i));%></p>
-              <% } %> --%>
+      <%for(Message messagesfromuser: ProfileServlet.messagesByUser){
+        System.out.println(messagesfromuser);
+      }%>
     </div>
     <hr/>
 
