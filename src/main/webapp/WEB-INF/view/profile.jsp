@@ -31,7 +31,7 @@
     <% } %>
 
     <h2>About Me</h2>
-    <%= request.getParameter("aboutme") %>
+    <p><%= request.getParameter("aboutme") %></p>
 
     <h3>Edit Your About Me</h3>
 
@@ -39,7 +39,7 @@
       <br/>
       <textarea rows="10" cols="100" name="aboutme"></textarea>
       <br/><br/>
-      <button type="submit">Submit</button>
+      <input type="submit" value="Submit"/>
     </form>
 
     <h2>Sent Messages</h2>
