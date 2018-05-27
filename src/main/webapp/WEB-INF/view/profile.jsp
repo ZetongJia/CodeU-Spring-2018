@@ -47,6 +47,7 @@
 
     <h2>Sent Messages</h2>
     <div class="messages">
+      <p><%=request.getSession().getAttribute("usermessages")%></p>
       <%-- <%for(Message messagesfromuser: ProfileServlet.messagesByUser){
         System.out.println(messagesfromuser);
       }%> --%>
