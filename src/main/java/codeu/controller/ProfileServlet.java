@@ -63,7 +63,7 @@ public class ProfileServlet extends HttpServlet {
       throws IOException, ServletException {
       String requestUrl = request.getRequestURI();
       String userProfile = requestUrl.substring("/user/".length());
-      request.getSession().getAttribute("user");
+      request.getSession().setAttribute("user");
 
     request.getRequestDispatcher("/WEB-INF/view/profile.jsp").forward(request, response);
   }
