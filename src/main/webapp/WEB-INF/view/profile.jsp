@@ -36,9 +36,8 @@
     <h3>Edit Your About Me</h3>
 
     <form action="/user/<%=request.getSession().getAttribute("user")%>" method="POST">
-      <label for="aboutme"></label>
       <br/>
-      <textarea rows="10" cols="100" name="aboutme" id="aboutme"></textarea>
+      <textarea rows="10" cols="100" name="aboutme" </textarea>
       <br/><br/>
       <button type="submit">Submit</button>
     </form>
