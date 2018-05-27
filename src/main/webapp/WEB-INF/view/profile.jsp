@@ -25,6 +25,7 @@
 
   <div id="container">
     <h1>Profile Page</h1>
+    <a href="/user/<%=request.getSession().getAttribute("user")%>">My Profile</a>
 
     <% if(request.getAttribute("error") != null){ %>
         <h2 style="color:red"><%= request.getAttribute("error") %></h2>
