@@ -31,10 +31,11 @@
     <% } %>
 
     <h2>About Me</h2>
+    <%= request.getParameter("aboutme") %>
 
     <h3>Edit Your About Me</h3>
 
-    <form action="/submit" method="POST">
+    <form action="/user/<%=request.getSession().getAttribute("user")%>" method="POST">
       <label for="aboutme"></label>
       <br/>
       <textarea rows="10" cols="100" name="aboutme" id="aboutme"></textarea>
