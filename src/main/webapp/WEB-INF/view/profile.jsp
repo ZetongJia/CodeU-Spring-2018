@@ -47,9 +47,9 @@
 
     <h2>Sent Messages</h2>
     <div class="messages">
-      <%for(Message messagesfromuser: ProfileServlet.messagesByUser){
+      <%-- <%for(Message messagesfromuser: ProfileServlet.messagesByUser){
         System.out.println(messagesfromuser);
-      }%>
+      }%> --%>
     </div>
     <hr/>
 

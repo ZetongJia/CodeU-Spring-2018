@@ -94,7 +94,10 @@ public class ProfileServlet extends HttpServlet {
           }
 
           List<Message> messagesByUser = MessageStore.getInstance().getUserMessages(username);
-          
+          for(Message messagesfromuser: messagesByUser){
+            System.out.println(messagesfromuser);
+          }
+          request.getSession().setAttribute("usermessages", messagesByUser);
     response.sendRedirect("/user/"+request.getSession().getAttribute("user"));
   }
 }
