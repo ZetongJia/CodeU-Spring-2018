@@ -86,7 +86,7 @@ public class MessageStore {
   }
 
 /** Access messages sent by given User. */
-  public List<Message> getUserMessages(UUID userId) {
+  public List<Message> getUserMessages(String userId) {
 
     List<Message> messagesByUser = new ArrayList<>();
 
