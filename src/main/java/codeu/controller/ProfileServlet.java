@@ -93,7 +93,7 @@ public class ProfileServlet extends HttpServlet {
             return;
           }
 
-          List<Message> messagesByUser = messageStore.getUserMessages(username);
+          List<Message> messagesByUser = MessageStore.getUserMessages(username);
           for(Message messagesfromuser: messagesByUser){
             System.out.println(messagesByUser[messagesfromuser]);
           }
