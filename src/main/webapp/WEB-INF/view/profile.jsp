@@ -24,7 +24,7 @@
   <jsp:include page="/WEB-INF/includes/header.jsp"/>
 
   <div id="container">
-    <h1>Profile Page</h1>
+    <h1><%=request.getSession().getAttribute("user")%>'s Profile Page</h1>
 
     <% if(request.getAttribute("error") != null){ %>
         <h2 style="color:red"><%= request.getAttribute("error") %></h2>
