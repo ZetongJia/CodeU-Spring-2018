@@ -31,7 +31,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.mindrot.jbcrypt.BCrypt;
 
 /** Servlet class responsible for the profile page. */
-public class ProfileServlet extends HttpServlet implements java.io.Serializable{
+public class ProfileServlet extends HttpServlet{
 
   /** Store class that gives access to Users. */
   private UserStore userStore;
@@ -73,7 +73,7 @@ public class ProfileServlet extends HttpServlet implements java.io.Serializable{
         request.setAttribute("error", "no messages found.");
       }
 
-      request.getSession().setAttribute("usermessages", messagesByUser);
+      request.setAttribute("usermessages", messagesByUser);
     request.getRequestDispatcher("/WEB-INF/view/profile.jsp").forward(request, response);
   }
 
