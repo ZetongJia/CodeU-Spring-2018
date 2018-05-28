@@ -31,7 +31,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.mindrot.jbcrypt.BCrypt;
 
 /** Servlet class responsible for the profile page. */
-public class ProfileServlet extends HttpServlet {
+public class ProfileServlet extends HttpServlet implements java.io.Serializable{
 
   /** Store class that gives access to Users. */
   private UserStore userStore;
