@@ -61,10 +61,8 @@
       List<Message> sentMessages = (ArrayList<Message>) request.getAttribute("usermessages");
 
       for(Message message : sentMessages) {
-            Instant instant = message.getCreationTime();
-            String output = formatter.format( instant );
           %><p>
-            <b><%out.print(output);%></b>
+            <b><%out.print(message.getCreationTime());%></b>
             <%out.println(message.getContent());%>
           </p>
       <%}
