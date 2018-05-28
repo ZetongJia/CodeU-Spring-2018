@@ -51,13 +51,15 @@
 
     <h2>Sent Messages</h2>
     <div class="messages">
-      //<p><%=request.getSession().getAttribute("usermessages")%></p>
       <%
       // retrieve your list from the request, with casting
       List<Message> sentMessages = (ArrayList<Message>) request.getAttribute("usermessages");
 
       for(Message message : sentMessages) {%>
-          <p><%out.println(message.getContent());%></p>;
+          <p>
+            <b><%out.print(message.getCreationTime());%></b>
+            <%out.println(message.getContent());%>
+          </p>
       <%}
       %>
     </div>
