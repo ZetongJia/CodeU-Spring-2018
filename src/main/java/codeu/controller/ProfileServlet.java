@@ -64,7 +64,7 @@ public class ProfileServlet extends HttpServlet {
 
       String requestUrl = request.getRequestURI();
       //String userId = requestUrl.substring("/user/".length());
-      UUID userId = request.getSession().getUser().getId();
+      UUID userId = request.getSession().getId();
 
       List<Message> messagesByUser = MessageStore.getInstance().getUserMessages(userId);
 
