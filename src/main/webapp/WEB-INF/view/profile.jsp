@@ -54,7 +54,7 @@
       <p><%=request.getSession().getAttribute("usermessages")%></p>
       <%
       // retrieve your list from the request, with casting
-      List<Message> sentMessages = request.getSession().getAttribute("usermessages");
+      List<Message> sentMessages = (ArrayList<Message>) request.getAttribute("usermessages");
 
       for(Message message : sentMessages) {
           System.out.println(message);
