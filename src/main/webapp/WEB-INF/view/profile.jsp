@@ -52,12 +52,16 @@
     <h2>Sent Messages</h2>
     <div class="messages">
       <%
+      DateTimeFormatter formatter =
+    DateTimeFormatter.RFC_1123_DATE_TIME;
       // retrieve your list from the request, with casting
       List<Message> sentMessages = (ArrayList<Message>) request.getAttribute("usermessages");
 
       for(Message message : sentMessages) {%>
+            Instant instant = message.getCreationTime();
+            String output = formatter.format( instant );
           <p>
-            <b><%out.print(message.getCreationTime());%></b>
+            <b><%out.print(output);%></b>
             <%out.println(message.getContent());%>
           </p>
       <%}
