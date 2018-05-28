@@ -66,6 +66,10 @@ public class ProfileServlet extends HttpServlet {
       String userId = requestUrl.substring("/user/".length());
       List<Message> messagesByUser = MessageStore.getInstance().getUserMessages(userId);
 
+      if(messagesByUser.size()==0){
+        request.setAttribute("error", "no messages found.");
+      }
+
       request.getSession().setAttribute("usermessages", messagesByUser);
     request.getRequestDispatcher("/WEB-INF/view/profile.jsp").forward(request, response);
   }
