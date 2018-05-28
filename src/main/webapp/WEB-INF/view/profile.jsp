@@ -57,7 +57,7 @@
       List<Message> sentMessages = (ArrayList<Message>) request.getAttribute("usermessages");
 
       for(Message message : sentMessages) {%>
-          <p><%message.getContent();%></p>;
+          <p><%out.printlnmessage.getContent());%></p>;
       <%}
       %>
     </div>
