@@ -13,8 +13,11 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 --%>
+<%@ page import ="java.lang.String"%>
 <%@ page import ="java.util.List"%>
 <%@ page import ="java.util.ArrayList"%>
+<%@ page import ="java.time.Instant"%>
+<%@ page import ="java.time.format.DateTimeFormatter"%>
 <%@ page import ="codeu.model.data.Message"%>
 
 <!DOCTYPE html>
@@ -57,10 +60,10 @@
       // retrieve your list from the request, with casting
       List<Message> sentMessages = (ArrayList<Message>) request.getAttribute("usermessages");
 
-      for(Message message : sentMessages) {%>
+      for(Message message : sentMessages) {
             Instant instant = message.getCreationTime();
             String output = formatter.format( instant );
-          <p>
+          %><p>
             <b><%out.print(output);%></b>
             <%out.println(message.getContent());%>
           </p>
