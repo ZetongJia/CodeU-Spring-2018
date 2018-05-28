@@ -64,7 +64,9 @@ public class ProfileServlet extends HttpServlet {
 
       String requestUrl = request.getRequestURI();
       String userId = requestUrl.substring("/user/".length());
+      List<Message> messagesByUser = MessageStore.getInstance().getUserMessages(userId);
 
+      request.getSession().setAttribute("usermessages", messagesByUser);
     request.getRequestDispatcher("/WEB-INF/view/profile.jsp").forward(request, response);
   }
 
@@ -93,11 +95,7 @@ public class ProfileServlet extends HttpServlet {
             return;
           }
 
-          List<Message> messagesByUser = MessageStore.getInstance().getUserMessages(username);
-          for(Message messagesfromuser: messagesByUser){
-            System.out.println(messagesfromuser);
-          }
-          request.getSession().setAttribute("usermessages", messagesByUser);
+
     response.sendRedirect("/user/"+request.getSession().getAttribute("user"));
   }
 }
