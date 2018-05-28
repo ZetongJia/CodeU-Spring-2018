@@ -63,7 +63,9 @@ public class ProfileServlet extends HttpServlet {
       throws IOException, ServletException {
 
       String requestUrl = request.getRequestURI();
-      String userId = requestUrl.substring("/user/".length());
+      //String userId = requestUrl.substring("/user/".length());
+      UUID userId = request.getSession().getUser().getId();
+
       List<Message> messagesByUser = MessageStore.getInstance().getUserMessages(userId);
 
       if(messagesByUser.size()==0){
