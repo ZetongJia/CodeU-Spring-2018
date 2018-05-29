@@ -63,9 +63,9 @@ public class ActivityFeedServlet extends HttpServlet {
   }
 
   /**
-   * This function fires when a user navigates to the chat page. It gets the conversation title from
-   * the URL, finds the corresponding Conversation, and fetches the messages in that Conversation.
-   * It then forwards to chat.jsp for rendering.
+   * This function fires when a user navigates to the activityfeed page. It gets all the conversation associated
+   * with that user and fetches the messages in each Conversation in chronological order.
+   * It then forwards to activityfeed.jsp for rendering.
    */
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -73,13 +73,13 @@ public class ActivityFeedServlet extends HttpServlet {
     // String requestUrl = request.getRequestURI();
     // String conversationTitle = requestUrl.substring("/chat/".length());
     //
-    // Conversation conversation = conversationStore.getConversationWithTitle(conversationTitle);
-    // if (conversation == null) {
-    //   // couldn't find conversation, redirect to conversation list
-    //   System.out.println("Conversation was null: " + conversationTitle);
-    //   response.sendRedirect("/conversations");
-    //   return;
-    // }
+    // The get function needs to know who the user is, and if one is not logged in, they need to.
+    if (user == null) {
+      // couldn't find conversation, redirect to conversation list
+      System.out.println("User was null: " + conversationTitle);
+      response.sendRedirect("/login");
+      return;
+    }
     //
     // UUID conversationId = conversation.getId();
     //
@@ -118,28 +118,28 @@ public class ActivityFeedServlet extends HttpServlet {
     String conversationTitle = requestUrl.substring("/chat/".length());
 
     Conversation conversation = conversationStore.getConversationWithTitle(conversationTitle);
-    if (conversation == null) {
-      // couldn't find conversation, redirect to conversation list
-      response.sendRedirect("/conversations");
-      return;
-    }
+    // if (conversation == null) {
+    //   // couldn't find conversation, redirect to conversation list
+    //   response.sendRedirect("/conversations");
+    //   return;
+    // }
 
     String messageContent = request.getParameter("message");
 
     // this removes any HTML from the message content
     String cleanedMessageContent = Jsoup.clean(messageContent, Whitelist.none());
 
-    Message message =
-        new Message(
-            UUID.randomUUID(),
-            conversation.getId(),
-            user.getId(),
-            cleanedMessageContent,
-            Instant.now());
-
-    messageStore.addMessage(message);
-
-    // redirect to a GET request
-    response.sendRedirect("/chat/" + conversationTitle);
+    // Message message =
+    //     new Message(
+    //         UUID.randomUUID(),
+    //         conversation.getId(),
+    //         user.getId(),
+    //         cleanedMessageContent,
+    //         Instant.now());
+    //
+    // messageStore.addMessage(message);
+    //
+    // // redirect to a GET request
+    // response.sendRedirect("/chat/" + conversationTitle);
   }
 }
