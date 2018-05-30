@@ -72,9 +72,8 @@ public class User {
   }
 
   /** Returns the number of messages sent by this User. */
-  public long getIncNumMessages() {
-    this.numMessages = numMessages + 1; 
-    return numMessages;
+  public void incrementNumMessages() {
+    this.numMessages++;
   }
 
   /** Returns the number of words typed by this User. */
@@ -83,9 +82,8 @@ public class User {
   }
 
   /** Returns the number of words sent by this User. */
-  public long getIncNumWords(long words) {
-    this.numWords = numWords + words; 
-    return numWords;
+  public void incrementNumWords(long words) {
+    this.numWords += words;
   }  
 
   /** Returns true if user is admin. */

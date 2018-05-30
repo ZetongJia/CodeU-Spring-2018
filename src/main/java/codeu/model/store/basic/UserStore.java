@@ -179,7 +179,6 @@ public class UserStore {
         continue;
       }
       curr = user.getNumWords()/user.getNumMessages();
-      System.out.println(curr);
       if (curr >= largest){
         mostWordiest = user.getName();
         largest = curr;

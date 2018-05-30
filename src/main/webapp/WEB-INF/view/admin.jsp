@@ -49,16 +49,16 @@
     </p>
     <hr>
     <h2>Import Data</h2>
-      <form action=/ method=POST>
+      <form action=/admin method=POST>
         <p>
-          From source:
-          <select name="cars">
-            <option value="opt1">Opt1</option>
-            <option value="opt2">Opt2</option>
-            <option value="opt3">Opt3</option>
+          Create a conversation from a movie scene:
+          <select name="script">
+            <option value="wall_e">Wall-E</option>
+            <option value="monsters_inc">Monsters Inc</option>
+            <option value="toy_store_3">Toy Story 3</option>
           </select>
         </p>
-        <input type="submit" value="Submit">
+        <button type="submit">Submit</button>
       </form>
     </div>
 
