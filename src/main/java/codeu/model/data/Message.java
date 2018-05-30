@@ -67,4 +67,12 @@ public class Message {
   public Instant getCreationTime() {
     return creation;
   }
+
+  /** Returns the number of words of this Message. */
+  public long calcNumWords() {
+    String[] arr = content.split("\\W+");
+    long words = arr.length;
+    return words;
+  }
+
 }
