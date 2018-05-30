@@ -102,15 +102,7 @@
 
   </dependencies>
 
-  <!-- <build>
-    <plugins>
-      <plugin>
-        <groupId>com.google.appengine</groupId>
-        <artifactId>appengine-maven-plugin</artifactId>
-        <version>1.9.59</version>
-      </plugin>
-    </plugins>
-  </build> -->
+  
   <build>
       <plugins>
             <plugin>

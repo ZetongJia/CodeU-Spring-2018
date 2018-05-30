@@ -34,5 +34,21 @@ public class AdminServlet extends HttpServlet {
     request.getRequestDispatcher("/WEB-INF/view/admin.jsp").forward(request, response);
   }
 
+   /**
+   * This function fires when a user submits the admin form for scripts. It gets the script value (movie scene) from
+   * the submitted form data to pre-populate a conversation with messages (dialogue) by pre-registered users (characters).
+   */
+  @Override
+  public void doPost(HttpServletRequest request, HttpServletResponse response)
+      throws IOException, ServletException {
+    String script = request.getParameter("script");
+
+    if (script.equals("wall_e")) {
+    	System.out.println("WAALLLY");
+    }
+
+    response.sendRedirect("/admin");
+  }
+
 }
 
