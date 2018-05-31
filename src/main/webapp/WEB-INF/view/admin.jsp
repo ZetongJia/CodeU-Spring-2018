@@ -53,9 +53,9 @@
         <p>
           Create a conversation from a movie scene:
           <select name="script">
-            <option value="wall_e">Wall-E</option>
-            <option value="monsters_inc">Monsters Inc</option>
-            <option value="toy_store_3">Toy Story 3</option>
+            <option value="WallE.txt">Wall-E</option>
+            <option value="MonstersInc.txt">Monsters Inc</option>
+            <option value="ToyStory3.txt">Toy Story 3</option>
           </select>
         </p>
         <button type="submit">Submit</button>
