@@ -14,8 +14,6 @@
   limitations under the License.
 --%>
 
-<%@ page import="java.util.List" %>
-<%@ page import="codeu.model.data.Conversation" %>
 <%@ page import="codeu.model.store.basic.*" %>
 
 <!DOCTYPE html>
@@ -41,25 +39,26 @@
     <h2>Site Statistics</h2>
     <p>Here are some site stats:
       <ul>
-        <li>Users: <%= userStore.getNumOfUsers()%> </li>
-        <li>Conversations: <%= conversationStore.getNumOfConversations()%> </li>
-        <li>Messages: <%= messageStore.getNumOfMessages()%> </li>
-        <li>Most Active User:</li>
-        <li>Wordiest User:</li>
+        <li>Users: <%= userStore.getNumOfUsers() %> </li>
+        <li>Conversations: <%= conversationStore.getNumOfConversations() %> </li>
+        <li>Messages: <%= messageStore.getNumOfMessages() %> </li>
+        <li>Most Active User: <%= userStore.getMostActiveUser() %> </li>
+        <li>Newest User: <%= userStore.getNewestUser() %> </li>
+        <li>Wordiest User: <%= userStore.getWordiestUser() %> </li>
       </ul>
     </p>
     <hr>
     <h2>Import Data</h2>
-      <form action=/ method=POST>
+      <form action=/admin method=POST>
         <p>
-          From source:
-          <select name="cars">
-            <option value="opt1">Opt1</option>
-            <option value="opt2">Opt2</option>
-            <option value="opt3">Opt3</option>
+          Create a conversation from a movie scene:
+          <select name="script">
+            <option value="wall_e">Wall-E</option>
+            <option value="monsters_inc">Monsters Inc</option>
+            <option value="toy_store_3">Toy Story 3</option>
           </select>
         </p>
-        <input type="submit" value="Submit">
+        <button type="submit">Submit</button>
       </form>
     </div>
 
