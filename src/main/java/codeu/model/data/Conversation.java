@@ -26,6 +26,7 @@ public class Conversation {
   public final UUID owner;
   public final Instant creation;
   public final String title;
+  public List<UUID> members = new ArrayList<>();
 
   /**
    * Constructs a new Conversation.
@@ -38,8 +39,9 @@ public class Conversation {
   public Conversation(UUID id, UUID owner, String title, Instant creation) {
     this.id = id;
     this.owner = owner;
-    this.title = title;
     this.creation = creation;
+    this.title = title;
+    members.add(owner);
   }
 
   /** Returns the ID of this Conversation. */
