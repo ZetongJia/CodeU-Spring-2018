@@ -14,31 +14,17 @@
 
 package codeu.model.data;
 
-import codeu.model.data.User;
-import codeu.model.store.basic.UserStore;
-import codeu.model.store.persistence.PersistentStorageAgent;
-import java.time.Instant;
 import java.util.*;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mockito;
 
 public class ScriptTest {
-
-  // private UserStore userStore;
-  // private PersistentStorageAgent mockPersistentStorageAgent;
-
-  // @Before
-  // public void setup() {
-  //   mockPersistentStorageAgent = Mockito.mock(PersistentStorageAgent.class);
-  //   userStore = UserStore.getTestInstance(mockPersistentStorageAgent);
-  // }
 
   @Test
   public void testCreate() {
     String theme = "Sample.txt";
-    Script script = new Script(theme);
+    String path = "src/main/webapp/WEB-INF/scripts/" + theme;
+    Script script = new Script(theme, path);
 
     Map<String, List<String>> map = new HashMap<String, List<String>>()
     {{
@@ -50,6 +36,7 @@ public class ScriptTest {
     map.get("AMNA").add("b");
 
     Assert.assertEquals(theme, script.getTheme());
+    Assert.assertEquals(path, script.getPath());
     Assert.assertEquals(map, script.getContent());
 
 

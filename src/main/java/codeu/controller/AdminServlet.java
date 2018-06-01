@@ -83,7 +83,6 @@ public class AdminServlet extends HttpServlet {
     //       System.out.println(user.getName());
     //     }
 
-
     response.sendRedirect("/admin");
   }
 

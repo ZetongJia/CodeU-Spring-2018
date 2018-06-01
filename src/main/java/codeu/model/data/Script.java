@@ -27,16 +27,25 @@ import java.util.*;
  */
 public class Script {
   public final String theme;
-  public final Map<String, List<String>> content;
+  public final String path;
+  public Map<String, List<String>> content;
 
   /**
    * Constructs a new Script.
    *
    * @param theme the theme of this (movie) Script
-   * @param content the content of this (movie) Conversation
+   * @param path the path of this (movie) Script
+   * @param content the content of this (movie) Script
    */
   public Script(String theme) {
     this.theme = theme;
+    this.path = "WEB-INF/scripts/" + theme;
+    this.content = mapScript();
+  }
+
+  public Script(String theme, String path) {
+    this.theme = theme;
+    this.path = path;
     this.content = mapScript();
   }
 
@@ -45,19 +54,21 @@ public class Script {
     return theme;
   }
 
+  /** Returns the path of this Script. */
+  public String getPath() {
+    return path;
+  }
+
   /** Returns the content of this Script. */
   public Map<String, List<String>> getContent() {
-    System.out.println("GOT CONTENT!!");
     return content;
   }
 
   public Map<String, List<String>> mapScript(){
-    System.out.println("MAPPING!!");
     Map<String, List<String>> map = new HashMap<String, List<String>>();
 
     try {
-
-      BufferedReader file = new BufferedReader(new FileReader("scripts/" + theme));
+      BufferedReader file = new BufferedReader(new FileReader(path));
       String line;
 
       while ((line = file.readLine()) != null) {
@@ -75,7 +86,6 @@ public class Script {
     }catch(IOException e) {
       e.printStackTrace();
     }
-    System.out.println("RETURNED!!");
     return map;
   }
 
