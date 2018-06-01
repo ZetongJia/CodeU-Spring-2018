@@ -14,14 +14,13 @@
 
 package codeu.controller;
 
-import codeu.model.data.Script;
-import java.io.PrintWriter;
+
 import java.io.*;
 import java.util.*;
 import java.time.Instant;
 
-import codeu.model.data.User;
-import codeu.model.store.basic.UserStore;
+import codeu.model.data.*;
+import codeu.model.store.basic.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -31,6 +30,12 @@ import javax.servlet.http.HttpServletResponse;
 
 /** Servlet class responsible for the admin page. */
 public class AdminServlet extends HttpServlet {
+
+  /** Store class that gives access to Conversations. */
+  private ConversationStore conversationStore;
+
+  /** Store class that gives access to Messages. */
+  private MessageStore messageStore;
 
   /** Store class that gives access to Users. */
   private UserStore userStore;
@@ -42,7 +47,25 @@ public class AdminServlet extends HttpServlet {
   @Override
   public void init() throws ServletException {
     super.init();
+    setConversationStore(ConversationStore.getInstance());
+    setMessageStore(MessageStore.getInstance());
     setUserStore(UserStore.getInstance());
+  }
+
+  /**
+   * Sets the ConversationStore used by this servlet. This function provides a common setup method
+   * for use by the test framework or the servlet's init() function.
+   */
+  void setConversationStore(ConversationStore conversationStore) {
+    this.conversationStore = conversationStore;
+  }
+
+  /**
+   * Sets the MessageStore used by this servlet. This function provides a common setup method for
+   * use by the test framework or the servlet's init() function.
+   */
+  void setMessageStore(MessageStore messageStore) {
+    this.messageStore = messageStore;
   }
 
   /**
@@ -73,15 +96,41 @@ public class AdminServlet extends HttpServlet {
 
     String theme = request.getParameter("script");
     Script script = new Script(theme);
-    System.out.println(script.getTheme());
-    System.out.println(script.getContent());
 
-    // for 
-    //     if (userStore.isUserRegistered(character)){
-    //       User user = new User(UUID.randomUUID(), character, "bot", Instant.now(), false);
-    //       userStore.addUser(user);
-    //       System.out.println(user.getName());
-    //     }
+    try {
+      BufferedReader file = new BufferedReader(new FileReader(script.getPath()));
+      String line;
+
+      //creating new conversation
+      Conversation conversation =
+              new Conversation(UUID.randomUUID(), userStore.getUser("admin").getId(), theme, Instant.now());
+      conversationStore.addConversation(conversation);
+
+      while ((line = file.readLine()) != null) {
+
+        String arr[] = line.split(":\\s", 2);
+        String character = arr[0], dialogue = arr[1];
+
+        //creating new user (character)
+        if (!userStore.isUserRegistered(character)) {
+         User user = new User(UUID.randomUUID(), character, "bot", Instant.now(), false);
+         userStore.addUser(user);
+        }
+
+        //creating new message
+        Message message =
+                new Message(
+                        UUID.randomUUID(),
+                        conversation.getId(),
+                        userStore.getUser(character).getId(),
+                        dialogue,
+                        Instant.now());
+        messageStore.addMessage(message);
+      }
+
+    }catch(IOException e) {
+      e.printStackTrace();
+    }
 
     response.sendRedirect("/admin");
   }

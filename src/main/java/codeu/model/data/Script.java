@@ -28,25 +28,21 @@ import java.util.*;
 public class Script {
   public final String theme;
   public final String path;
-  public Map<String, List<String>> content;
 
   /**
    * Constructs a new Script.
    *
    * @param theme the theme of this (movie) Script
    * @param path the path of this (movie) Script
-   * @param content the content of this (movie) Script
    */
   public Script(String theme) {
     this.theme = theme;
     this.path = "WEB-INF/scripts/" + theme;
-    this.content = mapScript();
   }
 
   public Script(String theme, String path) {
     this.theme = theme;
     this.path = path;
-    this.content = mapScript();
   }
 
   /** Returns the theme of this Script. */
@@ -57,36 +53,6 @@ public class Script {
   /** Returns the path of this Script. */
   public String getPath() {
     return path;
-  }
-
-  /** Returns the content of this Script. */
-  public Map<String, List<String>> getContent() {
-    return content;
-  }
-
-  public Map<String, List<String>> mapScript(){
-    Map<String, List<String>> map = new HashMap<String, List<String>>();
-
-    try {
-      BufferedReader file = new BufferedReader(new FileReader(path));
-      String line;
-
-      while ((line = file.readLine()) != null) {
-
-        String arr[] = line.split(":\\s", 2);
-        String character = arr[0], dialogue = arr[1]; 
-
-        if (map.get(character) == null) {
-            map.put(character, new ArrayList<String>());
-        }
-        map.get(character).add(dialogue);
-      }
-      System.out.println(map);
-
-    }catch(IOException e) {
-      e.printStackTrace();
-    }
-    return map;
   }
 
 }
