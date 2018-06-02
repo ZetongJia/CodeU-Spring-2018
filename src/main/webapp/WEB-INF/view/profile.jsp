@@ -41,7 +41,7 @@
   <jsp:include page="/WEB-INF/includes/header.jsp"/>
 
   <div id="container">
-    <h1><%=request.getSession().getAttribute("user")%>'s Profile Page</h1>
+    <h1><%=requestUrl.substring("/user/".length())%>'s Profile Page</h1>
     <hr/>
 
     <% if(request.getAttribute("error") != null){ %>
