@@ -66,13 +66,13 @@ public class PersistentDataStore {
       try {
         UUID uuid = UUID.fromString((String) entity.getProperty("uuid"));
         String userName = (String) entity.getProperty("username");
-        String aboutme = (String) entity.getProperty("aboutme");        
+        String aboutme = (String) entity.getProperty("aboutme");
         String passwordHash = (String) entity.getProperty("password_hash");
         Instant creationTime = Instant.parse((String) entity.getProperty("creation_time"));
 //        Long numMessages = Long.parseLong((String) entity.getProperty("numMessages"));
 //        Long numWords = Long.parseLong((String) entity.getProperty("numWords"));
         Boolean isAdmin = Boolean.valueOf((String) entity.getProperty("isAdmin"));
-        User user = new User(uuid, userName, passwordHash, creationTime, isAdmin);
+        User user = new User(uuid, userName, passwordHash, creationTime, aboutme, isAdmin);
         users.add(user);
       } catch (Exception e) {
         // In a production environment, errors should be very rare. Errors which may
