@@ -21,6 +21,7 @@
 <%@ page import ="java.time.format.DateTimeFormatter"%>
 <%@ page import ="codeu.model.data.Message"%>
 <%@ page import ="codeu.model.data.User"%>
+<%@ page import ="codeu.model.store.basec.UserStore"%>
 
 <!DOCTYPE html>
 <html>
