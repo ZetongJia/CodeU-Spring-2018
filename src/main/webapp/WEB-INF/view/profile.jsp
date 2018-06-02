@@ -64,7 +64,7 @@
       for(Message message : sentMessages) {
           Date date = Date.from(message.getCreationTime());
           %><p>
-            <td><b><%out.print(date);%></b></td>
+            <td><b><%out.println(date);%></b></td>
             <td><%out.println(message.getContent());%></td>
           </p>
       <%}
