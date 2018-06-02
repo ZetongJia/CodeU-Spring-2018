@@ -68,7 +68,7 @@ public class PersistentDataStore {
         String userName = (String) entity.getProperty("username");
         String passwordHash = (String) entity.getProperty("password_hash");
         Instant creationTime = Instant.parse((String) entity.getProperty("creation_time"));
-        Long numMessages = Long.parseLong((String) entity.getProperty("numMessages"));
+//        Long numMessages = Long.parseLong((String) entity.getProperty("numMessages"));
         Long numWords = Long.parseLong((String) entity.getProperty("numWords"));
         Boolean isAdmin = Boolean.valueOf((String) entity.getProperty("isAdmin"));
         User user = new User(uuid, userName, passwordHash, creationTime, isAdmin);
