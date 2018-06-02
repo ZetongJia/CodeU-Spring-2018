@@ -52,8 +52,7 @@
     <% } %>
 
     <h2>About Me</h2>
-    <% User user = new User();
-       user = UserStore.getUser((String)request.getSession().getAttribute("username"));
+    <% User user = new User(String.valueOf(request.getAttribute("username")));
     %>
     <p><%= user.getAboutMe()%></p>
 
