@@ -75,7 +75,7 @@ public class PersistentDataStoreTest {
     Assert.assertEquals(nameTwo, resultUserTwo.getName());
     Assert.assertEquals(passwordHashTwo, resultUserTwo.getPasswordHash());
     Assert.assertEquals(creationTwo, resultUserTwo.getCreationTime());
-    Assert.assertEquals(aboutMeTwo, resultUserOne.getAboutMe());
+    Assert.assertEquals(aboutMeTwo, resultUserTwo.getAboutMe());
     Assert.assertEquals(isAdminTwo, resultUserTwo.getIsAdmin());
   }
 
