@@ -66,6 +66,7 @@
           <input type="submit" value="Submit"/>
         </form>
     <%}%>
+    
     <hr/>
     <h2>Sent Messages</h2>
 
