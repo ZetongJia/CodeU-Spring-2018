@@ -15,6 +15,7 @@
 --%>
 <%@ page import ="java.lang.String"%>
 <%@ page import ="java.util.List"%>
+<%@ page import ="java.util.Date"%>
 <%@ page import ="java.util.ArrayList"%>
 <%@ page import ="java.time.Instant"%>
 <%@ page import ="java.time.format.DateTimeFormatter"%>
@@ -55,14 +56,12 @@
     <h2>Sent Messages</h2>
     <div class="messages">
       <%
-      DateTimeFormatter formatter =
-    DateTimeFormatter.RFC_1123_DATE_TIME;
-      // retrieve your list from the request, with casting
       List<Message> sentMessages = (ArrayList<Message>) request.getAttribute("usermessages");
 
       for(Message message : sentMessages) {
+          Date date = Date.from(message.getCreationTime());
           %><p>
-            <b><%out.print(message.getCreationTime());%></b>
+            <b><%out.print(date);%></b>
             <%out.println(message.getContent());%>
           </p>
       <%}
