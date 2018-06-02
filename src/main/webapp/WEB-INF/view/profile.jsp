@@ -50,7 +50,7 @@
     <% } %>
 
     <h2>About Me</h2>
-    <p><%= request.getSession().getAttribute("aboutme")%></p>
+    <p><%= request.getSession()..getAttribute("username").("aboutme")%></p>
 
     <%if(request.getSession().getAttribute("user").equals(request.getAttribute("username"))) {%>
         <h3>Edit Your About Me</h3>
