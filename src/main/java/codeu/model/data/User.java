@@ -41,6 +41,7 @@ public class User {
     this.name = name;
     this.passwordHash = passwordHash;
     this.creation = creation;
+    this.aboutme = "";
     this.numMessages = 0;
     this.numWords = 0;
     this.isAdmin = isAdmin;
@@ -55,7 +56,12 @@ public class User {
   public String getName() {
     return name;
   }
-  
+
+  /** Returns the aboutme of this User. */
+  public String getAboutMe() {
+    return aboutme;
+  }
+
   /** Returns the password hash of this User. */
   public String getPasswordHash() {
     return passwordHash;
@@ -84,11 +90,11 @@ public class User {
   /** Returns the number of words sent by this User. */
   public void incrementNumWords(long words) {
     this.numWords += words;
-  }  
+  }
 
   /** Returns true if user is admin. */
   public boolean getIsAdmin() {
     return isAdmin;
-  }  
+  }
 
 }

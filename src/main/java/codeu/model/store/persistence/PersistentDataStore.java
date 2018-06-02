@@ -66,6 +66,7 @@ public class PersistentDataStore {
       try {
         UUID uuid = UUID.fromString((String) entity.getProperty("uuid"));
         String userName = (String) entity.getProperty("username");
+        String aboutme = (String) entity.getProperty("aboutme");        
         String passwordHash = (String) entity.getProperty("password_hash");
         Instant creationTime = Instant.parse((String) entity.getProperty("creation_time"));
 //        Long numMessages = Long.parseLong((String) entity.getProperty("numMessages"));
@@ -159,6 +160,7 @@ public class PersistentDataStore {
     Entity userEntity = new Entity("chat-users", user.getId().toString());
     userEntity.setProperty("uuid", user.getId().toString());
     userEntity.setProperty("username", user.getName());
+    userEntity.setProperty("aboutme", user.getAboutMe());
     userEntity.setProperty("password_hash", user.getPasswordHash());
     userEntity.setProperty("creation_time", user.getCreationTime().toString());
     userEntity.setProperty("numMessages", String.valueOf(user.getNumMessages()));
