@@ -93,11 +93,6 @@ public class UserStore {
     return null;
   }
 
-  /** Gets aboutme of user. */
-  // public String getAboutMe(User user) {
-  //   return this.users.size();
-  // }
-
   /**
    * Add a new user to the current set of users known to the application. This should only be called
    * to add a new user, not to update an existing user.
