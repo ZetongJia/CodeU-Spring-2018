@@ -53,20 +53,26 @@
 
     <h2>About Me</h2>
     <% User user = UserStore.getInstance().getUser(String.valueOf(request.getAttribute("username")));
+      if(user.getAboutMe().equals(null)){
+        String aboutme = "Haven't found the right words to describe my wondrous personality.";
+      }
+      else{
+        String aboutme = user.getAboutMe();
+      }
     %>
-    <p><%= user.getAboutMe()%></p>
+    <p><%=out.println(aboutme)%></p>
 
     <%if(request.getSession().getAttribute("user").equals(request.getAttribute("username"))) {%>
         <h3>Edit Your About Me</h3>
 
         <form action="/user/<%=request.getSession().getAttribute("user")%>" method="POST">
           <br/>
-          <textarea rows="10" cols="110" name="aboutme"><%=user.getAboutMe()%></textarea>
+          <textarea rows="10" cols="110" name="aboutme"><%=out.println(aboutme)%></textarea>
           <br/><br/>
           <input type="submit" value="Submit"/>
         </form>
     <%}%>
-    
+
     <hr/>
     <h2>Sent Messages</h2>
 
