@@ -41,7 +41,9 @@
   <jsp:include page="/WEB-INF/includes/header.jsp"/>
 
   <div id="container">
-    <h1><%=requestUrl.substring("/user/".length())%>'s Profile Page</h1>
+    <%String username = requestUrl.substring("/user/".length());%>
+
+    <h1><%=username%>'s Profile Page</h1>
     <hr/>
 
     <% if(request.getAttribute("error") != null){ %>
