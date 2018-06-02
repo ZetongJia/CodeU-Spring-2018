@@ -20,6 +20,7 @@
 <%@ page import ="java.time.Instant"%>
 <%@ page import ="java.time.format.DateTimeFormatter"%>
 <%@ page import ="codeu.model.data.Message"%>
+<%@ page import ="codeu.model.data.User"%>
 
 <!DOCTYPE html>
 <html>
@@ -50,14 +51,14 @@
     <% } %>
 
     <h2>About Me</h2>
-    <p><%= request.getAttribute("aboutme")%></p>
+    <p><%= UserStore.getInstance().getUser((String)request.getSession().getAttribute("username")).getAboutMe()%></p>
 
     <%if(request.getSession().getAttribute("user").equals(request.getAttribute("username"))) {%>
         <h3>Edit Your About Me</h3>
 
         <form action="/user/<%=request.getSession().getAttribute("user")%>" method="POST">
           <br/>
-          <textarea rows="10" cols="110" name="aboutme"><%= request.getSession().getAttribute("aboutme")%></textarea>
+          <textarea rows="10" cols="110" name="aboutme"><%=UserStore.getInstance().getUser((String)request.getSession().getAttribute("username")).getAboutMe()%></textarea>
           <br/><br/>
           <input type="submit" value="Submit"/>
         </form>
