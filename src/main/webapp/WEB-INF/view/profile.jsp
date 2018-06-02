@@ -52,7 +52,9 @@
     <% } %>
 
     <h2>About Me</h2>
-    <% User user = new User(UserStore.getUser((String)request.getSession().getAttribute("username")));%>
+    <% User user = new User();
+       user = UserStore.getUser((String)request.getSession().getAttribute("username"));
+    %>
     <p><%= user.getAboutMe()%></p>
 
     <%if(request.getSession().getAttribute("user").equals(request.getAttribute("username"))) {%>
