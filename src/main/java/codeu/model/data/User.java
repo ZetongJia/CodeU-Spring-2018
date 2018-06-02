@@ -21,6 +21,7 @@ import java.util.UUID;
 public class User {
   private final UUID id;
   private final String name;
+  private final String aboutme;
   private final String passwordHash;
   private final Instant creation;
   private long numMessages;
