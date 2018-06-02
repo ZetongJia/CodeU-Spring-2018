@@ -52,14 +52,15 @@
     <% } %>
 
     <h2>About Me</h2>
-    <p><%= UserStore.getInstance().getUser((String)request.getSession().getAttribute("username")).getAboutMe()%></p>
+    <% User user = userStore.getUser(username);%>
+    <p><%= user.getAboutMe()%></p>
 
     <%if(request.getSession().getAttribute("user").equals(request.getAttribute("username"))) {%>
         <h3>Edit Your About Me</h3>
 
         <form action="/user/<%=request.getSession().getAttribute("user")%>" method="POST">
           <br/>
-          <textarea rows="10" cols="110" name="aboutme"><%=UserStore.getInstance().getUser((String)request.getSession().getAttribute("username")).getAboutMe()%></textarea>
+          <textarea rows="10" cols="110" name="aboutme"><%=user.getAboutMe()%></textarea>
           <br/><br/>
           <input type="submit" value="Submit"/>
         </form>
