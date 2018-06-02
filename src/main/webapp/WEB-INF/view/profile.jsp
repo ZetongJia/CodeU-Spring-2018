@@ -44,7 +44,6 @@
     <h1><%=request.getSession().getAttribute("user")%>'s Profile Page</h1>
     <hr/>
 
-
     <% if(request.getAttribute("error") != null){ %>
         <h2 style="color:red"><%= request.getAttribute("error") %></h2>
     <% } %>
@@ -56,13 +55,14 @@
 
     <form action="/user/<%=request.getSession().getAttribute("user")%>" method="POST">
       <br/>
-      <textarea rows="10" cols="100" name="aboutme"><%= request.getSession().getAttribute("aboutme")%></textarea>
+      <textarea rows="10" cols="110" name="aboutme"><%= request.getSession().getAttribute("aboutme")%></textarea>
       <br/><br/>
       <input type="submit" value="Submit"/>
     </form>
-    <hr/>
 
+    <hr/>
     <h2>Sent Messages</h2>
+
     <div id="chat">
         <ul>
           <%
@@ -80,7 +80,6 @@
         </ul>
     </div>
     <hr/>
-
 
   </div>
 </body>
