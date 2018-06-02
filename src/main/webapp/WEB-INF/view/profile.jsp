@@ -54,14 +54,15 @@
     <hr/>
 
     <h2>Sent Messages</h2>
-    <div id="container">
+    <div id="chat">
 
       <%
       List<Message> sentMessages = (ArrayList<Message>) request.getAttribute("usermessages");
 
       for(Message message : sentMessages) {
           Date date = Date.from(message.getCreationTime());
-          %><p>
+      %>
+          <p>
             <b><%out.print(date);%></b>
             <%out.println(message.getContent());%>
           </p>
