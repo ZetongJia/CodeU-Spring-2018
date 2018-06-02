@@ -25,7 +25,16 @@
 <html>
 <head>
   <title>My Profile</title>
-  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/main.css" type="text/css">
+
+    <style>
+      #chat {
+        background-color: white;
+        height: 500px;
+        overflow-y: scroll
+      }
+    </style>
+
 </head>
 <body>
 
@@ -55,20 +64,20 @@
 
     <h2>Sent Messages</h2>
     <div id="chat">
+        <ul>
+          <%
+          List<Message> sentMessages = (ArrayList<Message>) request.getAttribute("usermessages");
 
-      <%
-      List<Message> sentMessages = (ArrayList<Message>) request.getAttribute("usermessages");
-
-      for(Message message : sentMessages) {
-          Date date = Date.from(message.getCreationTime());
-      %>
-          <p>
-            <b><%out.print(date);%></b>
-            <%out.println(message.getContent());%>
-          </p>
-      <%}
-      %>
-    </table>
+          for(Message message : sentMessages) {
+              Date date = Date.from(message.getCreationTime());
+          %>
+              <li>
+                <b><%out.print(date);%></b>
+                <%out.println(message.getContent());%>
+              </li>
+          <%}
+          %>
+        </ul>
     </div>
     <hr/>
 
