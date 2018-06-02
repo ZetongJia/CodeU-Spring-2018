@@ -88,6 +88,8 @@ public class ProfileServlet extends HttpServlet{
 
           String aboutme = request.getParameter("aboutme");
           request.getSession().setAttribute("aboutme", aboutme);
+          user.setAboutMe(aboutme);
+          userStore.updateUser(user);
           String username = (String) request.getSession().getAttribute("user");
 
           if(username == null){

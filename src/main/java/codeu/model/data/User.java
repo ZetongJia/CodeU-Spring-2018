@@ -59,6 +59,11 @@ public class User {
   }
 
   /** Returns the aboutme of this User. */
+  public void setAboutMe(String bio) {
+    aboutme = bio;
+  }
+
+  /** Returns the aboutme of this User. */
   public String getAboutMe() {
     return aboutme;
   }
