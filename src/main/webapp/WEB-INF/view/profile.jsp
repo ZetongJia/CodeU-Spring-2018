@@ -55,6 +55,7 @@
 
     <h2>Sent Messages</h2>
     <div class="messages">
+      <iframe style="background: white;>
       <%
       List<Message> sentMessages = (ArrayList<Message>) request.getAttribute("usermessages");
 
@@ -66,6 +67,7 @@
           </p>
       <%}
       %>
+      </iframe>
     </div>
     <hr/>
 
