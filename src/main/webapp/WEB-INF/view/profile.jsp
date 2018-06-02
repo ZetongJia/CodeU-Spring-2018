@@ -52,7 +52,7 @@
     <% } %>
 
     <h2>About Me</h2>
-    <% User user = userStore.getUser(username);%>
+    <% User user = UserStore.getUser(username);%>
     <p><%= user.getAboutMe()%></p>
 
     <%if(request.getSession().getAttribute("user").equals(request.getAttribute("username"))) {%>
