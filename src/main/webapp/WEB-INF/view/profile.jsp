@@ -52,15 +52,16 @@
     <h2>About Me</h2>
     <p><%= request.getSession().getAttribute("aboutme")%></p>
 
-    <h3>Edit Your About Me</h3>
+    <%if(request.getSession().getAttribute("user").equals(request.getAttribute("username"))) {%>
+        <h3>Edit Your About Me</h3>
 
-    <form action="/user/<%=request.getSession().getAttribute("user")%>" method="POST">
-      <br/>
-      <textarea rows="10" cols="110" name="aboutme"><%= request.getSession().getAttribute("aboutme")%></textarea>
-      <br/><br/>
-      <input type="submit" value="Submit"/>
-    </form>
-
+        <form action="/user/<%=request.getSession().getAttribute("user")%>" method="POST">
+          <br/>
+          <textarea rows="10" cols="110" name="aboutme"><%= request.getSession().getAttribute("aboutme")%></textarea>
+          <br/><br/>
+          <input type="submit" value="Submit"/>
+        </form>
+    <%}%>
     <hr/>
     <h2>Sent Messages</h2>
 
