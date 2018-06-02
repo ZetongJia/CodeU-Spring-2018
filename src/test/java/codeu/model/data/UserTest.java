@@ -30,7 +30,7 @@ public class UserTest {
     String aboutme = "test_aboutme";
     boolean isAdmin = false;
 
-    User user = new User(id, name, passwordHash, creation, isAdmin);
+    User user = new User(id, name, passwordHash, creation, aboutme, isAdmin);
 
     Assert.assertEquals(id, user.getId());
     Assert.assertEquals(name, user.getName());
