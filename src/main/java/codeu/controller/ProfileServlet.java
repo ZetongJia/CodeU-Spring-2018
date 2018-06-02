@@ -72,7 +72,7 @@ public class ProfileServlet extends HttpServlet{
       if(messagesByUser.size()==0){
         request.setAttribute("error", "no messages found.");
       }
-
+      request.setAttribute("username", username);
       request.setAttribute("usermessages", messagesByUser);
     request.getRequestDispatcher("/WEB-INF/view/profile.jsp").forward(request, response);
   }
