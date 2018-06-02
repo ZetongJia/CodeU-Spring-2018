@@ -58,16 +58,16 @@
         aboutme = "Haven't found the right words to describe my wondrous personality.";
       else
         aboutme = user.getAboutMe();
-      
+
     %>
-    <p><%=out.println(aboutme)%></p>
+    <p><%out.println(aboutme);%></p>
 
     <%if(request.getSession().getAttribute("user").equals(request.getAttribute("username"))) {%>
         <h3>Edit Your About Me</h3>
 
         <form action="/user/<%=request.getSession().getAttribute("user")%>" method="POST">
           <br/>
-          <textarea rows="10" cols="110" name="aboutme"><%=out.println(aboutme)%></textarea>
+          <textarea rows="10" cols="110" name="aboutme"><%out.println(aboutme);%></textarea>
           <br/><br/>
           <input type="submit" value="Submit"/>
         </form>
