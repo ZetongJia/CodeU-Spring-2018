@@ -53,11 +53,12 @@
 
     <h2>About Me</h2>
     <% User user = UserStore.getInstance().getUser(String.valueOf(request.getAttribute("username")));
+       String aboutme = "";
       if(user.getAboutMe().equals(null)){
-        String aboutme = "Haven't found the right words to describe my wondrous personality.";
+        aboutme = "Haven't found the right words to describe my wondrous personality.";
       }
       else{
-        String aboutme = user.getAboutMe();
+        aboutme = user.getAboutMe();
       }
     %>
     <p><%=out.println(aboutme)%></p>
