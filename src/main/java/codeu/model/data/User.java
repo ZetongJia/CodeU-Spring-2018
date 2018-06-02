@@ -37,12 +37,12 @@ public class User {
    * @param creation the creation time of this User
    * @param isAdmin the admin status of this User
    */
-  public User(UUID id, String name, String passwordHash, Instant creation, boolean isAdmin) {
+  public User(UUID id, String name, String passwordHash, Instant creation, String aboutme, boolean isAdmin) {
     this.id = id;
     this.name = name;
     this.passwordHash = passwordHash;
     this.creation = creation;
-    this.aboutme = "";
+    this.aboutme = aboutme;
     this.numMessages = 0;
     this.numWords = 0;
     this.isAdmin = isAdmin;
