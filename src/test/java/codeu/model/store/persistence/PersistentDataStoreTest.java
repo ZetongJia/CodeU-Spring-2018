@@ -44,7 +44,7 @@ public class PersistentDataStoreTest {
     Instant creationOne = Instant.ofEpochMilli(1000);
     String aboutMeOne = "test_aboutme1";
     boolean isAdminOne = true;
-    User inputUserOne = new User(idOne, nameOne, passwordHashOne, creationOne, isAdminOne);
+    User inputUserOne = new User(idOne, nameOne, passwordHashOne, creationOne, aboutMeOne, isAdminOne);
 
     UUID idTwo = UUID.fromString("10000001-2222-3333-4444-555555555555");
     String nameTwo = "test_username_two";
@@ -52,7 +52,7 @@ public class PersistentDataStoreTest {
     Instant creationTwo = Instant.ofEpochMilli(2000);
     boolean isAdminTwo = false;
     String aboutMeTwo = "test_aboutme2";
-    User inputUserTwo = new User(idTwo, nameTwo, passwordHashTwo, creationTwo, isAdminTwo);
+    User inputUserTwo = new User(idTwo, nameTwo, passwordHashTwo, creationTwo, aboutMeTwo, isAdminTwo);
 
     // save
     persistentDataStore.writeThrough(inputUserOne);
