@@ -67,6 +67,16 @@
   </servlet-mapping>
 
   <servlet>
+    <servlet-name>ActivityFeedServlet</servlet-name>
+    <servlet-class>codeu.controller.ActivityFeedServlet</serevlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>ActivityFeedServlet</servlet-name>
+    <url-patten>/activityfeed</url-patten>
+  </servlet-mapping>
+
+  <servlet>
     <servlet-name>AdminServlet</servlet-name>
     <servlet-class>codeu.controller.AdminServlet</servlet-class>
   </servlet>
