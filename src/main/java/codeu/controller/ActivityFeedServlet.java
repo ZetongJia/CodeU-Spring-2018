@@ -14,10 +14,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.jsoup.Jsoup;
-import org.jsoup.safety.Whitelist;
+import java.util.Collections;
 
-/** Servlet class responsible for the chat page. */
+/** Servlet class responsible for the activity feed page. */
 public class ActivityFeedServlet extends HttpServlet {
 
   /** Store class that gives access to Conversations. */
@@ -29,7 +28,7 @@ public class ActivityFeedServlet extends HttpServlet {
   /** Store class that gives access to Users. */
   private UserStore userStore;
 
-  /** Set up state for handling chat requests. */
+  /** Set up state for handling requests. */
   @Override
   public void init() throws ServletException {
     super.init();
@@ -63,83 +62,42 @@ public class ActivityFeedServlet extends HttpServlet {
   }
 
   /**
-   * This function fires when a user navigates to the chat page. It gets the conversation title from
-   * the URL, finds the corresponding Conversation, and fetches the messages in that Conversation.
-   * It then forwards to chat.jsp for rendering.
+   * This function fires when a user navigates to the activity feed page. It gets all the conversation associated
+   * with that user and fetches the messages in each Conversation in chronological order.
+   * It then forwards to activityfeed.jsp for rendering.
    */
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response)
-      throws IOException, ServletException {
-    // String requestUrl = request.getRequestURI();
-    // String conversationTitle = requestUrl.substring("/chat/".length());
-    //
-    // Conversation conversation = conversationStore.getConversationWithTitle(conversationTitle);
-    // if (conversation == null) {
-    //   // couldn't find conversation, redirect to conversation list
-    //   System.out.println("Conversation was null: " + conversationTitle);
-    //   response.sendRedirect("/conversations");
-    //   return;
-    // }
-    //
-    // UUID conversationId = conversation.getId();
-    //
-    // List<Message> messages = messageStore.getMessagesInConversation(conversationId);
-    //
-    // request.setAttribute("conversation", conversation);
-    // request.setAttribute("messages", messages);
-    request.getRequestDispatcher("/WEB-INF/view/activityfeed.jsp").forward(request, response);
-  }
-
-  /**
-   * This function fires when a user submits the form on the chat page. It gets the logged-in
-   * username from the session, the conversation title from the URL, and the chat message from the
-   * submitted form data. It creates a new Message from that data, adds it to the model, and then
-   * redirects back to the chat page.
-   */
-  @Override
-  public void doPost(HttpServletRequest request, HttpServletResponse response)
-      throws IOException, ServletException {
-
-    String username = (String) request.getSession().getAttribute("user");
-    if (username == null) {
-      // user is not logged in, don't let them add a message
-      response.sendRedirect("/login");
-      return;
-    }
-
+      throws IOException, ServletException, PersistentDataStoreException {
+    // The get function needs to know who the user is, aList<Conversation> conversations = conversationStore.getAllConversations();nd if one is not logged in, they need to.
     User user = userStore.getUser(username);
     if (user == null) {
-      // user was not found, don't let them add a message
+      // couldn't find conversation, redirect to conversation list
+      System.out.println("User was null");
       response.sendRedirect("/login");
       return;
     }
 
-    String requestUrl = request.getRequestURI();
-    String conversationTitle = requestUrl.substring("/chat/".length());
+    List<Conversation> conversations = conversationStore.loadConversations();
 
-    Conversation conversation = conversationStore.getConversationWithTitle(conversationTitle);
-    if (conversation == null) {
-      // couldn't find conversation, redirect to conversation list
-      response.sendRedirect("/conversations");
-      return;
+    List<Message> messages = new ArrayList<>();
+
+    /**
+     * this removes all conversations not associated with the user from the list
+     * and adds meaages associated with all conversations to a list.
+     */
+    for (Conversation conversation : conversations) {
+        for (UUID member : conversation.members) {
+          if (!(user.getId().equals(member))) {
+          conversations.remove(new Conversation(conversation));
+        } else {
+          messages.add(messageStore.getMessagesInConversation(conversation.getId()));
+        }
+      }
     }
 
-    String messageContent = request.getParameter("message");
+    Collections.sort(messages);
 
-    // this removes any HTML from the message content
-    String cleanedMessageContent = Jsoup.clean(messageContent, Whitelist.none());
-
-    Message message =
-        new Message(
-            UUID.randomUUID(),
-            conversation.getId(),
-            user.getId(),
-            cleanedMessageContent,
-            Instant.now());
-
-    messageStore.addMessage(message);
-
-    // redirect to a GET request
-    response.sendRedirect("/chat/" + conversationTitle);
+    request.getRequestDispatcher("/WEB-INF/view/activityfeed.jsp").forward(request, response);
   }
 }
