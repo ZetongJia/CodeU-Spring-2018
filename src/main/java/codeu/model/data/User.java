@@ -89,6 +89,6 @@ public class User {
   /** Returns true if user is admin. */
   public boolean getIsAdmin() {
     return isAdmin;
-  }  
+  }
 
 }

@@ -14,15 +14,67 @@
 
 package codeu.controller;
 
-import java.io.PrintWriter;
-import java.io.IOException;
+
+import java.io.*;
+import java.util.*;
+import java.time.Instant;
+
+import codeu.model.data.*;
+import codeu.model.store.basic.*;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+
 /** Servlet class responsible for the admin page. */
 public class AdminServlet extends HttpServlet {
+
+  /** Store class that gives access to Conversations. */
+  private ConversationStore conversationStore;
+
+  /** Store class that gives access to Messages. */
+  private MessageStore messageStore;
+
+  /** Store class that gives access to Users. */
+  private UserStore userStore;
+
+  /**
+   * Set up state for handling login-related requests. This method is only called when running in a
+   * server, not when running in a test.
+   */
+  @Override
+  public void init() throws ServletException {
+    super.init();
+    setConversationStore(ConversationStore.getInstance());
+    setMessageStore(MessageStore.getInstance());
+    setUserStore(UserStore.getInstance());
+  }
+
+  /**
+   * Sets the ConversationStore used by this servlet. This function provides a common setup method
+   * for use by the test framework or the servlet's init() function.
+   */
+  void setConversationStore(ConversationStore conversationStore) {
+    this.conversationStore = conversationStore;
+  }
+
+  /**
+   * Sets the MessageStore used by this servlet. This function provides a common setup method for
+   * use by the test framework or the servlet's init() function.
+   */
+  void setMessageStore(MessageStore messageStore) {
+    this.messageStore = messageStore;
+  }
+
+  /**
+   * Sets the UserStore used by this servlet. This function provides a common setup method for use
+   * by the test framework or the servlet's init() function.
+   */
+  void setUserStore(UserStore userStore) {
+    this.userStore = userStore;
+  }
 
   /**
    * This function fires when a user requests the /admin URL. It simply forwards the request to
@@ -41,10 +93,43 @@ public class AdminServlet extends HttpServlet {
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response)
       throws IOException, ServletException {
-    String script = request.getParameter("script");
 
-    if (script.equals("wall_e")) {
-    	System.out.println("WAALLLY");
+    String theme = request.getParameter("script");
+    Script script = new Script(theme);
+
+    try {
+      BufferedReader file = new BufferedReader(new FileReader(script.getPath()));
+      String line;
+
+      //creating new conversation
+      Conversation conversation =
+              new Conversation(UUID.randomUUID(), userStore.getUser("admin").getId(), theme, Instant.now());
+      conversationStore.addConversation(conversation);
+
+      while ((line = file.readLine()) != null) {
+
+        String arr[] = line.split(":\\s", 2);
+        String character = arr[0], dialogue = arr[1];
+
+        //creating new user (character)
+        if (!userStore.isUserRegistered(character)) {
+         User user = new User(UUID.randomUUID(), character, "bot", Instant.now(), false);
+         userStore.addUser(user);
+        }
+
+        //creating new message
+        Message message =
+                new Message(
+                        UUID.randomUUID(),
+                        conversation.getId(),
+                        userStore.getUser(character).getId(),
+                        dialogue,
+                        Instant.now());
+        messageStore.addMessage(message);
+      }
+
+    }catch(IOException e) {
+      e.printStackTrace();
     }
 
     response.sendRedirect("/admin");
