@@ -14,13 +14,6 @@
 
 package codeu.model.data;
 
-import java.time.Instant;
-import java.io.*;
-import codeu.model.data.*;
-import codeu.model.store.basic.*;
-import java.util.*;
-
-
 /**
  * Class representing a script. Scripts are created by the admin, 
  * and also create new Users, Messages, and Conversations.
@@ -33,16 +26,16 @@ public class Script {
    * Constructs a new Script.
    *
    * @param theme the theme of this (movie) Script
-   * @param path the path of this (movie) Script
    */
   public Script(String theme) {
     this.theme = theme;
-    this.path = "WEB-INF/scripts/" + theme;
-  }
-
-  public Script(String theme, String path) {
-    this.theme = theme;
-    this.path = path;
+    //for testing purposes
+    if (theme == "Sample.txt") {
+      this.path = "src/main/webapp/WEB-INF/scripts/" + theme;
+    } else {
+      this.path = "WEB-INF/scripts/" + theme;
+    }
+    
   }
 
   /** Returns the theme of this Script. */

@@ -15,13 +15,18 @@
 package codeu.controller;
 
 
-import java.io.*;
-import java.util.*;
+import codeu.model.data.Conversation;
+import codeu.model.data.Message;
+import codeu.model.data.User;
+import codeu.model.data.Script;
+import codeu.model.store.basic.ConversationStore;
+import codeu.model.store.basic.MessageStore;
+import codeu.model.store.basic.UserStore;
+import java.io.IOException;
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.time.Instant;
-
-import codeu.model.data.*;
-import codeu.model.store.basic.*;
-
+import java.util.UUID;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -83,6 +88,14 @@ public class AdminServlet extends HttpServlet {
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response)
       throws IOException, ServletException {
+
+    String username = (String) request.getSession().getAttribute("user");
+    if (username == null || !username.equals("admin")) {
+      // user is not logged in or is not admin, restrict page view
+      response.sendRedirect("/login");
+      return;
+    }
+
     request.getRequestDispatcher("/WEB-INF/view/admin.jsp").forward(request, response);
   }
 
@@ -109,29 +122,32 @@ public class AdminServlet extends HttpServlet {
       while ((line = file.readLine()) != null) {
 
         String arr[] = line.split(":\\s", 2);
-        String character = arr[0], dialogue = arr[1];
 
-        //creating new user (character)
+        //postfix " (bot)" is reserved for system generated users (characters)
+        //these bots are not able to log in as normal users
+        String character = arr[0] + " (bot)", dialogue = arr[1];
+
+        //creating new user (character) with no password
         if (!userStore.isUserRegistered(character)) {
-         User user = new User(UUID.randomUUID(), character, "bot", Instant.now(), false);
+         User user = new User(UUID.randomUUID(), character, "", Instant.now(), false);
          userStore.addUser(user);
         }
 
         //creating new message
         Message message =
-                new Message(
-                        UUID.randomUUID(),
-                        conversation.getId(),
-                        userStore.getUser(character).getId(),
-                        dialogue,
-                        Instant.now());
+            new Message(
+                UUID.randomUUID(),
+                conversation.getId(),
+                userStore.getUser(character).getId(),
+                dialogue,
+                Instant.now());
         messageStore.addMessage(message);
       }
 
     }catch(IOException e) {
       e.printStackTrace();
     }
-
+    
     response.sendRedirect("/admin");
   }
 
