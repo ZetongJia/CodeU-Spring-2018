@@ -28,38 +28,40 @@
 
   <div id="container">
 
-    <%
-    UserStore userStore = UserStore.getInstance();
-    ConversationStore conversationStore = ConversationStore.getInstance();
-    MessageStore messageStore = MessageStore.getInstance();
-    %>
+    <div>
+      <%
+      UserStore userStore = UserStore.getInstance();
+      ConversationStore conversationStore = ConversationStore.getInstance();
+      MessageStore messageStore = MessageStore.getInstance();
+      %>
 
-    <h1>Administration</h1>
-    <hr>
-    <h2>Site Statistics</h2>
-    <p>Here are some site stats:
-      <ul>
-        <li>Users: <%= userStore.getNumOfUsers() %> </li>
-        <li>Conversations: <%= conversationStore.getNumOfConversations() %> </li>
-        <li>Messages: <%= messageStore.getNumOfMessages() %> </li>
-        <li>Most Active User: <%= userStore.getMostActiveUser() %> </li>
-        <li>Newest User: <%= userStore.getNewestUser() %> </li>
-        <li>Wordiest User: <%= userStore.getWordiestUser() %> </li>
-      </ul>
-    </p>
-    <hr>
-    <h2>Import Data</h2>
-      <form action=/admin method=POST>
-        <p>
-          Create a conversation from a movie scene:
-          <select name="script">
-            <option value="Up.txt">Up</option>
-            <option value="WallE.txt">Wall-E</option>
-            <option value="FindingNemo.txt">Finding Nemo</option>
-          </select>
-        </p>
-        <button type="submit">Submit</button>
-      </form>
+      <h1>Administration</h1>
+      <hr>
+      <h2>Site Statistics</h2>
+      <p>Here are some site stats:
+        <ul>
+          <li>Users: <%= userStore.getNumOfUsers() %> </li>
+          <li>Conversations: <%= conversationStore.getNumOfConversations() %> </li>
+          <li>Messages: <%= messageStore.getNumOfMessages() %> </li>
+          <li>Most Active User: <%= userStore.getMostActiveUser() %> </li>
+          <li>Newest User: <%= userStore.getNewestUser() %> </li>
+          <li>Wordiest User: <%= userStore.getWordiestUser() %> </li>
+        </ul>
+      </p>
+      <hr>
+      <h2>Import Data</h2>
+        <form action=/admin method=POST>
+          <p>
+            Create a conversation from a movie scene:
+            <select name="script">
+              <option value="Up.txt">Up</option>
+              <option value="WallE.txt">Wall-E</option>
+              <option value="FindingNemo.txt">Finding Nemo</option>
+            </select>
+          </p>
+          <button type="submit">Submit</button>
+        </form>
+      </div>
     </div>
 
   </div>

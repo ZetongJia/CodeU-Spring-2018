@@ -14,7 +14,6 @@
 
 package codeu.model.data;
 
-import java.util.*;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -22,22 +21,12 @@ public class ScriptTest {
 
   @Test
   public void testCreate() {
+
     String theme = "Sample.txt";
     String path = "src/main/webapp/WEB-INF/scripts/" + theme;
-    Script script = new Script(theme, path);
-//
-//    Map<String, List<String>> map = new HashMap<String, List<String>>()
-//    {{
-//    	put("ALICE", new ArrayList<String>());
-//    	put("AMNA", new ArrayList<String>());
-//    }};
-//
-//    map.get("ALICE").add("a");
-//    map.get("AMNA").add("b");
+    Script script = new Script(theme);
 
     Assert.assertEquals(theme, script.getTheme());
     Assert.assertEquals(path, script.getPath());
-//    Assert.assertEquals(map, script.getContent());
-
   }
 }
