@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Collections;
+import java.util.ArrayList;
 
 /** Servlet class responsible for the activity feed page. */
 public class ActivityFeedServlet extends HttpServlet {
@@ -68,17 +69,18 @@ public class ActivityFeedServlet extends HttpServlet {
    */
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response)
-      throws IOException, ServletException, PersistentDataStoreException {
-    // The get function needs to know who the user is, aList<Conversation> conversations = conversationStore.getAllConversations();nd if one is not logged in, they need to.
+      throws IOException, ServletException {
+    // The get function needs to know who the user is, and if one is not logged in, they need to.
+    String username = (String) request.getSession().getAttribute("user");
     User user = userStore.getUser(username);
     if (user == null) {
-      // couldn't find conversation, redirect to conversation list
+      // user isn't logged in, redirect to login page
       System.out.println("User was null");
       response.sendRedirect("/login");
       return;
     }
 
-    List<Conversation> conversations = conversationStore.loadConversations();
+    List<Conversation> conversations = conversationStore.getAllConversations();
 
     List<Message> messages = new ArrayList<>();
 
@@ -89,15 +91,17 @@ public class ActivityFeedServlet extends HttpServlet {
     for (Conversation conversation : conversations) {
         for (UUID member : conversation.members) {
           if (!(user.getId().equals(member))) {
-          conversations.remove(new Conversation(conversation));
+          conversations.remove(conversation);
         } else {
-          messages.add(messageStore.getMessagesInConversation(conversation.getId()));
+          messages.addAll(messageStore.getMessagesInConversation(conversation.getId()));
         }
       }
     }
 
     Collections.sort(messages);
 
+    request.setAttribute("conversations", conversations);
+    request.setAttribute("messages", messages);
     request.getRequestDispatcher("/WEB-INF/view/activityfeed.jsp").forward(request, response);
   }
 }

@@ -77,15 +77,9 @@ public class Message implements Comparable<Message>{
 
   @Override
   /** Compares messages based on their creation time.
-    * Sorts earliest first.
+    * Sorts latest first.
     */
   public int compareTo(Message messageBoi) {
-    if (this.getCreationTime() < messageBoi.getCreationTime()) {
-      return 1;
-    } else if (this.getCreationTime() == messageBoi.getCreationTime())  {
-      return 0;
-    } else {
-      return -1;
-    }
+    return this.getCreationTime().compareTo(messageBoi.getCreationTime());
   }
 }

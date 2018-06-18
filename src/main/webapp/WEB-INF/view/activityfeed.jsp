@@ -3,7 +3,7 @@
 <%@ page import="codeu.model.data.Message" %>
 <%@ page import="codeu.model.store.basic.UserStore" %>
 <%
-Conversation conversation = (Conversation) request.getAttribute("conversation");
+List<Conversation> conversations = (List<Conversation>) request.getAttribute("conversations");
 List<Message> messages = (List<Message>) request.getAttribute("messages");
 %>
 
@@ -14,7 +14,7 @@ List<Message> messages = (List<Message>) request.getAttribute("messages");
   <link rel="stylesheet" href="/css/main.css" type="text/css">
 
   <style>
-    #chat {
+    #feed {
       background-color: white;
       height: 500px;
       overflow-y: scroll
@@ -26,15 +26,11 @@ List<Message> messages = (List<Message>) request.getAttribute("messages");
   <jsp:include page="/WEB-INF/includes/header.jsp"/>
 
   <div id="container">
-
-    <%-- <h1><%= conversation.getTitle() %>
-      <a href="" style="float: right">&#8635;</a></h1>
-
-    <hr/> --%>
-
-    <div id="chat">
+    <div id="feed">
       <ul>
-    <li>This is the actvity feed.</li>
+        <% for(int i = 0; i < messages.length; i++){ %>
+          <li><%= messages[i].getCreationTime() %>: User sent a message: <%= messages[i].getContent() %></li>
+        <% } %>
       </ul>
     </div>
 
