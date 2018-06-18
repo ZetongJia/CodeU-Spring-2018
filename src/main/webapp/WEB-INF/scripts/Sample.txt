@@ -1,0 +1,2 @@
+ALICE: a
+AMNA: b

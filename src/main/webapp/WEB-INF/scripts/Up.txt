@@ -1,0 +1,10 @@
+RUSSELL: Good afternoon. My name is Russell. And I am a Wilderness Explorer in Tribe 54, Sweatlodge 12. Are you in need of any assistance today, sir?"
+CARL: No.
+RUSSELL: I could help you cross the street.
+CARL: No.
+RUSSELL: I could help you cross your yard.
+CARL: No.
+RUSSELL: I could help you cross your... porch?
+CARL: No.
+RUSSELL: Well, I gotta help you cross something.
+CARL: Uh, no. I'm doing fine.
