@@ -2,8 +2,11 @@
 <%@ page import="codeu.model.data.Activity"%>
 <%@ page import="codeu.model.data.Conversation" %>
 <%@ page import="codeu.model.data.Message" %>
+<%@ page import="codeu.model.data.User" %>
 <%@ page import="codeu.model.store.basic.UserStore" %>
+<%@ page import="codeu.model.store.basic.ConversationStore" %>
 <%
+ConversationStore conversationStore = (ConversationStore) request.getAttribute("conversationStore");
 UserStore userStore = (UserStore) request.getAttribute("userStore");
 List<Activity> ActivityList = (List<Activity>) request.getAttribute("activities");
 %>
@@ -33,16 +36,26 @@ List<Activity> ActivityList = (List<Activity>) request.getAttribute("activities"
           for(Activity activity : ActivityList){
             if (activity instanceof Message){
               Message message = (Message) activity;
+              String convoTitle = conversationStore.getConversation(message.getConversationId()).getTitle();
               String author = userStore.getUser(message.getAuthorId()).getName();
         %>
-          <li><%= message.timeFormat() %>:<%= author %> sent a message: <%= message.getContent() %></li>
+          <li><%= message.timeFormat() %>:<%= author %> sent a message in <%= convoTitle %> : <%= message.getContent() %></li>
         <%
-          }
+            }
 
             else if (activity instanceof Conversation){
               Conversation conversation = (Conversation) activity;
         %>
           <li>New Conversattion: <%= conversation.getTitle() %> </li>
+        <%
+            }
+
+            else if (activity instanceof User){
+              User newUser = (User) activity;
+
+        %>
+          <li>New User <b><%= newUser.getName() %></b> joined!</li>
+
         <%
             }
           }

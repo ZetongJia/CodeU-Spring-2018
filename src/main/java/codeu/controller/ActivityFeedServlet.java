@@ -85,6 +85,8 @@ public class ActivityFeedServlet extends HttpServlet {
 
     List<Message> messages = new ArrayList<>();
 
+    List<User> users = new ArrayList<>();
+
     List<Activity> ActivityList = new ArrayList<>();
 
     /**
@@ -96,17 +98,20 @@ public class ActivityFeedServlet extends HttpServlet {
           if (!(user.getId().equals(member))) {
           conversations.remove(conversation);
         } else {
+          users.add(userStore.getUser(conversation.getOwnerId()));
           messages.addAll(messageStore.getMessagesInConversation(conversation.getId()));
         }
       }
     }
 
+    ActivityList.addAll(users);
     ActivityList.addAll(messages);
     ActivityList.addAll(conversations);
     Collections.sort(ActivityList);
 
     System.out.println("Activity List sorted");
 
+    request.setAttribute("conversationStore", this.conversationStore);
     request.setAttribute("userStore", this.userStore);
     request.setAttribute("activities", ActivityList);
     request.getRequestDispatcher("/WEB-INF/view/activityfeed.jsp").forward(request, response);
