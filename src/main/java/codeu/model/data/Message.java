@@ -18,13 +18,12 @@ import java.time.Instant;
 import java.util.UUID;
 
 /** Class representing a message. Messages are sent by a User in a Conversation. */
-public class Message implements Comparable<Message>{
+public class Message extends Activity{
 
   private final UUID id;
   private final UUID conversation;
   private final UUID author;
   private final String content;
-  private final Instant creation;
 
   /**
    * Constructs a new Message.
@@ -40,7 +39,7 @@ public class Message implements Comparable<Message>{
     this.conversation = conversation;
     this.author = author;
     this.content = content;
-    this.creation = creation;
+    Activity(creation);
   }
 
   /** Returns the ID of this Message. */
@@ -63,23 +62,10 @@ public class Message implements Comparable<Message>{
     return content;
   }
 
-  /** Returns the creation time of this Message. */
-  public Instant getCreationTime() {
-    return creation;
-  }
-
   /** Returns the number of words of this Message. */
   public long calcNumWords() {
     String[] arr = content.split("\\W+");
     long words = arr.length;
     return words;
-  }
-
-  @Override
-  /** Compares messages based on their creation time.
-    * Sorts latest first.
-    */
-  public int compareTo(Message messageBoi) {
-    return this.getCreationTime().compareTo(messageBoi.getCreationTime());
   }
 }

@@ -26,7 +26,6 @@ import java.util.List;
 public class Conversation {
   public final UUID id;
   public final UUID owner;
-  public final Instant creation;
   public final String title;
   public List<UUID> members = new ArrayList<>();
 
@@ -44,6 +43,7 @@ public class Conversation {
     this.creation = creation;
     this.title = title;
     members.add(owner);
+    Activity(creation);
   }
 
   /** Returns the ID of this Conversation. */
@@ -59,10 +59,5 @@ public class Conversation {
   /** Returns the title of this Conversation. */
   public String getTitle() {
     return title;
-  }
-
-  /** Returns the creation time of this Conversation. */
-  public Instant getCreationTime() {
-    return creation;
   }
 }
