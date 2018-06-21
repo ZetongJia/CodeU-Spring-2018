@@ -14,6 +14,7 @@
 
 package codeu.model.data;
 
+import codeu.model.data.Activity;
 import java.time.Instant;
 import java.util.UUID;
 
@@ -39,7 +40,7 @@ public class User extends Activity{
     this.id = id;
     this.name = name;
     this.passwordHash = passwordHash;
-    Activity(creation);
+    this.creation = creation;
     this.numMessages = 0;
     this.numWords = 0;
     this.isAdmin = isAdmin;

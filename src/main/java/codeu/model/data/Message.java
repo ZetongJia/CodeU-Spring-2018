@@ -14,6 +14,7 @@
 
 package codeu.model.data;
 
+import codeu.model.data.Activity;
 import java.time.Instant;
 import java.util.UUID;
 
@@ -39,7 +40,7 @@ public class Message extends Activity{
     this.conversation = conversation;
     this.author = author;
     this.content = content;
-    Activity(creation);
+    this.creation = creation;
   }
 
   /** Returns the ID of this Message. */

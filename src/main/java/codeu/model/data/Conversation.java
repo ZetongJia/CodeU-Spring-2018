@@ -14,6 +14,7 @@
 
 package codeu.model.data;
 
+import codeu.model.data.Activity;
 import java.time.Instant;
 import java.util.UUID;
 import java.util.ArrayList;
@@ -23,7 +24,7 @@ import java.util.List;
  * Class representing a conversation, which can be thought of as a chat room. Conversations are
  * created by a User and contain Messages.
  */
-public class Conversation {
+public class Conversation extends Activity{
   public final UUID id;
   public final UUID owner;
   public final String title;
@@ -43,7 +44,7 @@ public class Conversation {
     this.creation = creation;
     this.title = title;
     members.add(owner);
-    Activity(creation);
+    this.creation = creation;
   }
 
   /** Returns the ID of this Conversation. */

@@ -1,10 +1,11 @@
 <%@ page import="java.util.List" %>
+<%@ page import="codeu.model.data.Activity"%>
 <%@ page import="codeu.model.data.Conversation" %>
 <%@ page import="codeu.model.data.Message" %>
 <%@ page import="codeu.model.store.basic.UserStore" %>
 <%
-List<Conversation> conversations = (List<Conversation>) request.getAttribute("conversations");
-List<Message> messages = (List<Message>) request.getAttribute("messages");
+UserStore userStore = (UserStore) request.getAttribute("userStore");
+List<Activity> ActivityList = (List<Activity>) request.getAttribute("activities");
 %>
 
 <!DOCTYPE html>
@@ -28,15 +29,26 @@ List<Message> messages = (List<Message>) request.getAttribute("messages");
   <div id="container">
     <div id="feed">
       <ul>
-        <% for(int i = 0; i < messages.length; i++){ %>
-          <li><%= messages[i].getCreationTime() %>: User sent a message: <%= messages[i].getContent() %></li>
-        <% } %>
+        <%
+          for(Activity activity : ActivityList){
+            if (activity instanceof Message){
+              Message message = (Message) activity;
+              String author = userStore.getUser(message.getAuthorId()).getName();
+        %>
+          <li><%= message.timeFormat() %>:<%= author %> sent a message: <%= message.getContent() %></li>
+        <%
+          }
+
+            else if (activity instanceof Conversation){
+              Conversation conversation = (Conversation) activity;
+        %>
+          <li>New Conversattion: <%= conversation.getTitle() %> </li>
+        <%
+            }
+          }
+        %>
       </ul>
     </div>
-
-    <hr/>
-
-    <hr/>
 
   </div>
 

@@ -1,5 +1,6 @@
 package codeu.controller;
 
+import codeu.model.data.Activity;
 import codeu.model.data.Conversation;
 import codeu.model.data.Message;
 import codeu.model.data.User;
@@ -84,6 +85,8 @@ public class ActivityFeedServlet extends HttpServlet {
 
     List<Message> messages = new ArrayList<>();
 
+    List<Activity> ActivityList = new ArrayList<>();
+
     /**
      * this removes all conversations not associated with the user from the list
      * and adds meaages associated with all conversations to a list.
@@ -98,10 +101,14 @@ public class ActivityFeedServlet extends HttpServlet {
       }
     }
 
-    Collections.sort(messages);
+    ActivityList.addAll(messages);
+    ActivityList.addAll(conversations);
+    Collections.sort(ActivityList);
 
-    request.setAttribute("conversations", conversations);
-    request.setAttribute("messages", messages);
+    System.out.println("Activity List sorted");
+
+    request.setAttribute("userStore", this.userStore);
+    request.setAttribute("activities", ActivityList);
     request.getRequestDispatcher("/WEB-INF/view/activityfeed.jsp").forward(request, response);
   }
 }

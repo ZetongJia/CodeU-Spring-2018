@@ -1,9 +1,6 @@
 package codeu.model.data;
 
 import java.time.Instant;
-import java.util.UUID;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Date;
 import java.text.SimpleDateFormat;
 
@@ -13,15 +10,7 @@ import java.text.SimpleDateFormat;
  * Handles everything involving Instants/creation time.
  */
 public class Activity implements Comparable<Activity>{
-  protected final Instant creation;
-
-  /**
-   * Constructs an Activity object
-   * @param creation the creation time of this Activity
-   */
-  public Activity(Instant creation){
-    this.creation = creation;
-  }
+  protected Instant creation;
 
   /** Returns the creation time of this User. */
   public Instant getCreationTime() {
@@ -31,7 +20,7 @@ public class Activity implements Comparable<Activity>{
   /** Returns Instant time in MM/DD/YYYY HH:MM:SS timeFormat. */
   public String timeFormat() {
     Date myDate = Date.from(this.getCreationTime());
-    SimpleDateFormat formatter = new SimpleDateFormat("dd MM yyyy HH:mm:ss");
+    SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
     String formattedDate = formatter.format(myDate);
     return formattedDate;
   }
@@ -41,6 +30,6 @@ public class Activity implements Comparable<Activity>{
     * Sorts latest first.
     */
   public int compareTo(Activity ActivityBoi) {
-    return this.getCreationTime().compareTo(ActivityBoi.getCreationTime());
+    return -(this.getCreationTime().compareTo(ActivityBoi.getCreationTime()));
   }
 }
