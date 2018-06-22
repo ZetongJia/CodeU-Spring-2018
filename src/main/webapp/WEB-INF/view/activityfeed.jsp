@@ -30,16 +30,19 @@ List<Activity> ActivityList = (List<Activity>) request.getAttribute("activities"
   <jsp:include page="/WEB-INF/includes/header.jsp"/>
 
   <div id="container">
+    <h1 font-size="700px">Activity</h1>
+    <h2 top-padding="50px" bottom-padding="50px">See all site activity here!</h2>
     <div id="feed">
       <ul>
         <%
+          response.setIntHeader("Refresh", 5);
           for(Activity activity : ActivityList){
             if (activity instanceof Message){
               Message message = (Message) activity;
               String convoTitle = conversationStore.getConversation(message.getConversationId()).getTitle();
               String author = userStore.getUser(message.getAuthorId()).getName();
         %>
-          <li><%= message.timeFormat() %>:<%= author %> sent a message in <%= convoTitle %> : <%= message.getContent() %></li>
+          <li><%= message.timeFormat() %>:<%= author %> sent a message in <%= convoTitle %>: <%= message.getContent() %></li>
         <%
             }
 
