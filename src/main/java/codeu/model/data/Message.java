@@ -75,4 +75,9 @@ public class Message {
     return words;
   }
 
+  /** Returns true if detects @ in message content
+  public boolean detectMention (String content){
+
+  }**/
+
 }

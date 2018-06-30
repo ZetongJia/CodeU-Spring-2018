@@ -73,9 +73,20 @@ List<Message> messages = (List<Message>) request.getAttribute("messages");
 
     <% if (request.getSession().getAttribute("user") != null) { %>
     <form action="/chat/<%= conversation.getTitle() %>" method="POST">
-        <input type="text" name="message">
+        <input type="text" name="message" id="myInput" oninput="detectMention()">
         <br/>
         <button type="submit">Send</button>
+        <p id="demo"></p>
+        <script>
+          function detectMention() {
+              var message = document.getElementById("myInput").value;
+              var containsAt = message.includes("@");
+              if(containsAt){
+                document.getElementById("demo").innerHTML = "Tagging successful!";
+              }
+              //document.getElementById("demo").innerHTML = "You wrote: " + x;
+          }
+        </script>
     </form>
     <% } else { %>
       <p><a href="/login">Login</a> to send a message.</p>

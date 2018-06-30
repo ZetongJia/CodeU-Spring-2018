@@ -78,7 +78,7 @@ public class ProfileServlet extends HttpServlet{
   }
 
   /**
-   * This function fires when a goes on their profile page. It gets the username and password from
+   * This function fires when a user goes on their profile page. It gets the username and password from
    * the submitted form data, checks for validity and if correct adds the username to the session so
    * we know the user is logged in.
    */
