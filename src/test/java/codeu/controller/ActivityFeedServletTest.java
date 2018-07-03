@@ -32,7 +32,7 @@
 //   private ConversationStore mockConversationStore;
 //   private MessageStore mockMessageStore;
 //   private UserStore mockUserStore;
-// 
+//
 //   @Before
 //   public void setup() {
 //     activityfeedServlet = new ActivityFeedServlet();
