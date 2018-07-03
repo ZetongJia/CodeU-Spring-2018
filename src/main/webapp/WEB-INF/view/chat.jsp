@@ -84,7 +84,7 @@ List<Message> messages = (List<Message>) request.getAttribute("messages");
               if(containsAt){
                 document.getElementById("demo").innerHTML = "Tagging successful!";
               }
-              //document.getElementById("demo").innerHTML = "You wrote: " + x;
+              
           }
         </script>
     </form>
