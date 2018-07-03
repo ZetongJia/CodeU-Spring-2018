@@ -49,7 +49,7 @@ List<Activity> ActivityList = (List<Activity>) request.getAttribute("activities"
             else if (activity instanceof Conversation){
               Conversation conversation = (Conversation) activity;
         %>
-          <li>New Conversattion: <%= conversation.getTitle() %> </li>
+          <li><%= message.timeFormat() %>:New Conversattion <%= conversation.getTitle() %> created!</li>
         <%
             }
 
@@ -57,7 +57,7 @@ List<Activity> ActivityList = (List<Activity>) request.getAttribute("activities"
               User newUser = (User) activity;
 
         %>
-          <li>New User <b><%= newUser.getName() %></b> joined!</li>
+          <li><%= message.timeFormat() %>:New User <b><%= newUser.getName() %></b> joined!</li>
 
         <%
             }
