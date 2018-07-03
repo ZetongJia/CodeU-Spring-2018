@@ -36,13 +36,9 @@
     <div
       style="width:75%; margin-left:auto; margin-right:auto; margin-top: 50px;">
 
-<<<<<<< HEAD
-      <h1>CodeU Chat App (Team ZETA)</h1>
-=======
       <h1>CodeU Chat App</h1>
       <h2>~ Developed by Team ZETA</h2>
       <hr>
->>>>>>> 14a9b98d6674bd721ab53ceed1090107443bc930
       <h2>Welcome!</h2>
 
       <ul>
