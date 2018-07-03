@@ -42,14 +42,14 @@ List<Activity> ActivityList = (List<Activity>) request.getAttribute("activities"
               String convoTitle = conversationStore.getConversation(message.getConversationId()).getTitle();
               String author = userStore.getUser(message.getAuthorId()).getName();
         %>
-          <li><%= message.timeFormat() %>:<%= author %> sent a message in <%= convoTitle %>: <%= message.getContent() %></li>
+          <li><%= message.timeFormat() %>: <%= author %> sent a message in <%= convoTitle %>: <%= message.getContent() %></li>
         <%
             }
 
             else if (activity instanceof Conversation){
               Conversation conversation = (Conversation) activity;
         %>
-          <li><%= conversation.timeFormat() %>:New Conversattion <%= conversation.getTitle() %> created!</li>
+          <li><%= conversation.timeFormat() %>: New Conversattion <%= conversation.getTitle() %> created!</li>
         <%
             }
 
@@ -57,7 +57,7 @@ List<Activity> ActivityList = (List<Activity>) request.getAttribute("activities"
               User newUser = (User) activity;
 
         %>
-          <li><%= newUser.timeFormat() %>:New User <b><%= newUser.getName() %></b> joined!</li>
+          <li><%= newUser.timeFormat() %>: New User <b><%= newUser.getName() %></b> joined!</li>
 
         <%
             }
