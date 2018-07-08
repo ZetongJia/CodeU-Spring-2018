@@ -69,7 +69,8 @@ public class LoginServlet extends HttpServlet {
     String username = request.getParameter("username");
     String password = request.getParameter("password");
 
-    if (!userStore.isUserRegistered(username)) {
+    //first regex condition prevents logging in as bots
+    if (!username.matches("[\\w*\\s*]*") || !userStore.isUserRegistered(username)) {
       request.setAttribute("error", "That username was not found.");
       request.getRequestDispatcher("/WEB-INF/view/login.jsp").forward(request, response);
       return;
@@ -84,6 +85,7 @@ public class LoginServlet extends HttpServlet {
     }
 
     request.getSession().setAttribute("user", username);
+    request.getSession().setAttribute("isAdmin", user.getIsAdmin());
     response.sendRedirect("/conversations");
   }
 }
