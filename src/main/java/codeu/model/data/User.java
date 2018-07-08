@@ -14,15 +14,15 @@
 
 package codeu.model.data;
 
+import codeu.model.data.Activity;
 import java.time.Instant;
 import java.util.UUID;
 
 /** Class representing a registered user. */
-public class User {
+public class User extends Activity{
   private final UUID id;
   private final String name;
   private final String passwordHash;
-  private final Instant creation;
   private long numMessages;
   private long numWords;
   private boolean isAdmin;
@@ -55,15 +55,10 @@ public class User {
   public String getName() {
     return name;
   }
-  
+
   /** Returns the password hash of this User. */
   public String getPasswordHash() {
     return passwordHash;
-  }
-
-  /** Returns the creation time of this User. */
-  public Instant getCreationTime() {
-    return creation;
   }
 
   /** Returns the number of messages sent by this User. */
@@ -84,7 +79,7 @@ public class User {
   /** Returns the number of words sent by this User. */
   public void incrementNumWords(long words) {
     this.numWords += words;
-  }  
+  }
 
   /** Returns true if user is admin. */
   public boolean getIsAdmin() {
