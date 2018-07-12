@@ -16,7 +16,7 @@ List<Activity> ActivityList = (List<Activity>) request.getAttribute("activities"
 <head>
   <title>Activity Feed</title>
   <link rel="stylesheet" href="/css/main.css" type="text/css">
-  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
+  <%-- <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script> --%>
 
   <style>
     #feed {
@@ -33,11 +33,12 @@ List<Activity> ActivityList = (List<Activity>) request.getAttribute("activities"
   <body>
   <div id="container">
     <h1 font-size="700px">Activity</h1>
-    <h2 top-padding="50px" bottom-padding="50px">See all site activity here!</h2>
+    <h2 top-padding="50px" bottom-padding="50px">See all site activity here!
+    <a href="" style="float: right">&#8635;</a></h2>
+
     <div id="feed">
       <ul>
         <%
-          //response.setIntHeader("Refresh", 5);
           for(Activity activity : ActivityList){
             if (activity instanceof Message){
               Message message = (Message) activity;
@@ -70,7 +71,7 @@ List<Activity> ActivityList = (List<Activity>) request.getAttribute("activities"
 
   </div>
 
-  <script>
+  <%-- <script>
 
     $(document).ready(function() {
       setInterval(function()
@@ -79,7 +80,7 @@ List<Activity> ActivityList = (List<Activity>) request.getAttribute("activities"
       }, 7000);
     });
 
-  </script>
+  </script> --%>
 
 </body>
 </html>
