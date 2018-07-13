@@ -17,6 +17,9 @@ package codeu.model.data;
 import codeu.model.data.Activity;
 import java.time.Instant;
 import java.util.UUID;
+import codeu.model.store.basic.UserStore;
+import java.util.List;
+import java.util.ArrayList;
 
 /** Class representing a message. Messages are sent by a User in a Conversation. */
 public class Message extends Activity{
@@ -30,7 +33,7 @@ public class Message extends Activity{
    * Constructs a new Message.
    *
    * @param id the ID of this Message
-   * @param conversation the ID of the Conversation this Message belongs to
+   * @param conversaimport java.util.List;tion the ID of the Conversation this Message belongs to
    * @param author the ID of the User who sent this Message
    * @param content the text content of this Message
    * @param creation the creation time of this Message
@@ -68,5 +71,20 @@ public class Message extends Activity{
     String[] arr = content.split("\\W+");
     long words = arr.length;
     return words;
+  }
+
+  /** Returns a list of Users who were mentioned in this Message. */
+  public List<User> usersMentioned(){
+    UserStore userStore;
+    String[] arr = content.split("\\W+");
+    List<User> mentioned = new ArrayList<>();
+    for(int i = 0; i < arr.length; i++){
+      if(arr[i][0].compareTo("@") == 0){
+        if(userStore.isUserRegistered(arr[i].substring(1,arr[i].length))){
+          mentioned.add(userStore.getUser(arr[i]));
+        }
+      }
+    }
+    return mentioned;
   }
 }
