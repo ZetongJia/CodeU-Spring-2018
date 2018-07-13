@@ -98,7 +98,7 @@ public class ActivityFeedServlet extends HttpServlet {
           if (!(user.getId().equals(member))) {
           conversations.remove(conversation);
         } else {
-          users.add(userStore.getUser(conversation.getOwnerId()));
+          users.add(userStore.getUser(member));
           messages.addAll(messageStore.getMessagesInConversation(conversation.getId()));
         }
       }
