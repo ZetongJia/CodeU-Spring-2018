@@ -38,8 +38,8 @@ List<Activity> MentionList = (List<Activity>) request.getAttribute("mentions");
       <ul>
         <%
           for(Activity mention : MentionList){
-            if (activity instanceof Message){
-              Message message = (Message) activity;
+            if (mention instanceof Message){
+              Message message = (Message) mention;
               String convoTitle = conversationStore.getConversation(message.getConversationId()).getTitle();
               String author = userStore.getUser(message.getAuthorId()).getName();
 

@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Collections;
 import java.util.ArrayList;
+import java.lang.NullPointerException;
 
 /** Servlet class responsible for the activity feed page. */
 public class MentionServlet extends HttpServlet {
@@ -70,7 +71,7 @@ public class MentionServlet extends HttpServlet {
    */
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response)
-      throws IOException, ServletException {
+      throws IOException, ServletException, NullPointerException {
     // The get function needs to know who the user is, and if one is not logged in, they need to.
     String username = (String) request.getSession().getAttribute("user");
     User user = userStore.getUser(username);
@@ -85,7 +86,7 @@ public class MentionServlet extends HttpServlet {
 
     List<Message> messages = new ArrayList<>();
 
-    //List<User> usersMentioned = new ArrayList<>();
+    List<Message> nonMentioned = new ArrayList<>();
 
     List<Activity> MentionList = new ArrayList<>();
 
@@ -104,23 +105,26 @@ public class MentionServlet extends HttpServlet {
     }
 
     for (Message message : messages) {
-      if(message.usersMentioned().length != 0){
+      if(message.usersMentioned().size() != 0){
         //usersMentioned.addAll(message.usersMentioned());
-        boolean mentioned = false;
         for (User userMention : message.usersMentioned()) {
-          if(userMention.getId() == user.getId()) {
-            mentioned = true;
+          boolean mentioned = false;
+          if(userMention != null){
+            if(userMention.getId().equals(user.getId())) {
+              mentioned = true;
+            }
+
+            if(!mentioned){
+              nonMentioned.add(message);
+            }
           }
         }
-
-        if(!mentioned){
-          messages.remove(message);
-        }
       } else {
-        messages.remove(message);
+        nonMentioned.add(message);
       }
     }
 
+    messages.removeAll(nonMentioned);
     MentionList.addAll(messages);
     Collections.sort(MentionList);
 

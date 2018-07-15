@@ -75,16 +75,22 @@ public class Message extends Activity{
 
   /** Returns a list of Users who were mentioned in this Message. */
   public List<User> usersMentioned(){
-    UserStore userStore;
-    String[] arr = content.split("\\W+");
+    UserStore userStore = UserStore.getInstance();
+    String[] arr = content.split("\\s");
     List<User> mentioned = new ArrayList<>();
-    for(int i = 0; i < arr.length; i++){
-      if(arr[i][0].compareTo("@") == 0){
-        if(userStore.isUserRegistered(arr[i].substring(1,arr[i].length))){
-          mentioned.add(userStore.getUser(arr[i]));
+    for(String word : arr){
+      if(word.length() > 1){
+        //System.out.println(word);
+        if(word.charAt(0) == '@'){
+          // System.out.println(word);
+          if(userStore.isUserRegistered(word.substring(1))) {
+            System.out.println(word);
+            mentioned.add(userStore.getUser(word));
+          }
         }
       }
     }
+    //System.out.println(mentioned.size());
     return mentioned;
   }
 }
