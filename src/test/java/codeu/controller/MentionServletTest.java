@@ -43,7 +43,7 @@ public class MentionServletTest {
 
     mockResponse = Mockito.mock(HttpServletResponse.class);
     mockRequestDispatcher = Mockito.mock(RequestDispatcher.class);
-    Mockito.when(mockRequest.getRequestDispatcher("/WEB-INF/view/mention.jsp"))
+    Mockito.when(mockRequest.getRequestDispatcher("/WEB-INF/view/mentions.jsp"))
         .thenReturn(mockRequestDispatcher);
 
     mockConversationStore = Mockito.mock(ConversationStore.class);

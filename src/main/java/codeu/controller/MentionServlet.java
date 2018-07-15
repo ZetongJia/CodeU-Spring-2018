@@ -133,6 +133,8 @@ public class MentionServlet extends HttpServlet {
     request.setAttribute("conversationStore", this.conversationStore);
     request.setAttribute("userStore", this.userStore);
     request.setAttribute("mentions", MentionList);
+    //System.out.println("Request: " +  request);
+    //System.out.println("Response: " + response);
     request.getRequestDispatcher("/WEB-INF/view/mentions.jsp").forward(request, response);
   }
 }
