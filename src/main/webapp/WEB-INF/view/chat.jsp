@@ -80,9 +80,6 @@ List<Message> messages = (List<Message>) request.getAttribute("messages");
 	              var containsAt = message.includes("@");
 	              if(containsAt){
 	                 console.log("Detected @");
-                   <%
-                      
-                   %>
 	              }
 	          }
 	        </script>

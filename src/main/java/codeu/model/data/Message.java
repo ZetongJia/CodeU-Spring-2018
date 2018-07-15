@@ -76,7 +76,7 @@ public class Message extends Activity{
   /** Returns a list of Users who were mentioned in this Message. */
   public List<User> usersMentioned(){
     UserStore userStore = UserStore.getInstance();
-    String[] arr = content.split("\\s");
+    String[] arr = content.replaceAll("[.?/!\\[\\]{}()--]", " ").split("\\s");
     List<User> mentioned = new ArrayList<>();
     for(String word : arr){
       if(word.length() > 1){
