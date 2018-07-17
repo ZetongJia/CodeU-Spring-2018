@@ -40,7 +40,14 @@
       <ul>
         <li><strong>Alice:</strong> To use the Admin page type admin as the
           username when logging in.</li>
-        <li><strong>Aubin:</strong> The chat layout is designed .</li>
+        <li><strong>Aubin:</strong> The Activity Feed is a webpage where you can view all
+          activity happening across the site pertaining to you. It works by creating a list
+          of all site Activity in reverse chronological order. It then serves all of those
+          Activities to you. The Mentions page works similarly to the Activity Feed, however
+          it differs because it only creates a list of messages. Then a message function is
+          used to search for all the users mentioned (@) in the message. If you are mentioned,
+          then the message, who mentioned you, and the conversation you were mentioned in
+          appears on the Mentions page.</li>
         <li><strong>Tania:</strong> Designed and implemented profile pages for each user
           with an about me section to describe themselves and a section that lists all of
           their previously sent messages. About me sections are only editable by users themselves.

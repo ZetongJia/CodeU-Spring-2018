@@ -14,17 +14,17 @@
 
 package codeu.model.data;
 
+import codeu.model.data.Activity;
 import java.time.Instant;
 import java.util.UUID;
 
 /** Class representing a message. Messages are sent by a User in a Conversation. */
-public class Message {
+public class Message extends Activity{
 
   private final UUID id;
   private final UUID conversation;
   private final UUID author;
   private final String content;
-  private final Instant creation;
 
   /**
    * Constructs a new Message.
@@ -61,11 +61,6 @@ public class Message {
   /** Returns the text content of this Message. */
   public String getContent() {
     return content;
-  }
-
-  /** Returns the creation time of this Message. */
-  public Instant getCreationTime() {
-    return creation;
   }
 
   /** Returns the number of words of this Message. */
