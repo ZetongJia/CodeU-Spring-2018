@@ -17,6 +17,7 @@ package codeu.model.store.persistence;
 import codeu.model.data.Conversation;
 import codeu.model.data.Message;
 import codeu.model.data.User;
+import codeu.model.store.basic.*;
 import codeu.model.store.persistence.PersistentDataStoreException;
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
@@ -65,9 +66,13 @@ public class PersistentDataStore {
       try {
         UUID uuid = UUID.fromString((String) entity.getProperty("uuid"));
         String userName = (String) entity.getProperty("username");
+        String aboutme = (String) entity.getProperty("aboutme");
         String passwordHash = (String) entity.getProperty("password_hash");
         Instant creationTime = Instant.parse((String) entity.getProperty("creation_time"));
-        User user = new User(uuid, userName, passwordHash, creationTime);
+//        Long numMessages = Long.parseLong((String) entity.getProperty("numMessages"));
+//        Long numWords = Long.parseLong((String) entity.getProperty("numWords"));
+        Boolean isAdmin = Boolean.valueOf((String) entity.getProperty("isAdmin"));
+        User user = new User(uuid, userName, passwordHash, creationTime, aboutme, isAdmin);
         users.add(user);
       } catch (Exception e) {
         // In a production environment, errors should be very rare. Errors which may
@@ -124,6 +129,7 @@ public class PersistentDataStore {
   public List<Message> loadMessages() throws PersistentDataStoreException {
 
     List<Message> messages = new ArrayList<>();
+    List<Message> messagesByUser = new ArrayList<>();
 
     // Retrieve all messages from the datastore.
     Query query = new Query("chat-messages").addSort("creation_time", SortDirection.ASCENDING);
@@ -154,8 +160,12 @@ public class PersistentDataStore {
     Entity userEntity = new Entity("chat-users", user.getId().toString());
     userEntity.setProperty("uuid", user.getId().toString());
     userEntity.setProperty("username", user.getName());
+    userEntity.setProperty("aboutme", user.getAboutMe());
     userEntity.setProperty("password_hash", user.getPasswordHash());
     userEntity.setProperty("creation_time", user.getCreationTime().toString());
+    userEntity.setProperty("numMessages", String.valueOf(user.getNumMessages()));
+    userEntity.setProperty("numWords", String.valueOf(user.getNumWords()));
+    userEntity.setProperty("isAdmin", String.valueOf(user.getIsAdmin()));
     datastore.put(userEntity);
   }
 
@@ -180,4 +190,3 @@ public class PersistentDataStore {
     datastore.put(conversationEntity);
   }
 }
-

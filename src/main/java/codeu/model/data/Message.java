@@ -14,17 +14,17 @@
 
 package codeu.model.data;
 
+import codeu.model.data.Activity;
 import java.time.Instant;
 import java.util.UUID;
 
 /** Class representing a message. Messages are sent by a User in a Conversation. */
-public class Message {
+public class Message extends Activity{
 
   private final UUID id;
   private final UUID conversation;
   private final UUID author;
   private final String content;
-  private final Instant creation;
 
   /**
    * Constructs a new Message.
@@ -63,8 +63,16 @@ public class Message {
     return content;
   }
 
-  /** Returns the creation time of this Message. */
-  public Instant getCreationTime() {
-    return creation;
+  /** Returns the number of words of this Message. */
+  public long calcNumWords() {
+    String[] arr = content.split("\\W+");
+    long words = arr.length;
+    return words;
   }
+
+  /** Returns true if detects @ in message content
+  public boolean detectMention (String content){
+
+  }**/
+
 }

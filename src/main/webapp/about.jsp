@@ -21,16 +21,7 @@
 </head>
 <body>
 
-  <nav>
-    <a id="navTitle" href="/">CodeU Chat App</a>
-    <a href="/conversations">Conversations</a>
-    <% if(request.getSession().getAttribute("user") != null){ %>
-      <a>Hello <%= request.getSession().getAttribute("user") %>!</a>
-    <% } else{ %>
-      <a href="/login">Login</a>
-    <% } %>
-    <a href="/about.jsp">About</a>
-  </nav>
+  <jsp:include page="/WEB-INF/includes/header.jsp"/>
 
   <div id="container">
     <div
@@ -38,32 +29,37 @@
 
       <h1>About the CodeU Chat App</h1>
       <p>
-        This is an example chat application designed to be a starting point
-        for your CodeU project team work. Here's some stuff to think about:
+        Hello everyone, we are ZETA! Our group members consist of Alice, Aubin,
+        Tania and Tina. Throughout the summer, we've updated this chat app
+        with some awesome improvements. Enjoy!
+      </p>
+      <p>
+
       </p>
 
       <ul>
-        <li><strong>Algorithms and data structures:</strong> We've made the app
-            and the code as simple as possible. You will have to extend the
-            existing data structures to support your enhancements to the app,
-            and also make changes for performance and scalability as your app
-            increases in complexity.</li>
-        <li><strong>Look and feel:</strong> The focus of CodeU is on the Java
-          side of things, but if you're particularly interested you might use
-          HTML, CSS, and JavaScript to make the chat app prettier.</li>
-        <li><strong>Customization:</strong> Think about a group you care about.
-          What needs do they have? How could you help? Think about technical
-          requirements, privacy concerns, and accessibility and
-          internationalization.</li>
+        <li><strong>Alice:</strong> To use the Admin page type admin as the
+          username when logging in.</li>
+        <li><strong>Aubin:</strong> The Activity Feed is a webpage where you can view all
+          activity happening across the site pertaining to you. It works by creating a list
+          of all site Activity in reverse chronological order. It then serves all of those
+          Activities to you. The Mentions page works similarly to the Activity Feed, however
+          it differs because it only creates a list of messages. Then a message function is
+          used to search for all the users mentioned (@) in the message. If you are mentioned,
+          then the message, who mentioned you, and the conversation you were mentioned in
+          appears on the Mentions page.</li>
+        <li><strong>Tania:</strong> Designed and implemented profile pages for each user
+          with an about me section to describe themselves and a section that lists all of
+          their previously sent messages. About me sections are only editable by users themselves.
+          After creating the profile pages, the chat room was modified so that all usernames led to
+          that user's profile page, making it viewable by others. Moreover, a feature to detect the @
+          symbol in user messages before it was sent was added in order to implement the ability to mention/tag
+          other users in messages.
+          </li>
+        <li><strong>Tina:</strong> The chat layout is designed .</li>
+
       </ul>
 
-      <p>
-        This is your code now. Get familiar with it and get comfortable
-        working with your team to plan and make changes. Start by updating the
-        homepage and this about page to tell your users more about your team.
-        This page should also be used to describe the features and improvements
-        you've added.
-      </p>
     </div>
   </div>
 </body>

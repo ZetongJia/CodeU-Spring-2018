@@ -141,17 +141,19 @@ public class ChatServlet extends HttpServlet {
     String messageContent = request.getParameter("message");
 
     // this removes any HTML from the message content
-    String cleanedMessageContent = Jsoup.clean(messageContent, Whitelist.none());
+    String cleanedMessageContent = Jsoup.clean(messageContent, Whitelist.basic());
 
     Message message =
         new Message(
             UUID.randomUUID(),
             conversation.getId(),
-            user.getId(),
-            cleanedMessageContent,
+            user.getId(), cleanedMessageContent,
             Instant.now());
 
     messageStore.addMessage(message);
+    user.incrementNumMessages();
+    user.incrementNumWords(message.calcNumWords());
+    userStore.updateUser(user);
 
     // redirect to a GET request
     response.sendRedirect("/chat/" + conversationTitle);
