@@ -120,17 +120,19 @@ public class PersistentDataStoreTest {
     UUID conversationOne = UUID.fromString("10000001-2222-3333-4444-555555555555");
     UUID authorOne = UUID.fromString("10000002-2222-3333-4444-555555555555");
     String contentOne = "test content one";
+    String seenOne = "Unread";
     Instant creationOne = Instant.ofEpochMilli(1000);
     Message inputMessageOne =
-        new Message(idOne, conversationOne, authorOne, contentOne, creationOne);
+        new Message(idOne, conversationOne, authorOne, contentOne, seenOne, creationOne);
 
     UUID idTwo = UUID.fromString("10000003-2222-3333-4444-555555555555");
     UUID conversationTwo = UUID.fromString("10000004-2222-3333-4444-555555555555");
     UUID authorTwo = UUID.fromString("10000005-2222-3333-4444-555555555555");
     String contentTwo = "test content one";
+    String seenTwo = "Unread";
     Instant creationTwo = Instant.ofEpochMilli(2000);
     Message inputMessageTwo =
-        new Message(idTwo, conversationTwo, authorTwo, contentTwo, creationTwo);
+        new Message(idTwo, conversationTwo, authorTwo, contentTwo, seenTwo, creationTwo);
 
     // save
     persistentDataStore.writeThrough(inputMessageOne);
@@ -145,6 +147,7 @@ public class PersistentDataStoreTest {
     Assert.assertEquals(conversationOne, resultMessageOne.getConversationId());
     Assert.assertEquals(authorOne, resultMessageOne.getAuthorId());
     Assert.assertEquals(contentOne, resultMessageOne.getContent());
+    Assert.assertEquals(seenOne, resultMessageOne.getMessageSeen());
     Assert.assertEquals(creationOne, resultMessageOne.getCreationTime());
 
     Message resultMessageTwo = resultMessages.get(1);
@@ -152,6 +155,7 @@ public class PersistentDataStoreTest {
     Assert.assertEquals(conversationTwo, resultMessageTwo.getConversationId());
     Assert.assertEquals(authorTwo, resultMessageTwo.getAuthorId());
     Assert.assertEquals(contentTwo, resultMessageTwo.getContent());
+    Assert.assertEquals(seenTwo, resultMessageOne.getMessageSeen());
     Assert.assertEquals(creationTwo, resultMessageTwo.getCreationTime());
   }
 }

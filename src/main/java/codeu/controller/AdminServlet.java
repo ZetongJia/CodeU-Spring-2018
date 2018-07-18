@@ -140,6 +140,7 @@ public class AdminServlet extends HttpServlet {
                 conversation.getId(),
                 userStore.getUser(character).getId(),
                 dialogue,
+                "unread",
                 Instant.now());
         messageStore.addMessage(message);
       }

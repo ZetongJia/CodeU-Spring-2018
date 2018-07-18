@@ -61,6 +61,9 @@ List<Message> messages = (List<Message>) request.getAttribute("messages");
       for (Message message : messages) {
         String author = UserStore.getInstance()
           .getUser(message.getAuthorId()).getName();
+        if(!request.getSession().getAttribute("user").equals(author))
+          message.setMessageSeen();
+
     %>
       <li><strong><a href="/user/<%= author %>"><%= author %></a>:</strong> <%= message.getContent() %></li>
     <%
@@ -84,7 +87,7 @@ List<Message> messages = (List<Message>) request.getAttribute("messages");
               if(containsAt){
                 document.getElementById("demo").innerHTML = "Tagging successful!";
               }
-              
+
           }
         </script>
     </form>

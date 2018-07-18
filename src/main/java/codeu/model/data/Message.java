@@ -25,6 +25,7 @@ public class Message extends Activity{
   private final UUID conversation;
   private final UUID author;
   private final String content;
+  private String seen;
 
   /**
    * Constructs a new Message.
@@ -33,13 +34,15 @@ public class Message extends Activity{
    * @param conversation the ID of the Conversation this Message belongs to
    * @param author the ID of the User who sent this Message
    * @param content the text content of this Message
+   * @param seen the read or unread identity of this Message
    * @param creation the creation time of this Message
    */
-  public Message(UUID id, UUID conversation, UUID author, String content, Instant creation) {
+  public Message(UUID id, UUID conversation, UUID author, String content, String seen, Instant creation) {
     this.id = id;
     this.conversation = conversation;
     this.author = author;
     this.content = content;
+    this.seen = "Unread";
     this.creation = creation;
   }
 
@@ -70,6 +73,13 @@ public class Message extends Activity{
     return words;
   }
 
+  public void setMessageSeen(){
+    seen = "Read";
+  }
+
+  public String getMessageSeen(){
+    return seen;
+  }
   /** Returns true if detects @ in message content
   public boolean detectMention (String content){
 

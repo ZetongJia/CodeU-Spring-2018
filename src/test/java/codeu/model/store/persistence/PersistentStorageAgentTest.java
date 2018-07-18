@@ -70,7 +70,7 @@ public class PersistentStorageAgentTest {
   public void testWriteThroughMessage() {
     Message message =
         new Message(
-            UUID.randomUUID(), UUID.randomUUID(), UUID.randomUUID(), "test content", Instant.now());
+            UUID.randomUUID(), UUID.randomUUID(), UUID.randomUUID(), "test content", "unread", Instant.now());
     persistentStorageAgent.writeThrough(message);
     Mockito.verify(mockPersistentDataStore).writeThrough(message);
   }

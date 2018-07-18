@@ -127,6 +127,7 @@ public class ChatServlet extends HttpServlet {
       response.sendRedirect("/login");
       return;
     }
+    request.setAttribute("username", username);
 
     String requestUrl = request.getRequestURI();
     String conversationTitle = requestUrl.substring("/chat/".length());
@@ -148,6 +149,7 @@ public class ChatServlet extends HttpServlet {
             UUID.randomUUID(),
             conversation.getId(),
             user.getId(), cleanedMessageContent,
+            "unread",
             Instant.now());
 
     messageStore.addMessage(message);

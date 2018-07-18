@@ -161,6 +161,7 @@ public class AdminServletTest {
             fakeConversationId,
             fakeUser1.getId(),
             "a",
+            "unread",
             Instant.now()));
 
     fakeMessageList.add(
@@ -169,6 +170,7 @@ public class AdminServletTest {
             fakeConversationId,
             fakeUser2.getId(),
             "b",
+            "unread",
             Instant.now()));
 
     Mockito.when(mockMessageStore.getMessagesInConversation(fakeConversationId))

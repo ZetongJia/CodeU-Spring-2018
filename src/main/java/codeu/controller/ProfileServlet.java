@@ -70,7 +70,7 @@ public class ProfileServlet extends HttpServlet{
       List<Message> messagesByUser = MessageStore.getInstance().getUserMessages(userId);
 
       if(messagesByUser.size()==0){
-        request.setAttribute("error", "no messages found.");
+        request.setAttribute("error", "Don't be shy! Send a message.");
       }
       request.setAttribute("username", username);
       request.setAttribute("usermessages", messagesByUser);

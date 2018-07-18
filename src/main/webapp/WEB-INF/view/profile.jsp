@@ -86,6 +86,7 @@
           %>
               <li>
                 <b><%out.print(date);%></b>
+                <b><%out.println("("+message.getMessageSeen()+")");%></b>
                 <%out.println(message.getContent());%>
               </li>
           <%}

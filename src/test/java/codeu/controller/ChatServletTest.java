@@ -87,6 +87,7 @@ public class ChatServletTest {
             fakeConversationId,
             UUID.randomUUID(),
             "test message",
+            "unread",
             Instant.now()));
     Mockito.when(mockMessageStore.getMessagesInConversation(fakeConversationId))
         .thenReturn(fakeMessageList);
