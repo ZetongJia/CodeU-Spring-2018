@@ -19,22 +19,22 @@ import java.util.UUID;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class UserTest {
+public class NotificationTest {
 
   @Test
   public void testCreate() {
     UUID id = UUID.randomUUID();
-    String name = "test_username";
-    String passwordHash = "$2a$10$bBiLUAVmUFK6Iwg5rmpBUOIBW6rIMhU1eKfi3KR60V9UXaYTwPfHy";
+    UUID message = UUID.randomUUID();
+    UUID conversation = UUID.randomUUID();
+    UUID mentionedUser = UUID.randomUUID();
     Instant creation = Instant.now();
-    boolean isAdmin = false;
 
-    User user = new User(id, name, passwordHash, creation, isAdmin);
+    Notification notification = new Notification(id, message, conversation, mentionedUser, creation);
 
-    Assert.assertEquals(id, user.getId());
-    Assert.assertEquals(name, user.getName());
-    Assert.assertEquals(passwordHash, user.getPasswordHash());
-    Assert.assertEquals(creation, user.getCreationTime());
-    Assert.assertEquals(isAdmin, user.getIsAdmin());
+    Assert.assertEquals(id, notification.getId());
+    Assert.assertEquals(message, notification.getMessageId());
+    Assert.assertEquals(conversation, notification.getConversationId());
+    Assert.assertEquals(mentionedUser, notification.getMentionedUserId());
+    Assert.assertEquals(creation, notification.getCreationTime());
   }
 }

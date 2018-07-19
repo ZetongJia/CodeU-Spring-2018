@@ -17,6 +17,8 @@ package codeu.model.store.persistence;
 import codeu.model.data.Conversation;
 import codeu.model.data.Message;
 import codeu.model.data.User;
+import codeu.model.data.Notification;
+import codeu.model.store.basic.*;
 import codeu.model.store.persistence.PersistentDataStoreException;
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
@@ -67,7 +69,10 @@ public class PersistentDataStore {
         String userName = (String) entity.getProperty("username");
         String passwordHash = (String) entity.getProperty("password_hash");
         Instant creationTime = Instant.parse((String) entity.getProperty("creation_time"));
-        User user = new User(uuid, userName, passwordHash, creationTime);
+        Long numMessages = Long.parseLong((String) entity.getProperty("numMessages"));
+        Long numWords = Long.parseLong((String) entity.getProperty("numWords"));
+        Boolean isAdmin = Boolean.valueOf((String) entity.getProperty("isAdmin"));
+        User user = new User(uuid, userName, passwordHash, creationTime, isAdmin);
         users.add(user);
       } catch (Exception e) {
         // In a production environment, errors should be very rare. Errors which may
@@ -149,6 +154,41 @@ public class PersistentDataStore {
     return messages;
   }
 
+  /**
+   * Loads all Notification objects from the Datastore service and returns them in a List, sorted in
+   * ascending order by creation time.
+   *
+   * @throws PersistentDataStoreException if an error was detected during the load from the
+   *     Datastore service
+   */
+  public List<Notification> loadNotifications() throws PersistentDataStoreException {
+
+    List<Notification> notifications = new ArrayList<>();
+
+    // Retrieve all Notifications from the datastore.
+    Query query = new Query("chat-notifications").addSort("creation_time", SortDirection.ASCENDING);
+    PreparedQuery results = datastore.prepare(query);
+
+    for (Entity entity : results.asIterable()) {
+      try {
+        UUID uuid = UUID.fromString((String) entity.getProperty("uuid"));
+        UUID messageUuid = UUID.fromString((String) entity.getProperty("message_uuid"));
+        UUID conversationUuid = UUID.fromString((String) entity.getProperty("conv_uuid"));
+        UUID mentionedUserUuid = UUID.fromString((String) entity.getProperty("mentioned_user_uuid"));
+        Instant creationTime = Instant.parse((String) entity.getProperty("creation_time"));
+        Notification notification = new Notification(uuid, messageUuid, conversationUuid, mentionedUserUuid, creationTime);
+        notifications.add(notification);
+      } catch (Exception e) {
+        // In a production environment, errors should be very rare. Errors which may
+        // occur include network errors, Datastore service errors, authorization errors,
+        // database entity definition mismatches, or service mismatches.
+        throw new PersistentDataStoreException(e);
+      }
+    }
+
+    return notifications;
+  }
+
   /** Write a User object to the Datastore service. */
   public void writeThrough(User user) {
     Entity userEntity = new Entity("chat-users", user.getId().toString());
@@ -156,7 +196,20 @@ public class PersistentDataStore {
     userEntity.setProperty("username", user.getName());
     userEntity.setProperty("password_hash", user.getPasswordHash());
     userEntity.setProperty("creation_time", user.getCreationTime().toString());
+    userEntity.setProperty("numMessages", String.valueOf(user.getNumMessages()));
+    userEntity.setProperty("numWords", String.valueOf(user.getNumWords()));
+    userEntity.setProperty("isAdmin", String.valueOf(user.getIsAdmin()));
     datastore.put(userEntity);
+  }
+
+  /** Write a Conversation object to the Datastore service. */
+  public void writeThrough(Conversation conversation) {
+    Entity conversationEntity = new Entity("chat-conversations", conversation.getId().toString());
+    conversationEntity.setProperty("uuid", conversation.getId().toString());
+    conversationEntity.setProperty("owner_uuid", conversation.getOwnerId().toString());
+    conversationEntity.setProperty("title", conversation.getTitle());
+    conversationEntity.setProperty("creation_time", conversation.getCreationTime().toString());
+    datastore.put(conversationEntity);
   }
 
   /** Write a Message object to the Datastore service. */
@@ -170,14 +223,15 @@ public class PersistentDataStore {
     datastore.put(messageEntity);
   }
 
-  /** Write a Conversation object to the Datastore service. */
-  public void writeThrough(Conversation conversation) {
-    Entity conversationEntity = new Entity("chat-conversations", conversation.getId().toString());
-    conversationEntity.setProperty("uuid", conversation.getId().toString());
-    conversationEntity.setProperty("owner_uuid", conversation.getOwnerId().toString());
-    conversationEntity.setProperty("title", conversation.getTitle());
-    conversationEntity.setProperty("creation_time", conversation.getCreationTime().toString());
-    datastore.put(conversationEntity);
+  /** Write a Notification object to the Datastore service. */
+  public void writeThrough(Notification notification) {
+    Entity notificationEntity = new Entity("chat-notifications", notification.getId().toString());
+    notificationEntity.setProperty("uuid", notification.getId().toString());
+    notificationEntity.setProperty("message_uuid", notification.getMessageId().toString());
+    notificationEntity.setProperty("conv_uuid", notification.getConversationId().toString());
+    notificationEntity.setProperty("mentioned_user_uuid", notification.getMentionedUserId().toString());
+    notificationEntity.setProperty("creation_time", notification.getCreationTime().toString());
+    datastore.put(notificationEntity);
   }
 }
 

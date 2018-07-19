@@ -14,27 +14,19 @@
 
 package codeu.model.data;
 
-import java.time.Instant;
-import java.util.UUID;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class UserTest {
+public class ScriptTest {
 
   @Test
   public void testCreate() {
-    UUID id = UUID.randomUUID();
-    String name = "test_username";
-    String passwordHash = "$2a$10$bBiLUAVmUFK6Iwg5rmpBUOIBW6rIMhU1eKfi3KR60V9UXaYTwPfHy";
-    Instant creation = Instant.now();
-    boolean isAdmin = false;
 
-    User user = new User(id, name, passwordHash, creation, isAdmin);
+    String theme = "Sample.txt";
+    String path = "src/main/webapp/WEB-INF/scripts/" + theme;
+    Script script = new Script(theme);
 
-    Assert.assertEquals(id, user.getId());
-    Assert.assertEquals(name, user.getName());
-    Assert.assertEquals(passwordHash, user.getPasswordHash());
-    Assert.assertEquals(creation, user.getCreationTime());
-    Assert.assertEquals(isAdmin, user.getIsAdmin());
+    Assert.assertEquals(theme, script.getTheme());
+    Assert.assertEquals(path, script.getPath());
   }
 }
