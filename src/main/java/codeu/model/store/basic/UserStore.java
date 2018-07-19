@@ -187,4 +187,7 @@ public class UserStore {
     return mostWordiest;
   }
 
+  public List<User> getAllUsers() {
+    return users;
+  }
 }
