@@ -93,7 +93,7 @@ public class Message extends Activity{
   public String getMessageSeen(){
     return seen;
   }
-  
+
   /** Returns a list of Users who were mentioned in this Message. */
   public List<User> usersMentioned(){
     UserStore userStore = UserStore.getInstance();
