@@ -55,7 +55,7 @@
     <servlet-name>ChatServlet</servlet-name>
     <url-pattern>/chat/*</url-pattern>
   </servlet-mapping>
-  
+
   <servlet>
     <servlet-name>RegisterServlet</servlet-name>
     <servlet-class>codeu.controller.RegisterServlet</servlet-class>
@@ -67,6 +67,16 @@
   </servlet-mapping>
 
   <servlet>
+    <servlet-name>ActivityFeedServlet</servlet-name>
+    <servlet-class>codeu.controller.ActivityFeedServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>ActivityFeedServlet</servlet-name>
+    <url-pattern>/activityfeed</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
     <servlet-name>AdminServlet</servlet-name>
     <servlet-class>codeu.controller.AdminServlet</servlet-class>
   </servlet>
@@ -74,6 +84,16 @@
   <servlet-mapping>
     <servlet-name>AdminServlet</servlet-name>
     <url-pattern>/admin</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>MentionServlet</servlet-name>
+    <servlet-class>codeu.controller.MentionServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>MentionServlet</servlet-name>
+    <url-pattern>/mentions</url-pattern>
   </servlet-mapping>
 
 </web-app>

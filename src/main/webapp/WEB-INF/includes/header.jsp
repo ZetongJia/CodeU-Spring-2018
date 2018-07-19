@@ -6,9 +6,14 @@
 
   <%  if ( (boolean) request.getSession().getAttribute("isAdmin")) { %>
         <a href="/admin">Admin</a>
-  <%  } 
+  <%  }
      }else{ %>
        <a href="/login">Login</a>
   <% } %>
+
+  <a href="/activityfeed">Activity Feed</a>
+
+  <a href="/mentions">Mentions</a>
+
   <a href="/about.jsp">About</a>
 </nav>

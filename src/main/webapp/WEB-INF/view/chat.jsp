@@ -1,12 +1,9 @@
 <%--
   Copyright 2017 Google Inc.
-
   Licensed under the Apache License, Version 2.0 (the "License");
   you may not use this file except in compliance with the License.
   You may obtain a copy of the License at
-
      http://www.apache.org/licenses/LICENSE-2.0
-
   Unless required by applicable law or agreed to in writing, software
   distributed under the License is distributed on an "AS IS" BASIS,
   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -73,9 +70,19 @@ List<Message> messages = (List<Message>) request.getAttribute("messages");
 
     <% if (request.getSession().getAttribute("user") != null) { %>
     <form action="/chat/<%= conversation.getTitle() %>" method="POST">
-        <input type="text" name="message">
+        <input type="text" name="message" id="myInput" oninput="detectMention()">
         <br/>
         <button type="submit">Send</button>
+        <p id="demo"></p>
+	        <script>
+          function detectMention() {
+	              var message = document.getElementById("myInput").value;
+	              var containsAt = message.includes("@");
+	              if(containsAt){
+	                 console.log("Detected @");
+	              }
+	          }
+	        </script>
     </form>
     <% } else { %>
       <p><a href="/login">Login</a> to send a message.</p>
