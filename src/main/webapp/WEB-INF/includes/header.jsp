@@ -25,6 +25,7 @@
   <% } else if (request.getSession().getAttribute("user")=="admin") { %>
         <a href="/admin">Admin</a>
 <<<<<<< HEAD
+<<<<<<< HEAD
   <% } else{ %>
         <a href="/login">Login</a>
 =======
@@ -33,15 +34,23 @@
      }else{ %>
        <a href="/login">Login</a>
 >>>>>>> 8c8c3225b26729c0504758f0d763e269e2dbf36c
+=======
+  <%  
+     }else{ %>
+       <a href="/login">Login</a>
+>>>>>>> b984399a10d9101abcb3d298329c19c25b1adbf5
   <% } %>
 
   <a href="/activityfeed">Activity Feed</a>
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
 =======
+=======
+>>>>>>> b984399a10d9101abcb3d298329c19c25b1adbf5
     <% if (last != null && last.getNotify() && user != null && listUsers != null) { %>
         <% for(User u : listUsers){
             if(u.getName().equals(user)){%>
@@ -51,10 +60,12 @@
         }%>
 
     <% }else{ %>
+<<<<<<< HEAD
 >>>>>>> 8c8c3225b26729c0504758f0d763e269e2dbf36c
+=======
+>>>>>>> b984399a10d9101abcb3d298329c19c25b1adbf5
   <a href="/mentions">Mentions</a>
     <% } %>
 
   <a href="/about.jsp">About</a>
->>>>>>> d900b0610eb02b6fdacc9c1d349cac3f2ae5e5d2
 </nav>

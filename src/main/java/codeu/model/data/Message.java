@@ -30,7 +30,7 @@ public class Message extends Activity{
   private final String content;
   private String seen;
   private boolean notify;
-  
+
   /**
    * Constructs a new Message.
    *
