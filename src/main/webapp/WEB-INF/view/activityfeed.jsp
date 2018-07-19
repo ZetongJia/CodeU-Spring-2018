@@ -18,7 +18,6 @@ List<Activity> ActivityList = (List<Activity>) request.getAttribute("activities"
   <link rel="stylesheet" href="/css/main.css" type="text/css">
   <%-- <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script> --%>
 
-
   <style>
     #feed {
       background-color: white;
@@ -31,11 +30,12 @@ List<Activity> ActivityList = (List<Activity>) request.getAttribute("activities"
 
   <jsp:include page="/WEB-INF/includes/header.jsp"/>
 
-<body>
+  <body>
   <div id="container">
     <h1 font-size="700px">Activity</h1>
     <h2 top-padding="50px" bottom-padding="50px">See all site activity here!
-      +    <a href="" style="float: right">&#8635;</a></h2>
+    <a href="" style="float: right">&#8635;</a></h2>
+
     <div id="feed">
       <ul>
         <%
@@ -45,7 +45,9 @@ List<Activity> ActivityList = (List<Activity>) request.getAttribute("activities"
               String convoTitle = conversationStore.getConversation(message.getConversationId()).getTitle();
               String author = userStore.getUser(message.getAuthorId()).getName();
         %>
-        <li><%= message.timeFormat() %>: <b><%= author %></b> sent a message in <b><%= convoTitle %></b>: <%= message.getContent() %></li>
+
+          <li><%= message.timeFormat() %>: <b><%= author %></b> sent a message in <b><%= convoTitle %></b>: <%= message.getContent() %></li>
+
         <%
             }
 
@@ -72,13 +74,16 @@ List<Activity> ActivityList = (List<Activity>) request.getAttribute("activities"
   </div>
 
   <%-- <script>
-      $(document).ready(function() {
-        setInterval(function()
-        {
-          $('#feed').load(document.URL + ' #feed');
-        }, 7000);
-      });
-    </script> --%>
+
+
+    $(document).ready(function() {
+      setInterval(function()
+      {
+        $('#feed').load(document.URL + ' #feed');
+      }, 7000);
+    });
+
+  </script> --%>
 
 
 </body>

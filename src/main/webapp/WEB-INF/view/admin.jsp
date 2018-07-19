@@ -59,7 +59,7 @@
               <option value="FindingNemo.txt">Finding Nemo</option>
             </select>
           </p>
-          <button type="submit">Submit</button>
+          <button type="submit" onclick="alert('Check conversations for imported data!')">Submit</button>
         </form>
       </div>
     </div>

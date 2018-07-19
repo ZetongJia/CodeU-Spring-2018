@@ -27,68 +27,68 @@ import java.util.UUID;
  */
 public class NotificationStore {
 
-    /** Singleton instance of NotificationStore. */
-    private static NotificationStore instance;
+  /** Singleton instance of NotificationStore. */
+  private static NotificationStore instance;
 
-    /**
-     * Returns the singleton instance of NotificationStore that should be shared between all servlet
-     * classes. Do not call this function from a test; use getTestInstance() instead.
-     */
-    public static NotificationStore getInstance() {
-        if (instance == null) {
-            instance = new NotificationStore(PersistentStorageAgent.getInstance());
-        }
-        return instance;
+  /**
+   * Returns the singleton instance of NotificationStore that should be shared between all servlet
+   * classes. Do not call this function from a test; use getTestInstance() instead.
+   */
+  public static NotificationStore getInstance() {
+    if (instance == null) {
+      instance = new NotificationStore(PersistentStorageAgent.getInstance());
+    }
+    return instance;
+  }
+
+  /**
+   * Instance getter function used for testing. Supply a mock for PersistentStorageAgent.
+   *
+   * @param persistentStorageAgent a mock used for testing
+   */
+  public static NotificationStore getTestInstance(PersistentStorageAgent persistentStorageAgent) {
+    return new NotificationStore(persistentStorageAgent);
+  }
+
+  /**
+   * The PersistentStorageAgent responsible for loading Notifications from and saving Notifications to
+   * Datastore.
+   */
+  private PersistentStorageAgent persistentStorageAgent;
+
+  /** The in-memory list of Notifications. */
+  private List<Notification> notifications;
+
+  /** This class is a singleton, so its constructor is private. Call getInstance() instead. */
+  private NotificationStore(PersistentStorageAgent persistentStorageAgent) {
+    this.persistentStorageAgent = persistentStorageAgent;
+    notifications = new ArrayList<>();
+  }
+
+  /** Add a new Notification to the current set of Notifications known to the application. */
+  public void addNotification(Notification notification) {
+    notifications.add(notification);
+    persistentStorageAgent.writeThrough(notification);
+  }
+
+  /** Access the current set of Notifications within the given Conversation. */
+  public List<Notification> getNotificationsInConversation(UUID conversationId) {
+
+    List<Notification> notificationsInConversation = new ArrayList<>();
+
+    for (Notification notification : notifications) {
+      if (notification.getConversationId().equals(conversationId)) {
+        notificationsInConversation.add(notification);
+      }
     }
 
-    /**
-     * Instance getter function used for testing. Supply a mock for PersistentStorageAgent.
-     *
-     * @param persistentStorageAgent a mock used for testing
-     */
-    public static NotificationStore getTestInstance(PersistentStorageAgent persistentStorageAgent) {
-        return new NotificationStore(persistentStorageAgent);
-    }
+    return notificationsInConversation;
+  }
 
-    /**
-     * The PersistentStorageAgent responsible for loading Notifications from and saving Notifications to
-     * Datastore.
-     */
-    private PersistentStorageAgent persistentStorageAgent;
-
-    /** The in-memory list of Notifications. */
-    private List<Notification> notifications;
-
-    /** This class is a singleton, so its constructor is private. Call getInstance() instead. */
-    private NotificationStore(PersistentStorageAgent persistentStorageAgent) {
-        this.persistentStorageAgent = persistentStorageAgent;
-        notifications = new ArrayList<>();
-    }
-
-    /** Add a new Notification to the current set of Notifications known to the application. */
-    public void addNotification(Notification notification) {
-        notifications.add(notification);
-        persistentStorageAgent.writeThrough(notification);
-    }
-
-    /** Access the current set of Notifications within the given Conversation. */
-    public List<Notification> getNotificationsInConversation(UUID conversationId) {
-
-        List<Notification> notificationsInConversation = new ArrayList<>();
-
-        for (Notification notification : notifications) {
-            if (notification.getConversationId().equals(conversationId)) {
-                notificationsInConversation.add(notification);
-            }
-        }
-
-        return notificationsInConversation;
-    }
-
-    /** Sets the List of Notifications stored by this NotificationStore. */
-    public void setNotifications(List<Notification> notifications) {
-        this.notifications = notifications;
-    }
+  /** Sets the List of Notifications stored by this NotificationStore. */
+  public void setNotifications(List<Notification> notifications) {
+    this.notifications = notifications;
+  }
 
 
 }
