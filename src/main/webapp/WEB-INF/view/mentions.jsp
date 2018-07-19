@@ -43,6 +43,8 @@
                         Message message = (Message) mention;
                         String convoTitle = conversationStore.getConversation(message.getConversationId()).getTitle();
                         String author = userStore.getUser(message.getAuthorId()).getName();
+                        if(!request.getSession().getAttribute("user").equals(author))
+                          message.setMessageSeen();
             %>
             <li><%= message.timeFormat() %>: <b><%= author %></b> mentioned you in <a href="/chat/<%= convoTitle %>"><%= convoTitle %></a>: <%= message.getContent() %></li>
             <%
@@ -65,4 +67,3 @@
 
 </body>
 </html>
-

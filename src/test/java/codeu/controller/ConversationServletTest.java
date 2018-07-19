@@ -66,6 +66,19 @@ public class ConversationServletTest {
 
   @Test
   public void testDoGet() throws IOException, ServletException {
+    User testUser =
+        new User(
+            UUID.randomUUID(),
+            "testUser",
+            "$2a$10$.e.4EEfngEXmxAO085XnYOmDntkqod0C384jOR9oagwxMnPNHaGLa",
+            Instant.now(),
+            "",
+            false);
+
+    Mockito.when(mockSession.getAttribute("user")).thenReturn("testUser");
+    Mockito.when(mockUserStore.isUserRegistered("testUser")).thenReturn(true);
+    Mockito.when(mockUserStore.getUser("testUser")).thenReturn(testUser);
+    
     List<Conversation> fakeConversationList = new ArrayList<>();
     fakeConversationList.add(
         new Conversation(UUID.randomUUID(), UUID.randomUUID(), "test_conversation", Instant.now()));
@@ -85,7 +98,7 @@ public class ConversationServletTest {
 
     Mockito.verify(mockConversationStore, Mockito.never())
         .addConversation(Mockito.any(Conversation.class));
-    Mockito.verify(mockResponse).sendRedirect("/conversations");
+    Mockito.verify(mockResponse).sendRedirect("/login");
   }
 
   @Test
@@ -97,7 +110,7 @@ public class ConversationServletTest {
 
     Mockito.verify(mockConversationStore, Mockito.never())
         .addConversation(Mockito.any(Conversation.class));
-    Mockito.verify(mockResponse).sendRedirect("/conversations");
+    Mockito.verify(mockResponse).sendRedirect("/login");
   }
 
   @Test

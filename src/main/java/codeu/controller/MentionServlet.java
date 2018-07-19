@@ -84,7 +84,7 @@ public class MentionServlet extends HttpServlet {
 
     List<Conversation> conversations = conversationStore.getAllConversations();
 
-    List<Conversation> notMemberTo = new ArrayList<>();
+    //List<Conversation> notMemberTo = new ArrayList<>();
 
     List<Message> messages = new ArrayList<>();
 
@@ -97,13 +97,7 @@ public class MentionServlet extends HttpServlet {
      * and adds meaages associated with all conversations to a list.
      */
     for (Conversation conversation : conversations) {
-        for (UUID member : conversation.members) {
-          if (!(user.getId().equals(member))) {
-          notMemberTo.add(conversation);
-        } else {
-          messages.addAll(messageStore.getMessagesInConversation(conversation.getId()));
-        }
-      }
+      messages.addAll(messageStore.getMessagesInConversation(conversation.getId()));
     }
 
     for (Message message : messages) {
@@ -126,7 +120,7 @@ public class MentionServlet extends HttpServlet {
       }
     }
 
-    conversations.removeAll(notMemberTo);
+    //conversations.removeAll(notMemberTo);
     messages.removeAll(nonMentioned);
     MentionList.addAll(messages);
     Collections.sort(MentionList);
