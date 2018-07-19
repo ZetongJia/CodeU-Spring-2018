@@ -17,9 +17,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Collections;
 import java.util.ArrayList;
+import java.lang.NullPointerException;
 
 /** Servlet class responsible for the activity feed page. */
-public class ActivityFeedServlet extends HttpServlet {
+public class MentionServlet extends HttpServlet {
 
   /** Store class that gives access to Conversations. */
   private ConversationStore conversationStore;
@@ -70,7 +71,7 @@ public class ActivityFeedServlet extends HttpServlet {
    */
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response)
-      throws IOException, ServletException {
+      throws IOException, ServletException, NullPointerException {
     // The get function needs to know who the user is, and if one is not logged in, they need to.
     String username = (String) request.getSession().getAttribute("user");
     User user = userStore.getUser(username);
@@ -85,9 +86,9 @@ public class ActivityFeedServlet extends HttpServlet {
 
     List<Message> messages = new ArrayList<>();
 
-    List<User> users = new ArrayList<>();
+    List<Message> nonMentioned = new ArrayList<>();
 
-    List<Activity> ActivityList = new ArrayList<>();
+    List<Activity> MentionList = new ArrayList<>();
 
     /**
      * this removes all conversations not associated with the user from the list
@@ -98,22 +99,42 @@ public class ActivityFeedServlet extends HttpServlet {
           if (!(user.getId().equals(member))) {
           conversations.remove(conversation);
         } else {
-          users.add(userStore.getUser(member));
           messages.addAll(messageStore.getMessagesInConversation(conversation.getId()));
         }
       }
     }
 
-    ActivityList.addAll(users);
-    ActivityList.addAll(messages);
-    ActivityList.addAll(conversations);
-    Collections.sort(ActivityList);
+    for (Message message : messages) {
+      if(message.usersMentioned().size() != 0){
+        //usersMentioned.addAll(message.usersMentioned());
+        for (User userMention : message.usersMentioned()) {
+          boolean mentioned = false;
+          if(userMention != null){
+            if(userMention.getId().equals(user.getId())) {
+              mentioned = true;
+            }
 
-    System.out.println("Activity List sorted");
+            if(!mentioned){
+              nonMentioned.add(message);
+            }
+          }
+        }
+      } else {
+        nonMentioned.add(message);
+      }
+    }
+
+    messages.removeAll(nonMentioned);
+    MentionList.addAll(messages);
+    Collections.sort(MentionList);
+
+    System.out.println("Mention List sorted");
 
     request.setAttribute("conversationStore", this.conversationStore);
     request.setAttribute("userStore", this.userStore);
-    request.setAttribute("activities", ActivityList);
-    request.getRequestDispatcher("/WEB-INF/view/activityfeed.jsp").forward(request, response);
+    request.setAttribute("mentions", MentionList);
+    //System.out.println("Request: " +  request);
+    //System.out.println("Response: " + response);
+    request.getRequestDispatcher("/WEB-INF/view/mentions.jsp").forward(request, response);
   }
 }

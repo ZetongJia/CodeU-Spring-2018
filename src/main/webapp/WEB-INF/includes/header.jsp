@@ -16,5 +16,11 @@
 
   <a href="/activityfeed">Activity Feed</a>
 
+<<<<<<< HEAD
 
+=======
+  <a href="/mentions">Mentions</a>
+
+  <a href="/about.jsp">About</a>
+>>>>>>> d900b0610eb02b6fdacc9c1d349cac3f2ae5e5d2
 </nav>

@@ -17,6 +17,9 @@ package codeu.model.data;
 import codeu.model.data.Activity;
 import java.time.Instant;
 import java.util.UUID;
+import codeu.model.store.basic.UserStore;
+import java.util.List;
+import java.util.ArrayList;
 
 /** Class representing a message. Messages are sent by a User in a Conversation. */
 public class Message extends Activity{
@@ -31,7 +34,7 @@ public class Message extends Activity{
    * Constructs a new Message.
    *
    * @param id the ID of this Message
-   * @param conversation the ID of the Conversation this Message belongs to
+   * @param conversaimport java.util.List;tion the ID of the Conversation this Message belongs to
    * @param author the ID of the User who sent this Message
    * @param content the text content of this Message
    * @param seen the read or unread identity of this Message
@@ -73,16 +76,34 @@ public class Message extends Activity{
     return words;
   }
 
+  /** Marks messages as seen. */
   public void setMessageSeen(){
     seen = "Read";
   }
 
+  /** Returns the seen condition of this Message. */
   public String getMessageSeen(){
     return seen;
   }
-  /** Returns true if detects @ in message content
-  public boolean detectMention (String content){
-
-  }**/
-
+  
+  /** Returns a list of Users who were mentioned in this Message. */
+    public List<User> usersMentioned(){
+      UserStore userStore = UserStore.getInstance();
+      String[] arr = content.replaceAll("[.?/!\\[\\]{}()--]", " ").split("\\s");
+      List<User> mentioned = new ArrayList<>();
+      for(String word : arr){
+        if(word.length() > 1){
+          //System.out.println(word);
+          if(word.charAt(0) == '@'){
+            // System.out.println(word);
+            if(userStore.isUserRegistered(word.substring(1))) {
+              System.out.println(word);
+              mentioned.add(userStore.getUser(word));
+            }
+          }
+        }
+      }
+      //System.out.println(mentioned.size());
+      return mentioned;
+    }
 }
