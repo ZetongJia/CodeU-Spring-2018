@@ -29,6 +29,7 @@ public class Message extends Activity{
   private final UUID author;
   private final String content;
   private String seen;
+  private boolean notify;
 
   /**
    * Constructs a new Message.
@@ -47,6 +48,7 @@ public class Message extends Activity{
     this.content = content;
     this.seen = "Unread";
     this.creation = creation;
+    this.notify = false;
   }
 
   /** Returns the ID of this Message. */
@@ -69,6 +71,12 @@ public class Message extends Activity{
     return content;
   }
 
+  public boolean getNotify() {
+    return notify;
+  }
+
+  public void setNotify(boolean b) { notify = b; }
+
   /** Returns the number of words of this Message. */
   public long calcNumWords() {
     String[] arr = content.split("\\W+");
@@ -87,19 +95,18 @@ public class Message extends Activity{
   }
   
   /** Returns a list of Users who were mentioned in this Message. */
-    public List<User> usersMentioned(){
-      UserStore userStore = UserStore.getInstance();
-      String[] arr = content.replaceAll("[.?/!\\[\\]{}()--]", " ").split("\\s");
-      List<User> mentioned = new ArrayList<>();
-      for(String word : arr){
-        if(word.length() > 1){
-          //System.out.println(word);
-          if(word.charAt(0) == '@'){
-            // System.out.println(word);
-            if(userStore.isUserRegistered(word.substring(1))) {
-              System.out.println(word);
-              mentioned.add(userStore.getUser(word));
-            }
+  public List<User> usersMentioned(){
+    UserStore userStore = UserStore.getInstance();
+    String[] arr = content.replaceAll("[.?/!\\[\\]{}()--]", " ").split("\\s");
+    List<User> mentioned = new ArrayList<>();
+    for(String word : arr){
+      if(word.length() > 1){
+        //System.out.println(word);
+        if(word.charAt(0) == '@'){
+          // System.out.println(word);
+          if(userStore.isUserRegistered(word.substring(1))) {
+            System.out.println(word);
+            mentioned.add(userStore.getUser(word.substring(1)));
           }
         }
       }

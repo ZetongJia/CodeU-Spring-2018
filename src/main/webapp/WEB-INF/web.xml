@@ -105,5 +105,4 @@
     <servlet-name>MentionServlet</servlet-name>
     <url-pattern>/mentions</url-pattern>
   </servlet-mapping>
-
 </web-app>
