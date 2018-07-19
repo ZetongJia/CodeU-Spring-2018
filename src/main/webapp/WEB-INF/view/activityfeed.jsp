@@ -54,7 +54,7 @@ List<Activity> ActivityList = (List<Activity>) request.getAttribute("activities"
             else if (activity instanceof Conversation){
               Conversation conversation = (Conversation) activity;
         %>
-          <li><%= conversation.timeFormat() %>: New Conversattion <b><%= conversation.getTitle() %></b> created!</li>
+          <li><%= conversation.timeFormat() %>: New Conversation <b><%= conversation.getTitle() %></b> created!</li>
         <%
             }
 

@@ -111,6 +111,8 @@ public class Message extends Activity{
         }
       }
       //System.out.println(mentioned.size());
-      return mentioned;
     }
+    return mentioned;
+
+}
 }
