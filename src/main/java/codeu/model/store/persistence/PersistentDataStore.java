@@ -234,4 +234,3 @@ public class PersistentDataStore {
     datastore.put(notificationEntity);
   }
 }
-

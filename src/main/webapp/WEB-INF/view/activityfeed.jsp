@@ -45,7 +45,9 @@ List<Activity> ActivityList = (List<Activity>) request.getAttribute("activities"
               String convoTitle = conversationStore.getConversation(message.getConversationId()).getTitle();
               String author = userStore.getUser(message.getAuthorId()).getName();
         %>
+
           <li><%= message.timeFormat() %>: <b><%= author %></b> sent a message in <b><%= convoTitle %></b>: <%= message.getContent() %></li>
+
         <%
             }
 
@@ -73,6 +75,7 @@ List<Activity> ActivityList = (List<Activity>) request.getAttribute("activities"
 
   <%-- <script>
 
+
     $(document).ready(function() {
       setInterval(function()
       {
@@ -81,6 +84,7 @@ List<Activity> ActivityList = (List<Activity>) request.getAttribute("activities"
     });
 
   </script> --%>
+
 
 </body>
 </html>

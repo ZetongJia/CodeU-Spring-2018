@@ -28,6 +28,7 @@ public class Message extends Activity{
   private final UUID conversation;
   private final UUID author;
   private final String content;
+  private boolean notify;
 
   /**
    * Constructs a new Message.
@@ -44,6 +45,7 @@ public class Message extends Activity{
     this.author = author;
     this.content = content;
     this.creation = creation;
+    this.notify = false;
   }
 
   /** Returns the ID of this Message. */
@@ -66,6 +68,12 @@ public class Message extends Activity{
     return content;
   }
 
+  public boolean getNotify() {
+    return notify;
+  }
+
+  public void setNotify(boolean b) { notify = b; }
+
   /** Returns the number of words of this Message. */
   public long calcNumWords() {
     String[] arr = content.split("\\W+");
@@ -85,7 +93,7 @@ public class Message extends Activity{
           // System.out.println(word);
           if(userStore.isUserRegistered(word.substring(1))) {
             System.out.println(word);
-            mentioned.add(userStore.getUser(word));
+            mentioned.add(userStore.getUser(word.substring(1)));
           }
         }
       }

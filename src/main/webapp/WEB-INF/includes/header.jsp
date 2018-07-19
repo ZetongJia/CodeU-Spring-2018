@@ -20,6 +20,7 @@
   <%  if ( (boolean) request.getSession().getAttribute("isAdmin")) { %>
         <a href="/admin">Admin</a>
   <%  }
+
      }else{ %>
        <a href="/login">Login</a>
   <% } %>
@@ -33,9 +34,17 @@
          <% }
           }%>
 
-  <% }else{ %>
+    <% if (last != null && last.getNotify() && user != null && listUsers != null) { %>
+        <% for(User u : listUsers){
+            if(u.getName().equals(user)){%>
+                <a style="color:#FF0000;" href="/mentions"><b>Mentions</b></a>
+                <% last.setNotify(false); %>
+         <% }
+        }%>
+
+    <% }else{ %>
   <a href="/mentions">Mentions</a>
-  <% } %>
+    <% } %>
 
   <a href="/about.jsp">About</a>
 </nav>
