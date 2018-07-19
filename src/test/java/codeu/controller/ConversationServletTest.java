@@ -85,7 +85,7 @@ public class ConversationServletTest {
 
     Mockito.verify(mockConversationStore, Mockito.never())
         .addConversation(Mockito.any(Conversation.class));
-    Mockito.verify(mockResponse).sendRedirect("/conversations");
+    Mockito.verify(mockResponse).sendRedirect("/login");
   }
 
   @Test
@@ -97,7 +97,7 @@ public class ConversationServletTest {
 
     Mockito.verify(mockConversationStore, Mockito.never())
         .addConversation(Mockito.any(Conversation.class));
-    Mockito.verify(mockResponse).sendRedirect("/conversations");
+    Mockito.verify(mockResponse).sendRedirect("/login");
   }
 
   @Test

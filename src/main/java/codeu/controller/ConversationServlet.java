@@ -87,7 +87,7 @@ public class ConversationServlet extends HttpServlet {
     String username = (String) request.getSession().getAttribute("user");
     if (username == null) {
       // user is not logged in, don't let them create a conversation
-      response.sendRedirect("/conversations");
+      response.sendRedirect("/login");
       return;
     }
 
@@ -95,7 +95,7 @@ public class ConversationServlet extends HttpServlet {
     if (user == null) {
       // user was not found, don't let them create a conversation
       System.out.println("User not found: " + username);
-      response.sendRedirect("/conversations");
+      response.sendRedirect("/login");
       return;
     }
 
