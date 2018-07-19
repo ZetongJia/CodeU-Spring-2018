@@ -70,20 +70,6 @@ public class ConversationServlet extends HttpServlet {
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response)
       throws IOException, ServletException {
-    List<Conversation> conversations = conversationStore.getAllConversations();
-    request.setAttribute("conversations", conversations);
-    request.getRequestDispatcher("/WEB-INF/view/conversations.jsp").forward(request, response);
-  }
-
-  /**
-   * This function fires when a user submits the form on the conversations page. It gets the
-   * logged-in username from the session and the new conversation title from the submitted form
-   * data. It uses this to create a new Conversation object that it adds to the model.
-   */
-  @Override
-  public void doPost(HttpServletRequest request, HttpServletResponse response)
-      throws IOException, ServletException {
-
     String username = (String) request.getSession().getAttribute("user");
     if (username == null) {
       // user is not logged in, don't let them create a conversation
@@ -98,6 +84,20 @@ public class ConversationServlet extends HttpServlet {
       response.sendRedirect("/login");
       return;
     }
+
+    List<Conversation> conversations = conversationStore.getAllConversations();
+    request.setAttribute("conversations", conversations);
+    request.getRequestDispatcher("/WEB-INF/view/conversations.jsp").forward(request, response);
+  }
+
+  /**
+   * This function fires when a user submits the form on the conversations page. It gets the
+   * logged-in username from the session and the new conversation title from the submitted form
+   * data. It uses this to create a new Conversation object that it adds to the model.
+   */
+  @Override
+  public void doPost(HttpServletRequest request, HttpServletResponse response)
+      throws IOException, ServletException {
 
     String conversationTitle = request.getParameter("conversationTitle");
     if (!conversationTitle.matches("[\\w*]*")) {
