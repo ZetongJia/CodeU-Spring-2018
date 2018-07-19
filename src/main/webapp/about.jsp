@@ -38,8 +38,11 @@
       </p>
 
       <ul>
-        <li><strong>Alice:</strong> To use the Admin page type admin as the
-          username when logging in.</li>
+        <li><strong>Alice:</strong> The admin page is restricted to the user with username
+          admin (tmp pw: 123 for demo purposes). Admin page shows caculated chat statistics
+          from user activity and conversation history. There is also an import data feature
+          to migrate messages and users from existing conversations, specially from movie scripts.
+          I have also created a notifications class and store for the @mention tagging feature;</li>
         <li><strong>Aubin:</strong> The Activity Feed is a webpage where you can view all
           activity happening across the site pertaining to you. It works by creating a list
           of all site Activity in reverse chronological order. It then serves all of those
