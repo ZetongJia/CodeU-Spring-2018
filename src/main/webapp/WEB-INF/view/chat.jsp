@@ -17,6 +17,7 @@
 <%
 Conversation conversation = (Conversation) request.getAttribute("conversation");
 List<Message> messages = (List<Message>) request.getAttribute("messages");
+
 %>
 
 <!DOCTYPE html>
@@ -86,6 +87,7 @@ List<Message> messages = (List<Message>) request.getAttribute("messages");
 	              }
 	          }
 	        </script>
+
     </form>
     <% } else { %>
       <p><a href="/login">Login</a> to send a message.</p>
