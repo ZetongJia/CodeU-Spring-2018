@@ -114,3 +114,4 @@ public class Message extends Activity{
       return mentioned;
     }
 }
+}
