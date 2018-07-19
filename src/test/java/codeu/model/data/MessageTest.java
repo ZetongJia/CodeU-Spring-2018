@@ -27,14 +27,16 @@ public class MessageTest {
     UUID conversation = UUID.randomUUID();
     UUID author = UUID.randomUUID();
     String content = "test content";
+    String seen = "Unread";
     Instant creation = Instant.now();
 
-    Message message = new Message(id, conversation, author, content, creation);
+    Message message = new Message(id, conversation, author, content, seen, creation);
 
     Assert.assertEquals(id, message.getId());
     Assert.assertEquals(conversation, message.getConversationId());
     Assert.assertEquals(author, message.getAuthorId());
     Assert.assertEquals(content, message.getContent());
+    Assert.assertEquals(seen, message.getMessageSeen());
     Assert.assertEquals(creation, message.getCreationTime());
   }
 }

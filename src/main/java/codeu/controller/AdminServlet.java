@@ -129,7 +129,7 @@ public class AdminServlet extends HttpServlet {
 
         //creating new user (character) with no password
         if (!userStore.isUserRegistered(character)) {
-         User user = new User(UUID.randomUUID(), character, "", Instant.now(), false);
+         User user = new User(UUID.randomUUID(), character, "", Instant.now(), "", false);
          userStore.addUser(user);
         }
 
@@ -140,6 +140,7 @@ public class AdminServlet extends HttpServlet {
                 conversation.getId(),
                 userStore.getUser(character).getId(),
                 dialogue,
+                "unread",
                 Instant.now());
         messageStore.addMessage(message);
       }
@@ -147,9 +148,8 @@ public class AdminServlet extends HttpServlet {
     }catch(IOException e) {
       e.printStackTrace();
     }
-    
+
     response.sendRedirect("/admin");
   }
 
 }
-
