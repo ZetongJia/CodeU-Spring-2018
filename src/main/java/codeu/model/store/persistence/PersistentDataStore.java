@@ -67,12 +67,13 @@ public class PersistentDataStore {
       try {
         UUID uuid = UUID.fromString((String) entity.getProperty("uuid"));
         String userName = (String) entity.getProperty("username");
+        String aboutme = (String) entity.getProperty("aboutme");
         String passwordHash = (String) entity.getProperty("password_hash");
         Instant creationTime = Instant.parse((String) entity.getProperty("creation_time"));
-        Long numMessages = Long.parseLong((String) entity.getProperty("numMessages"));
-        Long numWords = Long.parseLong((String) entity.getProperty("numWords"));
+//        Long numMessages = Long.parseLong((String) entity.getProperty("numMessages"));
+//        Long numWords = Long.parseLong((String) entity.getProperty("numWords"));
         Boolean isAdmin = Boolean.valueOf((String) entity.getProperty("isAdmin"));
-        User user = new User(uuid, userName, passwordHash, creationTime, isAdmin);
+        User user = new User(uuid, userName, passwordHash, creationTime, aboutme, isAdmin);
         users.add(user);
       } catch (Exception e) {
         // In a production environment, errors should be very rare. Errors which may
@@ -129,6 +130,7 @@ public class PersistentDataStore {
   public List<Message> loadMessages() throws PersistentDataStoreException {
 
     List<Message> messages = new ArrayList<>();
+    List<Message> messagesByUser = new ArrayList<>();
 
     // Retrieve all messages from the datastore.
     Query query = new Query("chat-messages").addSort("creation_time", SortDirection.ASCENDING);
@@ -141,7 +143,7 @@ public class PersistentDataStore {
         UUID authorUuid = UUID.fromString((String) entity.getProperty("author_uuid"));
         Instant creationTime = Instant.parse((String) entity.getProperty("creation_time"));
         String content = (String) entity.getProperty("content");
-        Message message = new Message(uuid, conversationUuid, authorUuid, content, creationTime);
+        Message message = new Message(uuid, conversationUuid, authorUuid, content, "unread", creationTime);
         messages.add(message);
       } catch (Exception e) {
         // In a production environment, errors should be very rare. Errors which may
@@ -194,6 +196,7 @@ public class PersistentDataStore {
     Entity userEntity = new Entity("chat-users", user.getId().toString());
     userEntity.setProperty("uuid", user.getId().toString());
     userEntity.setProperty("username", user.getName());
+    userEntity.setProperty("aboutme", user.getAboutMe());
     userEntity.setProperty("password_hash", user.getPasswordHash());
     userEntity.setProperty("creation_time", user.getCreationTime().toString());
     userEntity.setProperty("numMessages", String.valueOf(user.getNumMessages()));
