@@ -83,9 +83,11 @@ public class ActivityFeedServlet extends HttpServlet {
 
     List<Conversation> conversations = conversationStore.getAllConversations();
 
+    //List<Conversation> notMemberTo = new ArrayList<>();
+
     List<Message> messages = new ArrayList<>();
 
-    List<User> users = new ArrayList<>();
+    List<User> users = userStore.getAllUsers();
 
     List<Activity> ActivityList = new ArrayList<>();
 
@@ -94,16 +96,10 @@ public class ActivityFeedServlet extends HttpServlet {
      * and adds meaages associated with all conversations to a list.
      */
     for (Conversation conversation : conversations) {
-        for (UUID member : conversation.members) {
-          if (!(user.getId().equals(member))) {
-          conversations.remove(conversation);
-        } else {
-            users.add(userStore.getUser(member));
-            messages.addAll(messageStore.getMessagesInConversation(conversation.getId()));
-        }
-      }
+      messages.addAll(messageStore.getMessagesInConversation(conversation.getId()));
     }
 
+    //conversations.removeAll(notMemberTo);
     ActivityList.addAll(users);
     ActivityList.addAll(messages);
     ActivityList.addAll(conversations);

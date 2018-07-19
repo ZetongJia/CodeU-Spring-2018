@@ -136,13 +136,13 @@ public class UserStore {
   public String getNewestUser() {
     if (users.size() == 0){
       return "N/A";
-    } 
+    }
     return (this.users.get(users.size() - 1)).getName();
   }
 
-  /** 
+  /**
   * Gets most active user in UserStore.
-  * The most active user is the user with the most messages sent. 
+  * The most active user is the user with the most messages sent.
   */
   public String getMostActiveUser() {
     if (users.size() == 0){
@@ -162,14 +162,14 @@ public class UserStore {
     return mostActive;
   }
 
-  /** 
+  /**
   * Gets wordiest user in UserStore.
-  * The wordiest user is the user with the highest average number of words sent per message. 
+  * The wordiest user is the user with the highest average number of words sent per message.
   */
   public String getWordiestUser() {
     if (users.size() == 0){
       return "N/A";
-    } 
+    }
 
     long largest = 0;
     long curr = 0;
@@ -185,7 +185,9 @@ public class UserStore {
       }
     }
     return mostWordiest;
-  }  
+  }
 
+  public List<User> getAllUsers() {
+    return users;
+  }
 }
-

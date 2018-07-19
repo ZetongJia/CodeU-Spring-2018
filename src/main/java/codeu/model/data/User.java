@@ -22,6 +22,7 @@ import java.util.UUID;
 public class User extends Activity{
   private final UUID id;
   private final String name;
+  private String aboutme;
   private final String passwordHash;
   private long numMessages;
   private long numWords;
@@ -36,11 +37,12 @@ public class User extends Activity{
    * @param creation the creation time of this User
    * @param isAdmin the admin status of this User
    */
-  public User(UUID id, String name, String passwordHash, Instant creation, boolean isAdmin) {
+  public User(UUID id, String name, String passwordHash, Instant creation, String aboutme, boolean isAdmin) {
     this.id = id;
     this.name = name;
     this.passwordHash = passwordHash;
     this.creation = creation;
+    this.aboutme = aboutme;
     this.numMessages = 0;
     this.numWords = 0;
     this.isAdmin = isAdmin;
@@ -54,6 +56,16 @@ public class User extends Activity{
   /** Returns the username of this User. */
   public String getName() {
     return name;
+  }
+
+  /** Sets the aboutme of this User. */
+  public void setAboutMe(String bio) {
+    aboutme = bio;
+  }
+
+  /** Returns the aboutme of this User. */
+  public String getAboutMe() {
+    return aboutme;
   }
 
   /** Returns the password hash of this User. */

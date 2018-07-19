@@ -24,37 +24,45 @@
   <jsp:include page="/WEB-INF/includes/header.jsp"/>
 
   <div id="container">
-    <div
-      style="width:75%; margin-left:auto; margin-right:auto; margin-top: 50px;">
+    <div style="width:75%; margin-left:auto; margin-right:auto; margin-top: 50px;">
 
       <h1>About the CodeU Chat App</h1>
       <p>
-        This is an example chat application designed to be a starting point
-        for your CodeU project team work. Here's some stuff to think about:
+        Hello everyone, we are ZETA! Our group members consist of Alice, Aubin,
+        Tania and Tina. Throughout the summer, we've updated this chat app
+        with some awesome improvements. Enjoy!
       </p>
 
       <ul>
-        <li><strong>Algorithms and data structures:</strong> We've made the app
-            and the code as simple as possible. You will have to extend the
-            existing data structures to support your enhancements to the app,
-            and also make changes for performance and scalability as your app
-            increases in complexity.</li>
-        <li><strong>Look and feel:</strong> The focus of CodeU is on the Java
-          side of things, but if you're particularly interested you might use
-          HTML, CSS, and JavaScript to make the chat app prettier.</li>
-        <li><strong>Customization:</strong> Think about a group you care about.
-          What needs do they have? How could you help? Think about technical
-          requirements, privacy concerns, and accessibility and
-          internationalization.</li>
+        <li><strong>Alice:</strong> The admin page is restricted to the user with username
+          admin (tmp pw: 123 for demo purposes). Admin page shows caculated chat statistics
+          from user activity and conversation history. There is also an import data feature
+          to migrate messages and users from existing conversations, specially from movie scripts.
+          I have also created a notifications class and store for the @mention tagging feature;</li>
+        <li><strong>Aubin:</strong> The Activity Feed is a webpage where you can view all
+          activity happening across the site pertaining to you. It works by creating a list
+          of all site Activity in reverse chronological order. It then serves all of those
+          Activities to you. The Mentions page works similarly to the Activity Feed, however
+          it differs because it only creates a list of messages. Then a message function is
+          used to search for all the users mentioned (@) in the message. If you are mentioned,
+          then the message, who mentioned you, and the conversation you were mentioned in
+          appears on the Mentions page.</li>
+        <li><strong>Tania:</strong> Designed and implemented profile pages for each user
+          with an about me section to describe themselves and a section that lists all of
+          their previously sent messages. About me sections are only editable by users themselves.
+          After creating the profile pages, the chat room was modified so that all usernames led to
+          that user's profile page, making it viewable by others. Moreover, a feature to detect the @
+          symbol in user messages before it was sent was added in order to implement the ability to mention/tag
+          other users in messages. There is also a message seen feature which tells you when another user has seen
+          the message you sent. Messages are marked as read or unread in profile pages.
+          </li>
+        <li><strong>Tina:</strong> When a user refresh the page to see new messages, if he/she is
+          mentioned in any of the conversations, the Mentions tab on the navigation bar will turn
+          red. When the user click on that tab, it will go back to white, and in the mention history,
+          the title is a link directed to that specific conversation.</li>
+
       </ul>
 
-      <p>
-        This is your code now. Get familiar with it and get comfortable
-        working with your team to plan and make changes. Start by updating the
-        homepage and this about page to tell your users more about your team.
-        This page should also be used to describe the features and improvements
-        you've added.
-      </p>
     </div>
   </div>
 </body>

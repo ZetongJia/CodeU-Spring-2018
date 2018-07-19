@@ -70,6 +70,21 @@ public class ConversationServlet extends HttpServlet {
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response)
       throws IOException, ServletException {
+    String username = (String) request.getSession().getAttribute("user");
+    if (username == null) {
+      // user is not logged in, don't let them create a conversation
+      response.sendRedirect("/login");
+      return;
+    }
+
+    User user = userStore.getUser(username);
+    if (user == null) {
+      // user was not found, don't let them create a conversation
+      System.out.println("User not found: " + username);
+      response.sendRedirect("/login");
+      return;
+    }
+
     List<Conversation> conversations = conversationStore.getAllConversations();
     request.setAttribute("conversations", conversations);
     request.getRequestDispatcher("/WEB-INF/view/conversations.jsp").forward(request, response);
@@ -83,11 +98,10 @@ public class ConversationServlet extends HttpServlet {
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response)
       throws IOException, ServletException {
-
     String username = (String) request.getSession().getAttribute("user");
     if (username == null) {
       // user is not logged in, don't let them create a conversation
-      response.sendRedirect("/conversations");
+      response.sendRedirect("/login");
       return;
     }
 
@@ -95,7 +109,7 @@ public class ConversationServlet extends HttpServlet {
     if (user == null) {
       // user was not found, don't let them create a conversation
       System.out.println("User not found: " + username);
-      response.sendRedirect("/conversations");
+      response.sendRedirect("/login");
       return;
     }
 

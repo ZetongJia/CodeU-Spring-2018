@@ -65,6 +65,7 @@ public class ActivityFeedServletTest {
             "testUser",
             "$2a$10$.e.4EEfngEXmxAO085XnYOmDntkqod0C384jOR9oagwxMnPNHaGLa",
             Instant.now(),
+            "",
             false);
 
     Mockito.when(mockSession.getAttribute("user")).thenReturn("testUser");
