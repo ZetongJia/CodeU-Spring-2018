@@ -1,4 +1,5 @@
 
+</nav>
 <%@ page import="codeu.model.data.User" %>
 <%@ page import="java.util.List" %>
 <%@ page import="codeu.model.data.Message" %>
@@ -10,7 +11,6 @@
         listUsers = last.usersMentioned();
     }
     String user = (String) request.getSession().getAttribute("user");
-
 %>
 <nav>
   <a id="navTitle" href="/">CodeU Chat App</a>
@@ -24,33 +24,12 @@
         <a href="/user/<%=request.getSession().getAttribute("user")%>">My Profile</a>
   <% } else if (request.getSession().getAttribute("user")=="admin") { %>
         <a href="/admin">Admin</a>
-<<<<<<< HEAD
-<<<<<<< HEAD
   <% } else{ %>
         <a href="/login">Login</a>
-=======
-  <%  }
-
-     }else{ %>
-       <a href="/login">Login</a>
->>>>>>> 8c8c3225b26729c0504758f0d763e269e2dbf36c
-=======
-  <%  
-     }else{ %>
-       <a href="/login">Login</a>
->>>>>>> b984399a10d9101abcb3d298329c19c25b1adbf5
   <% } %>
 
   <a href="/activityfeed">Activity Feed</a>
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-=======
-=======
-=======
->>>>>>> b984399a10d9101abcb3d298329c19c25b1adbf5
     <% if (last != null && last.getNotify() && user != null && listUsers != null) { %>
         <% for(User u : listUsers){
             if(u.getName().equals(user)){%>
@@ -60,12 +39,7 @@
         }%>
 
     <% }else{ %>
-<<<<<<< HEAD
->>>>>>> 8c8c3225b26729c0504758f0d763e269e2dbf36c
-=======
->>>>>>> b984399a10d9101abcb3d298329c19c25b1adbf5
-  <a href="/mentions">Mentions</a>
+      <a href="/mentions">Mentions</a>
     <% } %>
 
-  <a href="/about.jsp">About</a>
 </nav>
