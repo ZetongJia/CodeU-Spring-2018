@@ -71,6 +71,15 @@ public class MessageStore {
     persistentStorageAgent.writeThrough(message);
   }
 
+  public Message getLastMessage(){
+    if (messages != null && messages.size() != 0) {
+      return messages.get(messages.size() - 1);
+    }
+    else{
+      return null;
+    }
+  }
+
   /** Access the current set of Messages within the given Conversation. */
   public List<Message> getMessagesInConversation(UUID conversationId) {
 
