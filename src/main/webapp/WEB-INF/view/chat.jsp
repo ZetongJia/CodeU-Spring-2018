@@ -63,8 +63,12 @@ List<Message> messages = (List<Message>) request.getAttribute("messages");
           message.setMessageSeen();
 
     %>
-      <li><strong><a href="/user/<%= author %>"><%= author %></a>:</strong> <%= message.getContent() %></li>
-    <%
+        <% if(author.contains("(bot)")){ %>
+        <li><strong><%= author %>:</strong> <%= message.getContent() %></li>
+       <% }
+       else{ %>
+          <li><strong><a href="/user/<%= author %>"><%= author %></a>:</strong> <%= message.getContent() %></li>
+        <%}
       }
     %>
       </ul>
