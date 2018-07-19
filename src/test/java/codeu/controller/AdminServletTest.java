@@ -79,6 +79,7 @@ public class AdminServletTest {
         "admin",
         "$2a$10$bBiLUAVmUFK6Iwg5rmpBUOIBW6rIMhU1eKfi3KR60V9UXaYTwPfHy",
         Instant.now(),
+        "",
         true);
     Mockito.when(mockUserStore.getUser("admin")).thenReturn(fakeUser);
 
@@ -104,6 +105,7 @@ public class AdminServletTest {
             "not_admin",
             "$2a$10$bBiLUAVmUFK6Iwg5rmpBUOIBW6rIMhU1eKfi3KR60V9UXaYTwPfHy",
             Instant.now(),
+            "",
             false);
     Mockito.when(mockUserStore.getUser("not_admin")).thenReturn(fakeUser);
 
@@ -122,6 +124,7 @@ public class AdminServletTest {
         "admin",
         "$2a$10$bBiLUAVmUFK6Iwg5rmpBUOIBW6rIMhU1eKfi3KR60V9UXaYTwPfHy",
         Instant.now(),
+        "",
         true);
     Mockito.when(mockUserStore.getUser("admin")).thenReturn(fakeUser);
 
@@ -137,6 +140,7 @@ public class AdminServletTest {
             "ALICE (bot)",
             "",
             Instant.now(),
+            "",
             false);
     Mockito.when(mockUserStore.getUser("ALICE (bot)")).thenReturn(fakeUser1);
 
@@ -146,6 +150,7 @@ public class AdminServletTest {
             "AMNA (bot)",
             "",
             Instant.now(),
+            "",
             false);
     Mockito.when(mockUserStore.getUser("AMNA (bot)")).thenReturn(fakeUser2);
 
@@ -156,6 +161,7 @@ public class AdminServletTest {
             fakeConversationId,
             fakeUser1.getId(),
             "a",
+            "unread",
             Instant.now()));
 
     fakeMessageList.add(
@@ -164,6 +170,7 @@ public class AdminServletTest {
             fakeConversationId,
             fakeUser2.getId(),
             "b",
+            "unread",
             Instant.now()));
 
     Mockito.when(mockMessageStore.getMessagesInConversation(fakeConversationId))

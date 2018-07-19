@@ -28,6 +28,7 @@ public class Message extends Activity{
   private final UUID conversation;
   private final UUID author;
   private final String content;
+  private String seen;
   private boolean notify;
 
   /**
@@ -37,13 +38,15 @@ public class Message extends Activity{
    * @param conversaimport java.util.List;tion the ID of the Conversation this Message belongs to
    * @param author the ID of the User who sent this Message
    * @param content the text content of this Message
+   * @param seen the read or unread identity of this Message
    * @param creation the creation time of this Message
    */
-  public Message(UUID id, UUID conversation, UUID author, String content, Instant creation) {
+  public Message(UUID id, UUID conversation, UUID author, String content, String seen, Instant creation) {
     this.id = id;
     this.conversation = conversation;
     this.author = author;
     this.content = content;
+    this.seen = "Unread";
     this.creation = creation;
     this.notify = false;
   }
@@ -81,6 +84,16 @@ public class Message extends Activity{
     return words;
   }
 
+  /** Marks messages as seen. */
+  public void setMessageSeen(){
+    seen = "Read";
+  }
+
+  /** Returns the seen condition of this Message. */
+  public String getMessageSeen(){
+    return seen;
+  }
+
   /** Returns a list of Users who were mentioned in this Message. */
   public List<User> usersMentioned(){
     UserStore userStore = UserStore.getInstance();
@@ -97,8 +110,9 @@ public class Message extends Activity{
           }
         }
       }
+      //System.out.println(mentioned.size());
     }
-    //System.out.println(mentioned.size());
     return mentioned;
-  }
+
+}
 }
