@@ -60,7 +60,7 @@
           the message you sent. Messages are marked as read or unread in profile pages.
           </li>
         <li><strong>Tina:</strong> When a user refresh the page to see new messages, if he/she is
-          mentioned in any of the conversations, the “Mentions” tab on the navigation bar will turn
+          mentioned in any of the conversations, the Mentions tab on the navigation bar will turn
           red. When the user click on that tab, it will go back to white, and in the mention history,
           the title is a link directed to that specific conversation.</li>
 
