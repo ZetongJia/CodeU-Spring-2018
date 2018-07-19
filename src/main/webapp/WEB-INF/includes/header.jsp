@@ -16,7 +16,7 @@
   <a href="/conversations">Conversations</a>
   <% if (request.getSession().getAttribute("user") != null) { %>
        <a>Hello <%= request.getSession().getAttribute("user") %>!</a>
-
+       <a href="/user/<%=request.getSession().getAttribute("user")%>">My Profile</a>
   <%  if ( (boolean) request.getSession().getAttribute("isAdmin")) { %>
         <a href="/admin">Admin</a>
   <%  }
@@ -33,14 +33,6 @@
                 <% last.setNotify(false); %>
          <% }
           }%>
-
-    <% if (last != null && last.getNotify() && user != null && listUsers != null) { %>
-        <% for(User u : listUsers){
-            if(u.getName().equals(user)){%>
-                <a style="color:#FF0000;" href="/mentions"><b>Mentions</b></a>
-                <% last.setNotify(false); %>
-         <% }
-        }%>
 
     <% }else{ %>
   <a href="/mentions">Mentions</a>
