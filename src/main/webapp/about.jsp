@@ -57,9 +57,13 @@
           After creating the profile pages, the chat room was modified so that all usernames led to
           that user's profile page, making it viewable by others. Moreover, a feature to detect the @
           symbol in user messages before it was sent was added in order to implement the ability to mention/tag
-          other users in messages.
+          other users in messages. There is also a message seen feature which tells you when another user has seen
+          the message you sent. Messages are marked as read or unread in profile pages.
           </li>
-        <li><strong>Tina:</strong> The chat layout is designed .</li>
+        <li><strong>Tina:</strong> When a user refresh the page to see new messages, if he/she is
+          mentioned in any of the conversations, the “Mentions” tab on the navigation bar will turn
+          red. When the user click on that tab, it will go back to white, and in the mention history,
+          the title is a link directed to that specific conversation.</li>
 
       </ul>
 
