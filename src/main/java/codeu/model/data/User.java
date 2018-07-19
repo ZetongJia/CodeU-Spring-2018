@@ -14,15 +14,19 @@
 
 package codeu.model.data;
 
+import codeu.model.data.Activity;
 import java.time.Instant;
 import java.util.UUID;
 
 /** Class representing a registered user. */
-public class User {
+public class User extends Activity{
   private final UUID id;
   private final String name;
+  private String aboutme;
   private final String passwordHash;
-  private final Instant creation;
+  private long numMessages;
+  private long numWords;
+  private boolean isAdmin;
 
   /**
    * Constructs a new User.
@@ -31,12 +35,17 @@ public class User {
    * @param name the username of this User
    * @param passwordHash the password hash of this User
    * @param creation the creation time of this User
+   * @param isAdmin the admin status of this User
    */
-  public User(UUID id, String name, String passwordHash, Instant creation) {
+  public User(UUID id, String name, String passwordHash, Instant creation, String aboutme, boolean isAdmin) {
     this.id = id;
     this.name = name;
     this.passwordHash = passwordHash;
     this.creation = creation;
+    this.aboutme = aboutme;
+    this.numMessages = 0;
+    this.numWords = 0;
+    this.isAdmin = isAdmin;
   }
 
   /** Returns the ID of this User. */
@@ -48,14 +57,45 @@ public class User {
   public String getName() {
     return name;
   }
-  
+
+  /** Sets the aboutme of this User. */
+  public void setAboutMe(String bio) {
+    aboutme = bio;
+  }
+
+  /** Returns the aboutme of this User. */
+  public String getAboutMe() {
+    return aboutme;
+  }
+
   /** Returns the password hash of this User. */
   public String getPasswordHash() {
     return passwordHash;
   }
 
-  /** Returns the creation time of this User. */
-  public Instant getCreationTime() {
-    return creation;
+  /** Returns the number of messages sent by this User. */
+  public long getNumMessages() {
+    return numMessages;
   }
+
+  /** Returns the number of messages sent by this User. */
+  public void incrementNumMessages() {
+    this.numMessages++;
+  }
+
+  /** Returns the number of words typed by this User. */
+  public long getNumWords() {
+    return numWords;
+  }
+
+  /** Returns the number of words sent by this User. */
+  public void incrementNumWords(long words) {
+    this.numWords += words;
+  }
+
+  /** Returns true if user is admin. */
+  public boolean getIsAdmin() {
+    return isAdmin;
+  }
+
 }

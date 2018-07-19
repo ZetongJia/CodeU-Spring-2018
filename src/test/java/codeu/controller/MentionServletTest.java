@@ -22,9 +22,9 @@ import org.junit.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
 
-public class ActivityFeedServletTest {
+public class MentionServletTest {
 
-  private ActivityFeedServlet activityfeedServlet;
+  private MentionServlet mentionServlet;
   private HttpServletRequest mockRequest;
   private HttpSession mockSession;
   private HttpServletResponse mockResponse;
@@ -35,7 +35,7 @@ public class ActivityFeedServletTest {
 
   @Before
   public void setup() {
-    activityfeedServlet = new ActivityFeedServlet();
+    mentionServlet = new MentionServlet();
 
     mockRequest = Mockito.mock(HttpServletRequest.class);
     mockSession = Mockito.mock(HttpSession.class);
@@ -43,17 +43,17 @@ public class ActivityFeedServletTest {
 
     mockResponse = Mockito.mock(HttpServletResponse.class);
     mockRequestDispatcher = Mockito.mock(RequestDispatcher.class);
-    Mockito.when(mockRequest.getRequestDispatcher("/WEB-INF/view/activityfeed.jsp"))
+    Mockito.when(mockRequest.getRequestDispatcher("/WEB-INF/view/mentions.jsp"))
         .thenReturn(mockRequestDispatcher);
 
     mockConversationStore = Mockito.mock(ConversationStore.class);
-    activityfeedServlet.setConversationStore(mockConversationStore);
+    mentionServlet.setConversationStore(mockConversationStore);
 
     mockMessageStore = Mockito.mock(MessageStore.class);
-    activityfeedServlet.setMessageStore(mockMessageStore);
+    mentionServlet.setMessageStore(mockMessageStore);
 
     mockUserStore = Mockito.mock(UserStore.class);
-    activityfeedServlet.setUserStore(mockUserStore);
+    mentionServlet.setUserStore(mockUserStore);
   }
 
   @Test
@@ -72,7 +72,7 @@ public class ActivityFeedServletTest {
     Mockito.when(mockUserStore.isUserRegistered("testUser")).thenReturn(true);
     Mockito.when(mockUserStore.getUser("testUser")).thenReturn(testUser);
 
-    activityfeedServlet.doGet(mockRequest, mockResponse);
+    mentionServlet.doGet(mockRequest, mockResponse);
 
     Mockito.verify(mockRequestDispatcher).forward(mockRequest, mockResponse);
   }
@@ -81,7 +81,7 @@ public class ActivityFeedServletTest {
   public void testDoGetNoUser() throws IOException, ServletException {
     Mockito.when(mockSession.getAttribute("user")).thenReturn(null);
 
-    activityfeedServlet.doGet(mockRequest, mockResponse);
+    mentionServlet.doGet(mockRequest, mockResponse);
 
     Mockito.verify(mockResponse).sendRedirect("/login");
   }

@@ -14,8 +14,14 @@
 
 package codeu.controller;
 
+import codeu.model.data.Message;
+import codeu.model.store.persistence.PersistentStorageAgent;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 import codeu.model.data.User;
 import codeu.model.store.basic.UserStore;
+import codeu.model.store.basic.MessageStore;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -24,8 +30,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.mindrot.jbcrypt.BCrypt;
 
-/** Servlet class responsible for the login page. */
-public class LoginServlet extends HttpServlet {
+/** Servlet class responsible for the profile page. */
+public class ProfileServlet extends HttpServlet{
 
   /** Store class that gives access to Users. */
   private UserStore userStore;
@@ -49,43 +55,56 @@ public class LoginServlet extends HttpServlet {
   }
 
   /**
-   * This function fires when a user requests the /login URL. It simply forwards the request to
-   * login.jsp.
+   * This function fires when a user requests the /profile URL. It simply forwards the request to
+   * profile.jsp. Also adds username to the URL.
    */
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response)
       throws IOException, ServletException {
-    request.getRequestDispatcher("/WEB-INF/view/login.jsp").forward(request, response);
+
+      String requestUrl = request.getRequestURI();
+      String username = requestUrl.substring("/user/".length());
+      User user = userStore.getUser(username);
+      UUID userId = user.getId();
+
+      List<Message> messagesByUser = MessageStore.getInstance().getUserMessages(userId);
+
+      if(messagesByUser.size()==0){
+        request.setAttribute("error", "Don't be shy! Send a message.");
+      }
+      request.setAttribute("username", username);
+      request.setAttribute("usermessages", messagesByUser);
+    request.getRequestDispatcher("/WEB-INF/view/profile.jsp").forward(request, response);
   }
 
   /**
-   * This function fires when a user submits the login form. It gets the username and password from
+   * This function fires when a user goes on their profile page. It gets the username and password from
    * the submitted form data, checks for validity and if correct adds the username to the session so
    * we know the user is logged in.
    */
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response)
       throws IOException, ServletException {
-    String username = request.getParameter("username");
-    String password = request.getParameter("password");
 
-    //first regex condition prevents logging in as bots
-    if (!username.matches("[\\w*\\s*]*") || !userStore.isUserRegistered(username)) {
-      request.setAttribute("error", "That username was not found.");
-      request.getRequestDispatcher("/WEB-INF/view/login.jsp").forward(request, response);
-      return;
-    }
+          String aboutme = request.getParameter("aboutme");
+          request.getSession().setAttribute("aboutme", aboutme);
+          String username = (String) request.getSession().getAttribute("user");
 
-    User user = userStore.getUser(username);
+          if(username == null){
+            response.sendRedirect("/login");
+            return;
+          }
 
-    if (!BCrypt.checkpw(password, user.getPasswordHash())) {
-      request.setAttribute("error", "Please enter a correct password.");
-      request.getRequestDispatcher("/WEB-INF/view/login.jsp").forward(request, response);
-      return;
-    }
+          User user = userStore.getUser(username);
+          user.setAboutMe(aboutme);
+          userStore.updateUser(user);
 
-    request.getSession().setAttribute("user", username);
-    request.getSession().setAttribute("isAdmin", user.getIsAdmin());
-    response.sendRedirect("/conversations");
+          if(user == null){
+            response.sendRedirect("/login");
+            return;
+          }
+
+
+    response.sendRedirect("/user/"+request.getSession().getAttribute("user"));
   }
 }
