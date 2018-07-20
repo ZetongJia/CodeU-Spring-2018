@@ -115,6 +115,11 @@ public class AdminServlet extends HttpServlet {
       String line;
 
       //creating new conversation
+      if (conversationStore.isTitleTaken(theme)) {
+        response.sendRedirect("/admin");
+        return;
+      }
+
       Conversation conversation =
               new Conversation(UUID.randomUUID(), userStore.getUser("admin").getId(), theme, Instant.now());
       conversationStore.addConversation(conversation);
