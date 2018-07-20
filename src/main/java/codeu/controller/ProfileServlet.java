@@ -28,6 +28,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.jsoup.Jsoup;
+import org.jsoup.safety.Whitelist;
 import org.mindrot.jbcrypt.BCrypt;
 
 /** Servlet class responsible for the profile page. */
@@ -96,7 +98,8 @@ public class ProfileServlet extends HttpServlet{
           }
 
           User user = userStore.getUser(username);
-          user.setAboutMe(aboutme);
+          String cleanedAboutMeContent = Jsoup.clean(aboutme, Whitelist.basic());
+          user.setAboutMe(cleanedAboutMeContent);
           userStore.updateUser(user);
 
           if(user == null){
