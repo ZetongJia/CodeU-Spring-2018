@@ -28,7 +28,7 @@ public class Conversation extends Activity{
   public final UUID id;
   public final UUID owner;
   public final String title;
-  public List<UUID> members = new ArrayList<>();
+  //public List<UUID> members = new ArrayList<>();
 
   /**
    * Constructs a new Conversation.
@@ -43,7 +43,7 @@ public class Conversation extends Activity{
     this.owner = owner;
     this.creation = creation;
     this.title = title;
-    members.add(owner);
+    //members.add(owner);
     this.creation = creation;
   }
 

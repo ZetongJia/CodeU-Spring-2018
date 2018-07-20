@@ -92,8 +92,7 @@ public class ActivityFeedServlet extends HttpServlet {
     List<Activity> ActivityList = new ArrayList<>();
 
     /**
-     * this removes all conversations not associated with the user from the list
-     * and adds meaages associated with all conversations to a list.
+     * this adds meaages associated with all conversations to a list.
      */
     for (Conversation conversation : conversations) {
       messages.addAll(messageStore.getMessagesInConversation(conversation.getId()));
